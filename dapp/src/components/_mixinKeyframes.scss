@@ -1,0 +1,69 @@
+@keyframes cloudMove1 {
+    to { left: 10%; }
+    50% { left: 13%; }
+    form { left: 10%; }
+}
+
+@keyframes cloudMove2 {
+    to { right: 13%; }
+    50% { right: 17%; }
+    form { right: 13%; }
+}
+
+@keyframes starMove1 {
+    to { top: 30%; }
+    50% { top: 32%; }
+    form { top: 30%; }
+}
+
+@keyframes starMove2 {
+    to { top: 37%; }
+    50% { top: 35%; }
+    form { top: 37%; }
+}
+
+@keyframes starMove3 {
+    to { top: 75%; }
+    50% { top: 78%; }
+    form { top: 75%; }
+}
+
+@keyframes ElfMove{
+    to { transform: scale(1); }
+    50% { transform: scale(1.5); }
+    form { transform: scale(1); }
+}
+
+
+
+
+@mixin GameBtn($url, $bottom){
+    position: absolute;
+    bottom: $bottom;
+    display: block;
+    width: 250px;
+    height: 40px;
+    background-image: url($url); 
+    background-repeat: no-repeat;
+    background-position: center center;
+    transition: transform .3s;
+    &:hover{
+        transform: scale(1.1);
+    }
+    &:before, &:after{
+        position: absolute;
+        display: block;
+        width: 47px;
+        height: 37px;
+        background-image: url("../images/loveicon.png");
+        top: 3px;
+    }
+    &:before{
+        content:"";
+        left: -20px;
+    }
+    &:after{
+        content:"";
+        right: -20px
+    }
+}

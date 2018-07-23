@@ -64,11 +64,11 @@ const mapDispatchToProps = (dispatch) => {
     handleCryptoHerosTokenSymbol: (networkId) => {
       dispatch(cryptoHerosTokenSymbolAction(networkId));
     },
-    handleCryptoHerosTokenGetOwnedTokens: (networkId, address) => {
-      dispatch(cryptoHerosTokenGetOwnedTokensAction(networkId, address));
+    handleCryptoHerosTokenGetOwnedTokens: (networkId, address, callBack) => {
+      dispatch(cryptoHerosTokenGetOwnedTokensAction(networkId, address, callBack));
     },
-    handleCryptoHerosTokenTokenURI: (networkId, tokenId) => {
-      dispatch(cryptoHerosTokenTokenURIAction(networkId, tokenId));
+    handleCryptoHerosTokenTokenURI: (networkId, tokenId, callBack) => {
+      dispatch(cryptoHerosTokenTokenURIAction(networkId, tokenId, callBack));
     },
     handleWarningOpen: (message) => {
       dispatch(warningOpenAction(message));

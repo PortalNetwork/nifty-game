@@ -10,10 +10,11 @@ export const cryptoHerosTokenSymbolAction = (networkId) => ({
   networkId
 });
 
-export const cryptoHerosTokenTokenURIAction = (networkId, tokenId) => ({
+export const cryptoHerosTokenTokenURIAction = (networkId, tokenId, callBack) => ({
   type: types.CRYPTOHEROS_TOKEN_TOKEN_URI,
   networkId,
-  tokenId
+  tokenId,
+  callBack
 });
 
 export const cryptoHerosTokenOwnerOfAction = (networkId, tokenId) => ({
@@ -28,8 +29,9 @@ export const cryptoHerosTokenTransferOwnershipAction = (networkId, address) => (
   address
 });
 
-export const cryptoHerosTokenGetOwnedTokensAction = (networkId, address) => ({
+export const cryptoHerosTokenGetOwnedTokensAction = (networkId, address, callBack) => ({
   type: types.CRYPTOHEROS_TOKEN_GET_OWNED_TOKENS,
   networkId,
-  address
+  address,
+  callBack
 });

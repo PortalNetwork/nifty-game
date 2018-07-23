@@ -1,0 +1,171 @@
+@import "./_mixinKeyframes.scss";
+  .index{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .titlebox{
+      position: relative;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+
+      margin-bottom: 80px;
+      >img.title{
+        width: 530px;
+        margin-bottom: 40px;
+      }
+      >img.title2{
+        width: 239px;
+        margin-bottom: 80px;
+      }
+      a.gameplay{
+        @include GameBtn("../images/gameplaybtn.png", 0);
+        background-size: 152px 23px;
+      }
+      a.getCard{
+        @include GameBtn("../images/getcard.png", -20%);
+        background-size: 132px 19px;
+      }
+    }
+
+    img.logo{
+      position: absolute;
+      width: 90px;
+      height: 47px;
+      bottom: 13%;
+      left: 50%;
+      margin-left: -(90px / 2);
+    }
+
+    .ladder{
+      position: absolute;
+      width: 133px;
+      height: 274px;
+      background-image: url("../images/ladder.png");
+      bottom: 38px;
+      left: 75px;
+    }
+  }
+
+
+  .ui_item{
+    .ui{
+      position: absolute;
+      &.footer{
+        width: 100%;
+        height: 107px;
+        bottom: 0;
+        left: 0;
+        background-image: url("../images/footer.png");
+        background-position: center;
+      }
+      &.tree1{
+        width: 155px;
+        height: 288px;
+        background-image: url("../images/tree1.png");
+        left: -50px;
+        bottom: 0;
+      }
+      &.tree2{
+        width: 300px;
+        height: 577px;
+        background-image: url("../images/tree2.png");
+        right: -65px;
+        bottom: 0;
+      }
+      &.cloud{
+        top: 20%;
+        left: 10%;
+        width: 68px;
+        height: 27px;
+        background-image: url("../images/cloud.png");
+        animation: cloudMove1 18s infinite linear;
+      }
+      &.cloud2{
+        top: 50%;
+        right: 13%;
+        width: 68px;
+        height: 27px;
+        background-image: url("../images/cloud.png");
+        animation: cloudMove2 10s infinite linear;
+      }
+      &.start1{
+        width: 13px;
+        height: 20px;
+        background-image: url("../images/star1.png");
+        top: 30%;
+        left: 20%;
+        animation: starMove1 3s infinite linear;
+      }
+      &.start2{
+        width: 13px;
+        height: 21px;
+        background-image: url("../images/star2.png");
+        top: 37%;
+        right: 26%;
+        animation: starMove2 2s infinite linear;
+      }
+      &.start3{
+        width: 13px;
+        height: 20px;
+        background-image: url("../images/star1.png");
+        top: 75%;
+        left: 30%;
+        animation: starMove3 4s infinite linear;
+      }
+      &.Elf0{
+        pointer-events: none;
+        top: 0;
+        left: 0;
+        width: 38px;
+        height: 41px;
+        background-image: url("../images/Elf0.png");
+      }
+      &.Elf1{
+        bottom: 39%;
+        left: 120px;
+        width: 26px;
+        height: 25px;
+        background-image: url("../images/Elf1.png");
+        animation: ElfMove 2s infinite linear;
+      }
+      &.Elf2{
+        top: 15%;
+        left: 25%;
+        width: 26px;
+        height: 25px;
+        background-image: url("../images/Elf2.png");
+        animation: ElfMove 2s infinite linear;
+      }
+      &.Elf3{
+        bottom: 15%;
+        right: 25%;
+        width: 26px;
+        height: 25px;
+        background-image: url("../images/Elf3.png");
+        animation: ElfMove 2s infinite linear;
+      }
+      &.fruit1{
+        bottom: 10%;
+        left: 20%;
+        width: 26px;
+        height: 31px;
+        background-image: url("../images/fruit1.png");
+        animation: ElfMove 2s infinite linear;
+      }
+      &.fruit2{
+        top: 25%;
+        right: 7%;
+        width: 22px;
+        height: 33px;
+        background-image: url("../images/fruit2.png");
+        animation: ElfMove 2s infinite linear;
+      }
+    }
+  }
