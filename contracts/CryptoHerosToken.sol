@@ -11,15 +11,25 @@ import 'zeppelin-solidity/contracts/ownership/Ownable.sol';
 contract CryptoHerosToken is ERC721Token, Ownable {
   mapping (uint256 => address) internal tokenOwner;
 
+  struct Hero {
+    uint number;
+    string image;
+    string background;
+    string description;
+  }
+
   uint nonce = 0;
-  string[] public heros;
+  Hero[] public heros;
+  
+  mapping(uint256 => Hero) public tokenProperty;
+  
 
   constructor(string name, string symbol) public
     ERC721Token(name, symbol)
   { }
 
-  function initHeros(string heroURI) public onlyOwner {
-    heros.push(heroURI);
+  function initHeros(uint number, string image, string background, string desc) public onlyOwner {
+    heros.push(Hero(number, image, background, desc));
   }
   /**
    * Only owner can mint
@@ -29,7 +39,8 @@ contract CryptoHerosToken is ERC721Token, Ownable {
     uint256 _tokenId = totalSupply();
     tokenOwner[_tokenId] = msg.sender;
     super._mint(msg.sender, _tokenId);
-    super._setTokenURI(_tokenId, heros[rand(0, heros.length)]);
+    //super._setTokenURI(_tokenId, heros[rand(0, heros.length)]);
+    tokenProperty[_tokenId] = heros[rand(0, heros.length)];
   }
 
   function burn(uint256 _tokenId) public onlyOwner {
@@ -39,6 +50,12 @@ contract CryptoHerosToken is ERC721Token, Ownable {
 
   function getOwnedTokens(address _owner) external view returns (uint256[]) {
     return ownedTokens[_owner];
+  }
+
+  function getTokenProverty(uint256 _tokenId) external view returns (uint) {
+    // number = tokenProperty[_tokenId].number;
+    // image = tokenProperty[_tokenId].image;
+    return tokenProperty[_tokenId].number;
   }
 
   function rand(uint min, uint max) private returns (uint){
