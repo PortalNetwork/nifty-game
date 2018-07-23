@@ -4,101 +4,106 @@ const CryptoHerosToken = artifacts.require("CryptoHerosToken");
 const CryptoHerosGame = artifacts.require("CryptoHerosGame");
 
 contract("CryptoHeros token", accounts => {
-    let instance;
-    let instance2;
+  let cryptoHerosToken;
+  let cryptoHerosGame;
 
-    beforeEach(async () => {
-      instance = await CryptoHerosToken.deployed();
-      instance2 = await CryptoHerosGame.deployed(instance.address);
-      //instance = await CryptoHerosToken.new();
-      //instance2 = await CryptoHerosGame.new(instance.address);
+  beforeEach(async () => {
+    cryptoHerosToken = await CryptoHerosToken.deployed();
+    console.log(cryptoHerosToken.address);
+    cryptoHerosGame = await CryptoHerosGame.new(cryptoHerosToken.address);
+    console.log(cryptoHerosGame.address);
+  });
 
-      // await web3.eth.sendTransaction({
-      //   from: accounts[0],
-      //   to: instance.address,
-      //   gas: 3000000,
-      //   value: 10
-      // });
-    });
+  it("Should make first account an owner on CryptoHerosToken", async () => {
+    let owner = await cryptoHerosToken.owner();
+    assert.equal(owner, accounts[0]);
+  });
 
-  it("Should make first account an owner", async () => {
-    let owner = await instance.owner();
+  it("Should make first account an owner on CryptoHerosGame", async () => {
+    let owner = await cryptoHerosGame.owner();
     assert.equal(owner, accounts[0]);
   });
 
   it("Should get contract name", async () => {
-    let name = await instance.name();
+    let cryptoHerosToken = await CryptoHerosToken.deployed();
+    let name = await cryptoHerosToken.name();
     assert.equal(name, "CryptoHerosToken");
   });
 
   it("Should get contract symbol", async () => {
-    let symbol = await instance.symbol();
+    let cryptoHerosToken = await CryptoHerosToken.deployed();
+    let symbol = await cryptoHerosToken.symbol();
     assert.equal(symbol, "HERO");
   });
 
   it("Should get contract owner", async () => {
-    let owner = await instance.owner();
+    let cryptoHerosToken = await CryptoHerosToken.deployed();
+    let owner = await cryptoHerosToken.owner();
     assert.equal(owner, accounts[0]);
   });
 
   it("Should init hero", async () => {
-    let result = await instance.initHeros(0, 'image0', 'background0', 'dec0');
+    let cryptoHerosToken = await CryptoHerosToken.deployed();
+    let result = await cryptoHerosToken.initHeros(0, 'image0', 'background0', 'dec0');
     assert.equal(result.receipt.status, '0x1');
-    let result2 = await instance.initHeros(1, 'image1', 'background1', 'dec1');
+    let result2 = await cryptoHerosToken.initHeros(1, 'image1', 'background1', 'dec1');
     assert.equal(result2.receipt.status, '0x1');
-    let result3 = await instance.initHeros(2, 'image2', 'background2', 'dec2');
+    let result3 = await cryptoHerosToken.initHeros(2, 'image2', 'background2', 'dec2');
     assert.equal(result3.receipt.status, '0x1');
     //assert.equal(owner, accounts[0]);
   });
 
-  describe("Should mint crypto heros", () => {
+  describe("Crypto Heros", () => {
     it("Creates crypto heros with specified URI", async () => {
+      let cryptoHerosToken = await CryptoHerosToken.deployed();
       for (let i=0;i<10;i++) {
-        await instance.mint({from: accounts[1]});
+        await cryptoHerosToken.mint({from: accounts[1], value: web3.toWei(0.02, "ether")});
       }
     });
 
     it("Get crypto heros token uri", async () => {
-      const res = await instance.getOwnedTokens(accounts[1]);
+      let cryptoHerosToken = await CryptoHerosToken.deployed();
+      const res = await cryptoHerosToken.getOwnedTokens(accounts[1]);
       for(let i = 0; i < res.length; i++) {
-        console.log('res: ', res[i].toString());
-        const property = await instance.getTokenProverty(res[i]);
-        console.log('property: ', property[1]);
+        const property = await cryptoHerosToken.getTokenProverty(res[i]);
+        assert.equal(property.toNumber() >= 0, true);
       }
     });
 
     it.skip("Get token owner", async () => {
-      let owner = await instance.ownerOf(0);
+      let cryptoHerosToken = await CryptoHerosToken.deployed();
+      let owner = await cryptoHerosToken.ownerOf(0);
       assert.equal(owner, accounts[1]);
     });
 
     it.skip("Get owned token", async () => {
-      let owner = await instance.ownerOf(0);
+      let cryptoHerosToken = await CryptoHerosToken.deployed();
+      let owner = await cryptoHerosToken.ownerOf(0);
 
-      let ownedTokens = await instance.getOwnedTokens(owner);
+      let ownedTokens = await cryptoHerosToken.getOwnedTokens(owner);
       console.log(ownedTokens.toString());
       //assert.equal(ownedTokens, 0);
     })
 
     it.skip("Should transfer ownership", async () => {
+      let cryptoHerosToken = await CryptoHerosToken.deployed();
       let other = accounts[1];
 
-      let owner = await instance.owner();
+      let owner = await cryptoHerosToken.owner();
       assert.equal(owner, accounts[0]);
-      await instance.transferOwnership(other);
-      let newOwner = await instance.owner();
+      await cryptoHerosToken.transferOwnership(other);
+      let newOwner = await cryptoHerosToken.owner();
       assert.equal(newOwner, accounts[1]);
     });
 
 
     it.skip("Should transfer ownership", async () => {
-      const res = await instance.getOwnedTokens(accounts[1]);
-      console.log('instance: ', instance.address);
-      //const res2 = await instance2.createSingleGame(res[5]);
+      let cryptoHerosToken = await CryptoHerosToken.deployed();
+      const res = await cryptoHerosToken.getOwnedTokens(accounts[1]);
+      console.log('cryptoHerosToken: ', cryptoHerosToken.address);
+      //const res2 = await cryptoHerosGame.createSingleGame(res[5]);
       console.log('res: ', res);
       
     });
-
-    
   });
 });
