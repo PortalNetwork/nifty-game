@@ -37,10 +37,9 @@ contract CryptoHerosGame is Ownable {
   Game[] public games;
   SingleGame[] public singleGames;
 
-  function CryptoHerosGame(CryptoHerosToken _cryptoHerosToken) public {
-        cryptoHerosToken = _cryptoHerosToken;
-    }
-
+  constructor(CryptoHerosToken _cryptoHerosToken) public { 
+    cryptoHerosToken = _cryptoHerosToken;
+  }
 
   function createSingleGame(uint _tokenId) payable public returns (uint256) {
     require(msg.value >= minPrice);

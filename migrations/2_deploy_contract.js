@@ -7,7 +7,7 @@ const writeFile = util.promisify(fs.writeFile);
 
 module.exports = async function(deployer) {
   const cryptoHerosToken = await deployer.deploy(CryptoHerosToken, "CryptoHerosToken", "HERO");
-  const cryptoHerosGame = await deployer.deploy(CryptoHerosGame, cryptoHerosToken.address);
+  const cryptoHerosGame = await deployer.deploy(CryptoHerosGame, CryptoHerosToken.address);
 
   // const addresses = {
   //   tokenAddress: CryptoHerosToken.address
