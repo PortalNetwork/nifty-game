@@ -1,0 +1,23 @@
+{
+    "presets": [
+      "stage-2",
+      "react",
+      [
+        "env", {
+          "targets": {
+          "browsers": ["> 1%", "last 5 versions", "Firefox >= 45", "iOS >=8", "Safari >=8","ie >= 10"]
+          }
+        }
+      ]
+    ],
+    "plugins": [
+      "babel-plugin-transform-class-properties",
+      "transform-async-to-generator",
+      "transform-export-extensions",
+      "add-module-exports",
+      [
+        "transform-runtime", { "polyfill": false,  "regenerator": true }
+      ]
+    ]
+  }
+
