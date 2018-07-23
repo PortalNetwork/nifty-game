@@ -9,6 +9,8 @@ module.exports = async function(deployer) {
   const cryptoHerosToken = await deployer.deploy(CryptoHerosToken, "CryptoHerosToken", "HERO");
   const cryptoHerosGame = await deployer.deploy(CryptoHerosGame, CryptoHerosToken.address);
 
+  console.log('CryptoHerosToken address: ', CryptoHerosToken.address);
+  console.log('CryptoHerosGame address: ', CryptoHerosGame.address);
   // const addresses = {
   //   tokenAddress: CryptoHerosToken.address
   // };
