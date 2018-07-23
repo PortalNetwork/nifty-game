@@ -52,9 +52,10 @@ contract CryptoHerosToken is ERC721Token, Ownable {
     return ownedTokens[_owner];
   }
 
-  function getTokenProverty(uint256 _tokenId) external view returns (uint number, string image) {
-    number = tokenProperty[_tokenId].number;
-    image = tokenProperty[_tokenId].image;
+  function getTokenProverty(uint256 _tokenId) external view returns (uint) {
+    // number = tokenProperty[_tokenId].number;
+    // image = tokenProperty[_tokenId].image;
+    return tokenProperty[_tokenId].number;
   }
 
   function rand(uint min, uint max) private returns (uint){
