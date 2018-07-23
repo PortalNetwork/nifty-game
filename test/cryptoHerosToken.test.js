@@ -27,22 +27,40 @@ contract("CryptoHeros token", accounts => {
     assert.equal(owner, accounts[0]);
   });
 
+  it("Should init hero", async () => {
+    let instance = await CryptoHerosToken.deployed();
+    let result = await instance.initHeros('{name: "Portal Network", description: "A gateway to the decentralized world"}');
+    assert.equal(result.receipt.status, '0x1');
+    let result2 = await instance.initHeros('{name: "Portal Network 2", description: "A gateway to the decentralized world"}');
+    assert.equal(result2.receipt.status, '0x1');
+    let result3 = await instance.initHeros('{name: "Portal Network 3", description: "A gateway to the decentralized world"}');
+    assert.equal(result3.receipt.status, '0x1');
+    //assert.equal(owner, accounts[0]);
+  });
+
   describe("Should mint crypto heros", () => {
     it("Creates crypto heros with specified URI", async () => {
       let instance = await CryptoHerosToken.deployed();
-
-      let token = await instance.mint(accounts[1], '{name: "Portal Network", description: "A gateway to the decentralized world"}');
-      let tokenURI = await instance.tokenURI(0);
-      assert.deepEqual(tokenURI, '{name: "Portal Network", description: "A gateway to the decentralized world"}');
+      for (let i=0;i<10;i++) {
+        await instance.mint({from: accounts[1]});
+      }
+      //let hero = await instance.heros();
+      //console.log(hero);
+      //let heros = await instance.heros(0);
+      //assert.deepEqual(heros, '{name: "Portal Network", description: "A gateway to the decentralized world"}');
     });
 
-    it("Set crypto heros token uri", async () => {
+    it("Get crypto heros token uri", async () => {
       let instance = await CryptoHerosToken.deployed();
-      await assertRevert(instance.setTokenURI(0, '{name: "0", description: "Do not work!"}', {from: accounts[2]}));
-      await instance.setTokenURI(0, '{name: "0", description: "Do not work!"}', {from: accounts[1]});
+      //await assertRevert(instance.setTokenURI(0, '{name: "0", description: "Do not work!"}', {from: accounts[2]}));
+      //await instance.setTokenURI(0, '{name: "0", description: "Do not work!"}', {from: accounts[1]});
+      let tokenURI;
+      for (let i=0;i<10;i++) {
+        tokenURI = await instance.tokenURI(i);
+        console.log(tokenURI);
+      }
 
-      let tokenURI = await instance.tokenURI(0);
-      assert.equal(tokenURI, '{name: "0", description: "Do not work!"}');
+      //assert.equal(tokenURI, '{name: "0", description: "Do not work!"}');
     });
 
     it("Get token owner", async () => {
@@ -57,8 +75,8 @@ contract("CryptoHeros token", accounts => {
       let owner = await instance.ownerOf(0);
 
       let ownedTokens = await instance.getOwnedTokens(owner);
-      console.log(ownedTokens);
-      //assert.equal(ownedTokens, [0]);
+      console.log(ownedTokens.toString());
+      //assert.equal(ownedTokens, 0);
     })
 
     it("Should transfer ownership", async () => {
