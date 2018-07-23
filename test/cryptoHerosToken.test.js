@@ -29,11 +29,11 @@ contract("CryptoHeros token", accounts => {
 
   it("Should init hero", async () => {
     let instance = await CryptoHerosToken.deployed();
-    let result = await instance.initHeros('{name: "Portal Network", description: "A gateway to the decentralized world"}');
+    let result = await instance.initHeros(0, 'image0', 'background0', 'dec0');
     assert.equal(result.receipt.status, '0x1');
-    let result2 = await instance.initHeros('{name: "Portal Network 2", description: "A gateway to the decentralized world"}');
+    let result2 = await instance.initHeros(1, 'image1', 'background1', 'dec1');
     assert.equal(result2.receipt.status, '0x1');
-    let result3 = await instance.initHeros('{name: "Portal Network 3", description: "A gateway to the decentralized world"}');
+    let result3 = await instance.initHeros(2, 'image2', 'background2', 'dec2');
     assert.equal(result3.receipt.status, '0x1');
     //assert.equal(owner, accounts[0]);
   });
@@ -52,15 +52,13 @@ contract("CryptoHeros token", accounts => {
 
     it("Get crypto heros token uri", async () => {
       let instance = await CryptoHerosToken.deployed();
-      //await assertRevert(instance.setTokenURI(0, '{name: "0", description: "Do not work!"}', {from: accounts[2]}));
-      //await instance.setTokenURI(0, '{name: "0", description: "Do not work!"}', {from: accounts[1]});
-      let tokenURI;
-      for (let i=0;i<10;i++) {
-        tokenURI = await instance.tokenURI(i);
-        console.log(tokenURI);
-      }
 
-      //assert.equal(tokenURI, '{name: "0", description: "Do not work!"}');
+      const res = await instance.getOwnedTokens(accounts[1]);
+      for(let i = 0; i < res.length; i++) {
+        console.log('res: ', res[i].toString());
+        const property = await instance.getTokenProverty(res[i]);
+        console.log('property: ', property[1]);
+      }
     });
 
     it("Get token owner", async () => {
