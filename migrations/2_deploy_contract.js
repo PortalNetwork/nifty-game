@@ -15,3 +15,5 @@ module.exports = async function(deployer) {
   //   JSON.stringify(addresses)
   // );
 };
+
+// https://github.com/ensdomains/ens/blob/master/migrations/2_deploy_contracts.js
