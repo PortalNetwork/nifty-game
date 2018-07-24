@@ -12,6 +12,18 @@ export default class extends React.Component {
     };
   }
 
+  componentDidMount() {
+    // 若鎖定牌卡則禁止翻牌
+    if (this.state.isLock) {
+      return;
+    }
+    window.setTimeout(() => {
+      this.setState({
+        isOpenCard: !this.state.isOpenCard
+      });
+    }, 1000);
+  }
+
   handleOpenCard = () => {
     // 若鎖定牌卡則禁止翻牌
     if (this.state.isLock) {
@@ -24,11 +36,11 @@ export default class extends React.Component {
   }
 
   render() {
-    const { bgImg, pixelImg, numberImg, } = this.props;
+    const { bgImg, pixelImg, numberImg, isSmall, } = this.props;
     const { isOpenCard, } = this.state;
-
+    
     return (
-      <div className="cardbox" onClick={this.handleOpenCard}>
+      <div className={cx('cardbox', { small: isSmall || false } )}>
         <div className={cx('gameCard', { OpenCard: isOpenCard })}>
           <div className="seeCard">
             <div className="c_bg" style={{ backgroundImage: `url(https://ipfs.infura.io/ipfs/${bgImg})` }}></div>

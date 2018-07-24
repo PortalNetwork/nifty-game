@@ -7,6 +7,9 @@ import Loading from '../Loading';
 import gameplaytitleImg from '../../images/gameplaytitle.png';
 import playgameImg from '../../images/playgame.png';
 import historyImg from '../../images/history.png';
+import bigImg from '../../images/big.png';
+import winImg from '../../images/winlogo.png';
+import lostImg from '../../images/youlost.png';
 
 const cx = classnames.bind(style);
 
@@ -23,6 +26,8 @@ export default class extends React.Component {
     isLoading: false,
     isShowResult: false,
     isShowHistory: false,
+    hasBattleResult: false,
+    battleResult: {},
   }
 
   // 賭金輸入
@@ -62,8 +67,12 @@ export default class extends React.Component {
         isLoading: false,
         isShowResult: true,
         isShowHistory: false,
+        hasBattleResult: true,
+        battleResult: {
+          isWin: true,
+        },
       });
-    }, 3000);
+    }, 0);
   }
 
   // 看歷史戰鬥
@@ -87,11 +96,13 @@ export default class extends React.Component {
       isLoading: false,
       isShowHistory: false,
       isShowResult: false,
+      hasBattleResult: false,
+      battleResult: {},
     });
   }
 
   render() {
-    const { cards, selectedCard, betEth, isShowResult, isShowHistory, isLoading, } = this.state;
+    const { cards, selectedCard, betEth, isShowResult, isShowHistory, isLoading, hasBattleResult, battleResult, } = this.state;
     const { isShowArena, handleBack, } = this.props;
     
     return (
@@ -163,9 +174,57 @@ export default class extends React.Component {
         { /* 戰鬥結果 */ }
         {
           isShowResult && 
-          <div className={cx('battle-result')}>
+          <div>
             <a className="go-back-link-in-arena" onClick={this.handleBackArena}></a>
-            result
+            <div className={cx('battle-result')}>
+              <div className={cx('left')}>
+                <BattleCard 
+                  isSmall
+                  isLock
+                  isOpenCard={true}
+                  bgImg="QmTDfdUwLNTXJ1PgRqPxyW41jrdxhvh72C4h62dNhNgvtP"
+                  pixelImg="QmVALBXYymSKPz5wN1JFVHrZmnNhz7JW8J8QM5zVrHmagk"
+                  numberImg="Qmd9Xyuf3zQiyPfjDisVwL6J4AcTJy4ycFWBXdCQmjupyk"
+                  />
+              </div>
+              <div className={cx('center')}>
+                <div className={cx('result-center-container', { isSmall: false})}>
+                  <img src={bigImg} />
+                </div>
+              </div>
+              <div className={cx('right')}>
+                <BattleCard 
+                  isSmall
+                  isOpenCard={false}
+                  bgImg="QmTDfdUwLNTXJ1PgRqPxyW41jrdxhvh72C4h62dNhNgvtP"
+                  pixelImg="QmVALBXYymSKPz5wN1JFVHrZmnNhz7JW8J8QM5zVrHmagk"
+                  numberImg="Qmd9Xyuf3zQiyPfjDisVwL6J4AcTJy4ycFWBXdCQmjupyk"
+                  />
+              </div>
+            </div>
+
+            {
+              hasBattleResult && battleResult.isWin && 
+              <div className={cx('battle-result-win')}>
+                <div className="start1"></div>
+                <div className="start2"></div>
+                <div className="start3"></div>
+                <div className="start4"></div>
+                <div className="start5"></div>
+                <div className="start6"></div>
+                <img className={cx('win')} src={winImg} />
+              </div>
+            }
+
+            {
+              hasBattleResult && !battleResult.isWin && 
+              <div className={cx('battle-result-lose')}>
+                <div className="ghost1"></div>
+                <div className="ghost2"></div>
+                <img className={cx('lost')} src={lostImg} />
+              </div>
+            }
+
           </div>
         }
 

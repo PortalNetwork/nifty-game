@@ -198,3 +198,108 @@
   align-items: center;
   width: 100%;
   height: 300px; }
+
+.battle-result {
+  display: flex;
+  margin-left: 20%;
+  margin-right: 20%;
+  padding-top: 10px;
+  height: 400px; }
+  .battle-result .left, .battle-result .right, .battle-result .center {
+    display: inline-flex;
+    justify-content: center;
+    flex: 1 1; }
+  .battle-result .center {
+    align-items: center; }
+
+.result-center-container {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100px;
+  border: 5px solid white;
+  border-radius: 10px; }
+  .result-center-container img {
+    width: 36px;
+    height: 61px; }
+  .result-center-container.isSmall img {
+    transform: scaleX(-1); }
+
+.battle-result-win {
+  position: relative;
+  margin-top: 20px;
+  text-align: center; }
+  .battle-result-win .start1, .battle-result-win .start2, .battle-result-win .start3, .battle-result-win .start4, .battle-result-win .start5, .battle-result-win .start6 {
+    position: absolute; }
+  .battle-result-win .start1 {
+    width: 13px;
+    height: 20px;
+    background-image: url("../../images/star1.png");
+    top: 15%;
+    left: 15%;
+    animation: starMove1 3s infinite linear; }
+  .battle-result-win .start2 {
+    width: 13px;
+    height: 21px;
+    background-image: url("../../images/star2.png");
+    top: 37%;
+    left: 26%;
+    animation: starMove2 2s infinite linear; }
+  .battle-result-win .start3 {
+    width: 13px;
+    height: 20px;
+    background-image: url("../../images/star1.png");
+    top: 30%;
+    left: 20%;
+    animation: starMove3 4s infinite linear; }
+  .battle-result-win .start4 {
+    width: 13px;
+    height: 20px;
+    background-image: url("../../images/star1.png");
+    top: 15%;
+    right: 15%;
+    animation: starMove1 3s infinite linear; }
+  .battle-result-win .start5 {
+    width: 13px;
+    height: 21px;
+    background-image: url("../../images/star2.png");
+    top: 37%;
+    right: 26%;
+    animation: starMove2 2s infinite linear; }
+  .battle-result-win .start6 {
+    width: 13px;
+    height: 20px;
+    background-image: url("../../images/star1.png");
+    top: 30%;
+    right: 20%;
+    animation: starMove3 4s infinite linear; }
+  .battle-result-win .win {
+    display: inline-block;
+    width: 486px;
+    height: 73px; }
+
+.battle-result-lose {
+  position: relative;
+  margin-top: 20px;
+  text-align: center; }
+  .battle-result-lose .ghost1 {
+    position: absolute;
+    display: inline-block;
+    width: 64px;
+    height: 63px;
+    background-image: url("../../images/lostelf.png");
+    top: 15%;
+    left: 25%; }
+  .battle-result-lose .ghost2 {
+    position: absolute;
+    display: inline-block;
+    width: 64px;
+    height: 63px;
+    background-image: url("../../images/lostelf.png");
+    top: 15%;
+    right: 25%; }
+  .battle-result-lose .lost {
+    display: inline-block;
+    width: 486px;
+    height: 73px; }
