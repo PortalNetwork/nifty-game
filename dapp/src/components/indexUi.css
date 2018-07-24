@@ -1,0 +1,146 @@
+@keyframes cloudMove1 {
+  to {
+    left: 10%; }
+  50% {
+    left: 13%; }
+  form {
+    left: 10%; } }
+
+@keyframes cloudMove2 {
+  to {
+    right: 13%; }
+  50% {
+    right: 17%; }
+  form {
+    right: 13%; } }
+
+@keyframes starMove1 {
+  to {
+    top: 30%; }
+  50% {
+    top: 32%; }
+  form {
+    top: 30%; } }
+
+@keyframes starMove2 {
+  to {
+    top: 37%; }
+  50% {
+    top: 35%; }
+  form {
+    top: 37%; } }
+
+@keyframes starMove3 {
+  to {
+    top: 75%; }
+  50% {
+    top: 78%; }
+  form {
+    top: 75%; } }
+
+@keyframes ElfMove {
+  to {
+    transform: scale(1); }
+  50% {
+    transform: scale(1.5); }
+  form {
+    transform: scale(1); } }
+
+.ui_item .ui {
+  position: absolute; }
+  .ui_item .ui.footer {
+    width: 100%;
+    height: 107px;
+    bottom: 0;
+    left: 0;
+    background-image: url("../images/footer.png");
+    background-position: center; }
+  .ui_item .ui.tree1 {
+    width: 155px;
+    height: 288px;
+    background-image: url("../images/tree1.png");
+    left: -50px;
+    bottom: 0; }
+  .ui_item .ui.tree2 {
+    width: 300px;
+    height: 577px;
+    background-image: url("../images/tree2.png");
+    right: -65px;
+    bottom: 0; }
+  .ui_item .ui.cloud {
+    top: 20%;
+    left: 10%;
+    width: 68px;
+    height: 27px;
+    background-image: url("../images/cloud.png");
+    animation: cloudMove1 18s infinite linear; }
+  .ui_item .ui.cloud2 {
+    top: 50%;
+    right: 13%;
+    width: 68px;
+    height: 27px;
+    background-image: url("../images/cloud.png");
+    animation: cloudMove2 10s infinite linear; }
+  .ui_item .ui.start1 {
+    width: 13px;
+    height: 20px;
+    background-image: url("../images/star1.png");
+    top: 30%;
+    left: 20%;
+    animation: starMove1 3s infinite linear; }
+  .ui_item .ui.start2 {
+    width: 13px;
+    height: 21px;
+    background-image: url("../images/star2.png");
+    top: 37%;
+    right: 26%;
+    animation: starMove2 2s infinite linear; }
+  .ui_item .ui.start3 {
+    width: 13px;
+    height: 20px;
+    background-image: url("../images/star1.png");
+    top: 75%;
+    left: 30%;
+    animation: starMove3 4s infinite linear; }
+  .ui_item .ui.Elf0 {
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    width: 38px;
+    height: 41px;
+    background-image: url("../images/Elf0.png"); }
+  .ui_item .ui.Elf1 {
+    bottom: 39%;
+    left: 120px;
+    width: 26px;
+    height: 25px;
+    background-image: url("../images/Elf1.png");
+    animation: ElfMove 2s infinite linear; }
+  .ui_item .ui.Elf2 {
+    top: 15%;
+    left: 25%;
+    width: 26px;
+    height: 25px;
+    background-image: url("../images/Elf2.png");
+    animation: ElfMove 2s infinite linear; }
+  .ui_item .ui.Elf3 {
+    bottom: 15%;
+    right: 25%;
+    width: 26px;
+    height: 25px;
+    background-image: url("../images/Elf3.png");
+    animation: ElfMove 2s infinite linear; }
+  .ui_item .ui.fruit1 {
+    bottom: 10%;
+    left: 20%;
+    width: 26px;
+    height: 31px;
+    background-image: url("../images/fruit1.png");
+    animation: ElfMove 2s infinite linear; }
+  .ui_item .ui.fruit2 {
+    top: 25%;
+    right: 7%;
+    width: 22px;
+    height: 33px;
+    background-image: url("../images/fruit2.png");
+    animation: ElfMove 2s infinite linear; }

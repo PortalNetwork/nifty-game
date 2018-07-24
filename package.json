@@ -13,6 +13,7 @@
     "babel-preset-stage-2": "^6.18.0",
     "babel-preset-stage-3": "^6.17.0",
     "babel-register": "^6.23.0",
+    "classnames": "^2.2.6",
     "gsap": "^2.0.1"
   }
 }
