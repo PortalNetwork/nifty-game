@@ -4,6 +4,8 @@ import style from './Arena.css';
 import { TweenMax, } from "gsap/TweenMax";
 import gameplaytitleImg from '../../images/gameplaytitle.png';
 import playgameImg from '../../images/playgame.png';
+import historyImg from '../../images/history.png';
+
 const cx = classnames.bind(style);
 
 export default class extends React.Component {
@@ -24,7 +26,6 @@ export default class extends React.Component {
 
         <div className={cx('battle-field')}>
           <div className={cx('left')}>
-            
             <div className={cx('left-item')}>
               <label className={cx('select_card_field')} for="select-card">
                 <select id="select-card">
@@ -38,15 +39,30 @@ export default class extends React.Component {
 
             <div className={cx('left-item')}>
               <span className={cx('bet_eth_field')}>
-                <input type="number" maxLength="1" />
+                <input type="number" />
               </span>
-              <img className={cx('place_bet_button')} src={playgameImg} />
+              <a onClick={()=>{alert('bet')}}>
+                <img className={cx('place_bet_button')} src={playgameImg} />
+              </a>
             </div>
           
           </div>
+
           <div className={cx('center')}>center</div>
-          <div className={cx('right')}>right</div>
+
+          <div className={cx('right')}>
+            <div className={cx('right-item')}>
+              <a onClick={()=>{alert('history')}}>
+                <img className={cx('history-button')} src={historyImg} />
+              </a>
+            </div>
+          </div>
         </div>
+
+
+
+
+        
       </div>
     )
 

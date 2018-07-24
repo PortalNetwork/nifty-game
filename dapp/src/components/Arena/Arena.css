@@ -105,8 +105,7 @@
   margin-left: 10%;
   margin-right: 10%;
   padding-top: 20px;
-  height: 500px;
-  border: 1px solid white; }
+  height: 500px; }
   .battle-field .left {
     display: inline-flex;
     flex-direction: column;
@@ -124,8 +123,18 @@
     flex: 1 1;
     background-color: blue; }
   .battle-field .right {
-    flex: 1 1;
-    background-color: green; }
+    display: inline-flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 0 100px;
+    flex: 1 1; }
+    .battle-field .right .right-item {
+      display: inline-flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%; }
 
 .select_card_field {
   position: relative;
@@ -174,3 +183,9 @@
   display: inline-block;
   margin-top: 10px;
   width: 150px; }
+
+.history-button {
+  display: inline-block;
+  margin-top: 10px;
+  width: 150px;
+  cursor: pointer; }

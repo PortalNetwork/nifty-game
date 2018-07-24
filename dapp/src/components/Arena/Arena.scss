@@ -125,7 +125,6 @@
   margin-right: 10%;
   padding-top: 20px;
   height: 500px;
-  border: 1px solid white;
 
   & .left {
     display: inline-flex;
@@ -151,9 +150,20 @@
   }
 
   & .right {
+    display: inline-flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 0 100px;
     flex: 1 1;
-    background-color: green;
 
+    & .right-item {
+      display: inline-flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
   }
 }
 
@@ -210,4 +220,11 @@
   display: inline-block;
   margin-top: 10px;
   width: 150px;
+}
+
+.history-button {
+  display: inline-block;
+  margin-top: 10px;
+  width: 150px;
+  cursor: pointer;
 }
