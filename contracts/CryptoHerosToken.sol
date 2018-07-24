@@ -60,9 +60,9 @@ contract CryptoHerosToken is ERC721Token, Ownable {
     tokenOwner[_tokenId] = msg.sender;
     uint num = rand(0, numbers.length);
     uint _number = numbers[num];
-    string _image = images[rand(0, images.length)];
-    string _background = backgrounds[rand(0, backgrounds.length)];
-    string _description = descriptions[num];
+    string memory _image = images[rand(0, images.length)];
+    string memory _background = backgrounds[rand(0, backgrounds.length)];
+    string memory _description = descriptions[num];
     heros.push(Hero({number: _number, image: _image, background: _background, description: _description}));
     tokenProperty[_tokenId] = Hero({number: _number, image: _image, background: _background, description: _description});
     super._mint(msg.sender, _tokenId);
@@ -77,10 +77,8 @@ contract CryptoHerosToken is ERC721Token, Ownable {
     return ownedTokens[_owner];
   }
 
-  function getTokenProverty(uint256 _tokenId) external view returns (uint) {
-    // number = tokenProperty[_tokenId].number;
-    // image = tokenProperty[_tokenId].image;
-    return tokenProperty[_tokenId].number;
+  function getTokenProverty(uint256 _tokenId) external view returns (uint _number, string _image, string _background, string _description) {
+    return (tokenProperty[_tokenId].number, tokenProperty[_tokenId].image, tokenProperty[_tokenId].background, tokenProperty[_tokenId].description);
   }
 
   function rand(uint min, uint max) private returns (uint){
