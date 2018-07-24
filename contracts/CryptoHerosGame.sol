@@ -10,21 +10,10 @@ contract CryptoHerosGame is Ownable {
   uint constant minHerosToken = 5 ether;
 
   //address public cryptoHerosGame = 0x0;
-  uint256 public maxGameId = 0;
   uint256 public maxSingleGameId = 0;
 
   uint nonce = 0;
   CryptoHerosToken cryptoHerosToken;
-
-  struct Game {
-    address winner;
-    address creator;
-    address participant;
-    uint256 creatorTokenId;
-    uint256 participantTokenId;
-    uint256 creatorBet;
-    uint256 participantBet;
-  }
 
   struct SingleGame {
     address player;
@@ -35,7 +24,6 @@ contract CryptoHerosGame is Ownable {
     uint8 result; // 0 user win, 1 contract win, 2 draw
   }
 
-  Game[] public games;
   SingleGame[] public singleGames;
 
   constructor(CryptoHerosToken _cryptoHerosToken) public { 

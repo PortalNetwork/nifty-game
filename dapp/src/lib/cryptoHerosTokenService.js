@@ -47,14 +47,14 @@ export const getOwnerOf = (networkId, tokenId) => {
   }
 }
 
-export const getTokenURI = (networkId, tokenId) => {
+export const getTokenProperty = (networkId, tokenId) => {
   try {
     setWeb3Provider(networkId);
     const cryptoHerosToken = new CryptoHerosToken(web3, cryptoHerosTokenAddress);
-    const result = cryptoHerosToken.tokenURI(tokenId);
+    const result = cryptoHerosToken.getTokenProperty(tokenId);
     return result;
   } catch (err) {
-    console.log('getTokenURI: ', err);
+    console.log('getTokenProperty: ', err);
     return 'tokenURI not found';
   }
 }
