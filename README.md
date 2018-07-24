@@ -5,7 +5,7 @@
 <p align=center>
 <a target="_blank" href="https://travis-ci.org/PortalNetwork/nifty-game.svg?branch=develop" title="Build status"><img src="https://travis-ci.org/PortalNetwork/nifty-game.svg?branch=develop"></a>
 <a target="_blank" href="https://reactjs.org/" title="React"><img src="https://img.shields.io/badge/react-%3E%2016.1.1-brightgreen.svg"></a>
-<a target="_blank" href="http://nodejs.org/download/" title="Node version"><img src="https://img.shields.io/badge/node-%3E%3D%206.0.0-brightgreen.svg"></a>
+<a target="_blank" href="http://nodejs.org/download/" title="Node version"><img src="https://img.shields.io/badge/node-%3E%3D%208.0.0-brightgreen.svg"></a>
 <a target="_blank" href="https://github.com/PortalNetwork/nifty-game/pulls" title="PRs Welcome"><img src="https://img.shields.io/badge/PRs-welcome-blue.svg"></a>
 </p>  
 
@@ -57,7 +57,7 @@ You can find contract detail under `contracts/` directory:
 
 ## Requirements
 
-* NodeJS 6.0+ recommended.
+* NodeJS 8.0+ recommended.
 * Windows, Linux or Mac OS X.
 
 ## How To Install Dependencies
@@ -68,6 +68,12 @@ You'll need local ethereum node, I recommend `ganache-cli`. You can install it f
 
 ```
 npm install -g ganache-cli
+```
+
+Install truffle:
+
+```
+npm install -g truffle
 ```
 
 Then install contract dependencies:  
