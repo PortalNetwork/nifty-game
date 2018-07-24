@@ -1,11 +1,3 @@
-@keyframes btnMove {
-  to {
-    bottom: 0%; }
-  50% {
-    bottom: -5%; }
-  form {
-    bottom: 0%; } }
-
 @keyframes cloudMove1 {
   to {
     left: 10%; }
@@ -22,148 +14,132 @@
   form {
     right: 13%; } }
 
+@keyframes starMove1 {
+  to {
+    top: 30%; }
+  50% {
+    top: 32%; }
+  form {
+    top: 30%; } }
+
+@keyframes starMove2 {
+  to {
+    top: 37%; }
+  50% {
+    top: 35%; }
+  form {
+    top: 37%; } }
+
+@keyframes starMove3 {
+  to {
+    top: 75%; }
+  50% {
+    top: 78%; }
+  form {
+    top: 75%; } }
+
+@keyframes ElfMove {
+  to {
+    transform: scale(1); }
+  50% {
+    transform: scale(1.5); }
+  form {
+    transform: scale(1); } }
+
+img {
+  display: block; }
+
 .App {
   position: relative;
   width: 100%;
   height: 100%;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center; }
-  .App .titlebox {
-    position: relative;
+  overflow: hidden; }
+  .App .index {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     display: flex;
-    align-items: center;
-    flex-direction: column; }
-    .App .titlebox > img.title {
-      width: 530px;
-      margin-bottom: 40px; }
-    .App .titlebox > img.title2 {
-      width: 239px;
+    justify-content: center;
+    align-items: center; }
+    .App .index .titlebox {
+      position: relative;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
       margin-bottom: 80px; }
-    .App .titlebox a.gameplay {
-      position: absolute;
-      bottom: 0;
-      display: block;
-      width: 250px;
-      height: 40px;
-      background-image: url("../images/gameplaybtn.png");
-      background-size: 152px 23px;
-      background-repeat: no-repeat;
-      background-position: center center;
-      animation: btnMove 2s infinite linear; }
-      .App .titlebox a.gameplay:before, .App .titlebox a.gameplay:after {
+      .App .index .titlebox img.title {
+        width: 530px;
+        height: auto;
+        margin-bottom: 40px; }
+      .App .index .titlebox img.title2 {
+        width: 239px;
+        height: auto;
+        margin-bottom: 120px; }
+      .App .index .titlebox a.gameplay {
         position: absolute;
+        bottom: 0;
         display: block;
-        width: 47px;
-        height: 37px;
-        background-image: url("../images/loveicon.png");
-        top: 3px; }
-      .App .titlebox a.gameplay:before {
-        content: "";
-        left: -20px; }
-      .App .titlebox a.gameplay:after {
-        content: "";
-        right: -20px; }
-  .App img.logo {
-    position: absolute;
-    width: 90px;
-    height: 47px;
-    bottom: 13%; }
-  .App .ladder {
-    position: absolute;
-    width: 133px;
-    height: 274px;
-    background-image: url("../images/ladder.png");
-    bottom: 38px;
-    left: 75px; }
-  .App .ui {
-    position: absolute; }
-    .App .ui.footer {
-      width: 100%;
-      height: 107px;
-      bottom: 0;
-      left: 0;
-      background-image: url("../images/footer.png");
-      background-position: center; }
-    .App .ui.tree1 {
-      width: 155px;
-      height: 288px;
-      background-image: url("../images/tree1.png");
-      left: -50px;
-      bottom: 0; }
-    .App .ui.tree2 {
-      width: 300px;
-      height: 577px;
-      background-image: url("../images/tree2.png");
-      right: -65px;
-      bottom: 0; }
-    .App .ui.cloud {
-      top: 20%;
-      left: 10%;
-      width: 68px;
-      height: 27px;
-      background-image: url("../images/cloud.png");
-      animation: cloudMove1 18s infinite linear; }
-    .App .ui.cloud2 {
-      top: 50%;
-      right: 13%;
-      width: 68px;
-      height: 27px;
-      background-image: url("../images/cloud.png");
-      animation: cloudMove2 10s infinite linear; }
-    .App .ui.start1 {
-      width: 13px;
-      height: 20px;
-      background-image: url("../images/star1.png");
-      top: 30%;
-      left: 20%; }
-    .App .ui.start2 {
-      width: 13px;
-      height: 21px;
-      background-image: url("../images/star2.png");
-      top: 35%;
-      right: 26%; }
-    .App .ui.start3 {
-      width: 13px;
-      height: 20px;
-      background-image: url("../images/star1.png");
-      top: 75%;
-      left: 30%; }
-    .App .ui.Elf0 {
-      pointer-events: none;
-      top: 0;
-      left: 0;
-      width: 38px;
-      height: 41px;
-      background-image: url("../images/Elf0.png"); }
-    .App .ui.Elf1 {
-      bottom: 39%;
-      left: 120px;
-      width: 26px;
-      height: 25px;
-      background-image: url("../images/Elf1.png"); }
-    .App .ui.Elf2 {
-      top: 15%;
-      left: 25%;
-      width: 26px;
-      height: 25px;
-      background-image: url("../images/Elf2.png"); }
-    .App .ui.Elf3 {
-      bottom: 15%;
-      right: 25%;
-      width: 26px;
-      height: 25px;
-      background-image: url("../images/Elf3.png"); }
-    .App .ui.fruit1 {
-      bottom: 10%;
-      left: 20%;
-      width: 26px;
-      height: 31px;
-      background-image: url("../images/fruit1.png"); }
-    .App .ui.fruit2 {
-      top: 25%;
-      right: 7%;
-      width: 22px;
-      height: 33px;
-      background-image: url("../images/fruit2.png"); }
+        width: 250px;
+        height: 40px;
+        background-image: url("../images/gameplaybtn.png");
+        background-repeat: no-repeat;
+        background-position: center center;
+        transition: transform .3s;
+        background-size: 152px 23px; }
+        .App .index .titlebox a.gameplay:hover {
+          transform: scale(1.1); }
+        .App .index .titlebox a.gameplay:before, .App .index .titlebox a.gameplay:after {
+          position: absolute;
+          display: block;
+          width: 47px;
+          height: 37px;
+          background-image: url("../images/loveicon.png");
+          top: 3px; }
+        .App .index .titlebox a.gameplay:before {
+          content: "";
+          left: -20px; }
+        .App .index .titlebox a.gameplay:after {
+          content: "";
+          right: -20px; }
+      .App .index .titlebox a.getCard {
+        position: absolute;
+        bottom: -20%;
+        display: block;
+        width: 250px;
+        height: 40px;
+        background-image: url("../images/getcard.png");
+        background-repeat: no-repeat;
+        background-position: center center;
+        transition: transform .3s;
+        background-size: 132px 19px; }
+        .App .index .titlebox a.getCard:hover {
+          transform: scale(1.1); }
+        .App .index .titlebox a.getCard:before, .App .index .titlebox a.getCard:after {
+          position: absolute;
+          display: block;
+          width: 47px;
+          height: 37px;
+          background-image: url("../images/loveicon.png");
+          top: 3px; }
+        .App .index .titlebox a.getCard:before {
+          content: "";
+          left: -20px; }
+        .App .index .titlebox a.getCard:after {
+          content: "";
+          right: -20px; }
+    .App .index img.logo {
+      position: absolute;
+      width: 90px;
+      height: 47px;
+      bottom: 13%;
+      left: 50%;
+      margin-left: -45px; }
+    .App .index .ladder {
+      position: absolute;
+      width: 133px;
+      height: 274px;
+      background-image: url("../images/ladder.png");
+      bottom: 38px;
+      left: 75px; }
