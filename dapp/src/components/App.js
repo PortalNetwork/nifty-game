@@ -1,20 +1,16 @@
 import React, { Component } from 'react';
-import {MetaMask} from './MetaMask/MetaMask';
 import Contract from './Contract';
-import {TweenMax} from "gsap/TweenMax";
-import {Warning} from './Warning/Warning';
-
 import SendTransactoin from './SendTransaction';
 import Card from './Card';
-
 import IndexUi from './IndexUi';
 import Loading from './Loading';
-import './App.css';
 import title from "../images/title.png";
 import title2 from "../images/title2.png";
-import { 
-  getTokenURI
-} from '../lib/cryptoHerosTokenService';
+import './App.css';
+import { MetaMask } from './MetaMask/MetaMask';
+import { TweenMax } from "gsap/TweenMax";
+import { Warning } from './Warning/Warning';
+import { getTokenURI } from '../lib/cryptoHerosTokenService';
 class App extends Component {
 
   state={
@@ -51,7 +47,6 @@ class App extends Component {
     this.setState({isGetCardPage: false});
   }
 
-  
   //撈回所有的卡片
   TimeOutGoTokens = res =>{
     this.setState({brand: res.split(","), isLoading: false})
@@ -60,9 +55,7 @@ class App extends Component {
   //進入卡牌畫面
   gotoAndPlayGame = async () =>{
     let brandObj = [];
-    const { handleCryptoHerosTokenTokenURI } = this.props;
     const { network } = this.props.metaMask;
-
     this.state.brand.forEach(async (item, idx) => {
       const contents = await getTokenURI(network, item);
       brandObj.push(JSON.parse(contents));
@@ -82,7 +75,6 @@ class App extends Component {
       const {network, account} = this.props.metaMask;
       if(network!==null && account!==null){
         window.clearInterval(t);
-
         //抓卡牌編號
         this.props.handleCryptoHerosTokenGetOwnedTokens(network, account, this.TimeOutGoTokens);
       }
@@ -91,21 +83,16 @@ class App extends Component {
 
 
   render() {
-    const {handleCryptoHerosTokenTokenURI, cryptoHerosOwned} = this.props;
-    const {network, account} = this.props.metaMask;
     const {isLoading, brandItem, isGetCardPage} = this.state;
     return (
       <div className="App">
-        {/*<Top/>*/}
-        {/*<Health {...this.props} />*/}
-        {/*<SendTransactoin {...this.props} {...this.state}/>*/}
-        {
-          /*
+        {/*
+          <Top/>
+          <Health {...this.props} />
+          <SendTransactoin {...this.props} {...this.state}/>
           <Card {...this.props}/>
-        <Contract {...this.props} {...this.state} />
-          */
-        }
-
+          <Contract {...this.props} {...this.state} />
+        */}
         <div className="index">
           <div className="titlebox">
             <img className="title" src={title}/>
