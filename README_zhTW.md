@@ -1,5 +1,5 @@
 # Nifty Game 
-[![Build Status](https://travis-ci.com/billPortalNetwork/nifty-game.svg?branch=master)](https://travis-ci.com/billPortalNetwork/nifty-game)
+[![Build Status](https://travis-ci.com/billPortalNetwork/nifty-game.svg?branch=master)](https://travis-ci.org/PortalNetwork/nifty-game.svg?branch=develop)
 [![react](https://img.shields.io/badge/react-%3E%2016.1.1-brightgreen.svg)](https://img.shields.io/badge/react-%3E%2016.1.1-brightgreen.svg)
 [![node](https://img.shields.io/badge/node-%3E%3D%206.0.0-brightgreen.svg)](https://img.shields.io/badge/node-%3E%3D%206.0.0-brightgreen.svg)
 
