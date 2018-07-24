@@ -120,8 +120,9 @@
       align-items: center;
       width: 100%; }
   .battle-field .center {
-    flex: 1 1;
-    background-color: blue; }
+    display: inline-flex;
+    justify-content: center;
+    flex: 1 1; }
   .battle-field .right {
     display: inline-flex;
     flex-direction: column-reverse;

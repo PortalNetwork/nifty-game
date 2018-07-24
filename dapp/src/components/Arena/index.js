@@ -2,6 +2,7 @@ import React from 'react';
 import classnames from 'classnames/bind';
 import style from './Arena.css';
 import { TweenMax, } from "gsap/TweenMax";
+import BattleCard from '../BattleCard';
 import gameplaytitleImg from '../../images/gameplaytitle.png';
 import playgameImg from '../../images/playgame.png';
 import historyImg from '../../images/history.png';
@@ -89,7 +90,15 @@ export default class extends React.Component {
           
           </div>
 
-          <div className={cx('center')}>center</div>
+          <div className={cx('center')}>
+            <BattleCard 
+              isLock
+              isOpenCard={true}
+              bgImg="QmTDfdUwLNTXJ1PgRqPxyW41jrdxhvh72C4h62dNhNgvtP"
+              pixelImg="QmVALBXYymSKPz5wN1JFVHrZmnNhz7JW8J8QM5zVrHmagk"
+              numberImg="Qmd9Xyuf3zQiyPfjDisVwL6J4AcTJy4ycFWBXdCQmjupyk"
+            />
+          </div>
 
           <div className={cx('right')}>
             <div className={cx('right-item')}>
