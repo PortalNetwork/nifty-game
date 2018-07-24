@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import Contract from './Contract';
-import SendTransactoin from './SendTransaction';
 import Card from './Card';
 import Arena from './Arena';
 import IndexUi from './IndexUi';
@@ -12,10 +10,7 @@ import { MetaMask } from './MetaMask/MetaMask';
 import { TweenMax } from "gsap/TweenMax";
 import { Warning } from './Warning/Warning';
 import { doGetTokenProperty, doMint } from '../lib/cryptoHerosTokenService';
-
-import Demo from "./Demo";
 import LoadingCoin from './LoadingCoin';
-import animateScrollTo from 'animated-scroll-to';
 
 class App extends Component {
   state={
