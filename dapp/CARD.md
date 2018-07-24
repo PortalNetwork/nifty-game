@@ -48,4 +48,67 @@ Pixel18                   | QmcxdWmLbQ25WfnvKgF6JNhmR9UmWKiFFRTWXaTuDtA9YA
 Pixel19                   | QmRYQ7AuwUtFFh6TvN3PhpaAKvvJjeDJwDPgp5wQxZ1uKY
 Pixel20                   | QmeTfP9mV6arYmSUL5WJ17HiDUQqWQ6HbHW6ULvMLyCoSW 
 
+Name                      | IPFS Hash                                       
+--------------------------|:------------------------------------------------
+1.png                     | QmNbPeXSeUEg6oEhRVFa5uSwVdi8GbXewttkVKf3zX2oyX  
+Pixel1.png                | QmeARz345pVTS1CgT8YWrTiMnj8wk56nKBcbxEgSvVjpXE
+bg1.png                   | Qmb9jK8bPGaWAVm46kxDMr2Hf1YWcNGiGRhxoRiTRvfNeW
+2.png                     | QmaJUZLbFN4D3HkjEWbUrUqJXtFfjEjVcbauE3YSh393ht 
+Pixel2.png                | QmRmKvVZVPSAiFCXsa214mxBBibZqJM6aJWvmA8ndkc5ig
+bg2.png                   | QmeJgkdZWnkwPuyhXkoKJEiKHq7h3cBazn8BsLiiWyeGm4
+3.png                     | QmSdjH5q4Y3h8Uv6knNL4wybgi5Kxrxbni335Y5ooMtKjg
+Pixel3.png                | 
+bg3.png                   | QmZNUkkQrZ199WZEDuftsKCzfoYESor9fBmotjgYHrkGbx
+4.png                     |   
+Pixel4.png                | 
+bg4.png                   | 
+5.png                     |   
+Pixel5.png                | 
+bg5.png                   | 
+6.png                     |   
+Pixel6.png                | 
+bg6.png                   | 
+7.png                     |   
+Pixel7.png                | 
+bg7.png                   | 
+8.png                     |   
+Pixel8.png                | 
+bg8.png                   | 
+9.png                     |   
+Pixel9.png                | 
+bg9.png                   | 
+10.png                    |   
+Pixel10.png               | 
+bg10.png                  | 
+11.png                    |   
+Pixel11.png               | 
+bg11.png                  | 
+12.png                    |   
+Pixel12.png               | 
+bg12.png                  | 
+13.png                    |   
+Pixel13.png               | 
+bg13.png                  | 
+14.png                    |   
+Pixel14.png               | 
+bg14.png                  | 
+15.png                    |   
+Pixel15.png               | 
+bg15.png                  | 
+16.png                    |   
+Pixel16.png               | 
+bg16.png                  | 
+17.png                    |   
+Pixel17.png               | 
+bg17.png                  | 
+18.png                    |   
+Pixel18.png               | 
+bg18.png                  | 
+19.png                    |   
+Pixel19.png               | 
+bg19.png                  | 
+20.png                    |   
+Pixel20.png               | 
+bg20.png                  | 
+
 
