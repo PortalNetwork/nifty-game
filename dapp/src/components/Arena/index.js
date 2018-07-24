@@ -28,8 +28,8 @@ import user12 from '../../images/user/user12.png';
 import user13 from '../../images/user/user13.png';
 import user14 from '../../images/user/user14.png';
 import { getCryptoHerosGameAddress } from '../../lib/web3Service';
-import { doCreateSingleGame, doGetUserSingleGames, } from '../../lib/cryptoHerosGameService';
-
+import { doCreateSingleGame, doGetUserSingleGames, getSingleGame, } from '../../lib/cryptoHerosGameService';
+import axios from 'axios';
 
 const cx = classnames.bind(style);
 
@@ -42,12 +42,13 @@ export default class extends React.Component {
     isShowHistory: false,
     hasBattleResult: false,
     battleResult: {},
+    historyGames: [],
   }
 
   // 賭金輸入
   handleBetETHChange = e => {
     let betEth = e.target.value;
-    if(betEth > 1) {
+    if (betEth > 1) {
       alert('bet eth should not bigger than 1');
       betEth = 0.01;
     }
@@ -58,9 +59,9 @@ export default class extends React.Component {
   }
 
   // 卡片選擇
-  handleSelectChange = idx => e => {
+  handleSelectChange = e => {
     this.setState({
-      selectedCardIdx: idx,
+      selectedCardIdx: e.target.value,
     });
   }
 
@@ -68,10 +69,10 @@ export default class extends React.Component {
   handlePlaceBet = async e => {
     const { web3, metaMask, } = this.props;
     const { betEth, selectedCardIdx, } = this.state;
-    const {account, network} = metaMask;
-    
+    const { account, network } = metaMask;
 
-    if(betEth > 1 || betEth < 0.01) {
+
+    if (betEth > 1 || betEth < 0.01) {
       alert('bet eth should not be bigger than 1 and less than 0.01');
       return;
     }
@@ -80,45 +81,86 @@ export default class extends React.Component {
     this.setState({
       isLoading: true,
     });
- 
+    console.log('selectedCard', selectedCard)
     const byteData = doCreateSingleGame(network, selectedCard.tokenId);
     const tx = {
       from: account,
       to: getCryptoHerosGameAddress(network),
       value: this.props.web3.toWei(betEth, 'ether'),
-      data: byteData 
+      data: byteData
     };
-    console.log('tx', tx);
+
     web3.eth.sendTransaction(tx, (err, response) => {
-      console.log('response', response)
+      let t = setInterval(async () => {
+        const result = await axios.get(`https://api-ropsten.etherscan.io/api?module=transaction&action=gettxreceiptstatus&txhash=${response}&apikey=RAADZVN65BQA7G839DFN3VHWCZBQMRBR11`)
+        if (result.data.status === "1") {
+          const games = await doGetUserSingleGames(network, account);
+          const gamePromises = games.map(cur => getSingleGame(network, cur.c[0], account));
+          const gameDetails = await Promise.all(gamePromises);
+          const thisGame = gameDetails[gameDetails.length - 1];
+          const userPointer = thisGame[1].c[0];
+          const contractPointer = thisGame[2].c[0];
+          const userBet = thisGame[3].c[0];
+          const gameType = thisGame[4].c[0]; // 0 = compare less 1 = compare big
+          const isWin = thisGame[5].c[0];    // 0 win, 1 lost, 2 平手
+          const isUserSmall = userPointer < contractPointer;
+
+          const battleResult = {
+            userPointer,
+            contractPointer,
+            userBet,
+            isUserSmall,
+            gameType,
+            isWin,
+          };
+
+          window.setTimeout(() => {
+            this.setState({
+              isLoading: false,
+              isShowResult: true,
+              isShowHistory: false,
+              hasBattleResult: true,
+              battleResult,
+            });
+          }, 0);
+
+          window.clearInterval(t);
+        }
+      }, 3000);
+
+
+
     });
-    
-
-
-    // window.setTimeout(() => {
-    //   this.setState({
-    //     isLoading: false,
-    //     isShowResult: true,
-    //     isShowHistory: false,
-    //     hasBattleResult: true,
-    //     battleResult: {
-    //       isWin: true,
-    //     },
-    //   });
-    // }, 0);
   }
 
   // 看歷史戰鬥
-  handleShowHistory = e => {
+  handleShowHistory = async e => {
+    const { web3, metaMask, } = this.props;
+    const { account, network } = metaMask;
+
     this.setState({
       isLoading: true,
     });
+
+
+    const games = await doGetUserSingleGames(network, account);
+    const gamePromises = games.map(cur => getSingleGame(network, cur.c[0], account));
+    const gameDetails = await Promise.all(gamePromises);
+
+    const historyGames = gameDetails.map(game => {
+      return ({
+        userBet: 1 / game[3].c[0],
+        isWin: game[5].c[0],
+      });
+    });
+    console.log('historyGames', historyGames)
 
     window.setTimeout(() => {
       this.setState({
         isLoading: false,
         isShowResult: false,
         isShowHistory: true,
+        historyGames,
       });
     }, 0);
   }
@@ -135,12 +177,34 @@ export default class extends React.Component {
   }
 
   render() {
-    const { selectedCardIdx, betEth, isShowResult, isShowHistory, isLoading, hasBattleResult, battleResult, } = this.state;
+    const { selectedCardIdx, betEth, isShowResult, isShowHistory, isLoading, hasBattleResult, battleResult, historyGames, } = this.state;
     const { cards, isShowArena, handleBack, } = this.props;
     const userImages = [user1, user2, user3, user4, user5, user6, user7, user8, user9, user10, user11, user12, user13, user14];
     const selectedCard = cards[selectedCardIdx];
-
-    if(!selectedCard) {
+    const numberImgs = [
+      'QmNbPeXSeUEg6oEhRVFa5uSwVdi8GbXewttkVKf3zX2oyX',
+      'QmaJUZLbFN4D3HkjEWbUrUqJXtFfjEjVcbauE3YSh393ht',
+      'QmSdjH5q4Y3h8Uv6knNL4wybgi5Kxrxbni335Y5ooMtKjg',
+      'Qmdi4p96LLjrmgoj5pJRSLnorJZ4bzdddyrN2jjLM6fXke',
+      'QmNnvqXtomFAiM34aJRd2rTimCyQnxeemHTLZWwxTGXeWa',
+      'QmTMig9fwhU77oaWKMHYvMbb3b1wyWviWUxEeYHBdH2T9f',
+      'QmQXDnUzPSfrQWLcc4vXeVyZquW8cPN4b3qU8zcpsf6ZDP',
+      'QmQ8Hg8aXtqET4Apd6AGDLmeZTsi9JVvZnMdRGsvdYBgkx',
+      'QmWQ3oxfnXzpw35wiGnrc2HNV3U6iT4eT6VpoEtLwdKUsT',
+      'QmUHsb1T1NuEL1TDQMD1dENpZFYP9NsnLo2iohKR3ydz2t',
+      'QmaQc91N7YvZ8NaxeQfe9xpiVErTH5EJqTiyWVjf6CnV9X',
+      'QmYtQprzsas3NzA7v4i8y1PJf89bMdr3bUqEqLgXkmfN6X',
+      'Qmcsu3ATk6cwhXSi2nhkeZqJc6Urk9o6sWX5ZapMDLhedA',
+      'QmWCk6YgA13WZkF8exa1atTAFx6nzNaYbyYf2jZQRTEJyL',
+      'QmVDYWJs9RNxX75agGWmKTyLrsaFEJqfFqEcDMVbg9Ftnq',
+      'Qmd9Xyuf3zQiyPfjDisVwL6J4AcTJy4ycFWBXdCQmjupyk',
+      'QmZPkZq2XjPVa1oWWLiVDii7okohRrUw1CuzJvicHwUsCa',
+      'QmZguKxTcU6wpGoz9MUfy5nN4EHMFABHejUrTdjou2hJ1M',
+      'QmWzdBNu1ikXvcXo7C1WyUk3FxWRnDo5gt2WKm14Rcs1Pc',
+      'Qmf8MPrUF41e5N5rtXVEGZg5AC7m8NLsjqf9ad9fvwVSrw',
+    ]
+    console.log('battleResult', battleResult)
+    if (!selectedCard) {
       return null;
     }
 
@@ -151,13 +215,13 @@ export default class extends React.Component {
         <div className="ui bg_footer"></div>
 
         <div className="card-title">
-          <img src={ gameplaytitleImg } />
+          <img src={gameplaytitleImg} />
         </div>
 
         {
           isLoading &&
           <div className={cx('loading-spinner')}>
-            <div style={{display: 'inline-block', width: '100px'}}><Loading /></div>
+            <div style={{ display: 'inline-block', width: '100px' }}><Loading /></div>
           </div>
         }
 
@@ -169,11 +233,11 @@ export default class extends React.Component {
             <div className={cx('battle-field')}>
               <div className={cx('left')}>
                 <div className={cx('left-item')}>
-                  <label className={cx('select_card_field')} for="select-card">
+                  <label className={cx('select_card_field')} htmlFor="select-card">
                     <select id="select-card" value={selectedCardIdx} onChange={this.handleSelectChange}>
-                    {
-                      cards.map((card, idx) => (<option key={idx} value={idx}>{card.tokenId}</option>))
-                    }
+                      {
+                        cards.map((card, idx) => (<option key={idx} value={idx}>{card.tokenId}</option>))
+                      }
                     </select>
                   </label>
                 </div>
@@ -186,11 +250,11 @@ export default class extends React.Component {
                     <img className={cx('place_bet_button')} src={playgameImg} />
                   </a>
                 </div>
-              
+
               </div>
 
               <div className={cx('center')}>
-                <BattleCard 
+                <BattleCard
                   isLock
                   isOpenCard={true}
                   bgImg={selectedCard.bgImg || "QmTDfdUwLNTXJ1PgRqPxyW41jrdxhvh72C4h62dNhNgvtP"}
@@ -210,40 +274,40 @@ export default class extends React.Component {
           </div>
         }
 
-        { /* 戰鬥結果 */ }
+        { /* 戰鬥結果 */}
         {
-          isShowResult && 
+          isShowResult &&
           <div>
             <a className="go-back-link-in-arena" onClick={this.handleBackArena}></a>
             <div className={cx('battle-result')}>
               <div className={cx('left')}>
-                <BattleCard 
+                <BattleCard
                   isSmall
                   isLock
                   isOpenCard={true}
-                  bgImg="QmTDfdUwLNTXJ1PgRqPxyW41jrdxhvh72C4h62dNhNgvtP"
-                  pixelImg="QmVALBXYymSKPz5wN1JFVHrZmnNhz7JW8J8QM5zVrHmagk"
-                  numberImg="Qmd9Xyuf3zQiyPfjDisVwL6J4AcTJy4ycFWBXdCQmjupyk"
-                  />
+                  bgImg={selectedCard.bgImg || "QmTDfdUwLNTXJ1PgRqPxyW41jrdxhvh72C4h62dNhNgvtP"}
+                  pixelImg={selectedCard.roleImg || "QmVALBXYymSKPz5wN1JFVHrZmnNhz7JW8J8QM5zVrHmagk"}
+                  numberImg={selectedCard.numberImg || "Qmd9Xyuf3zQiyPfjDisVwL6J4AcTJy4ycFWBXdCQmjupyk"}
+                />
               </div>
               <div className={cx('center')}>
-                <div className={cx('result-center-container', { isSmall: false})}>
+                <div className={cx('result-center-container', { isSmall: battleResult.isUserSmall })}>
                   <img src={bigImg} />
                 </div>
               </div>
               <div className={cx('right')}>
-                <BattleCard 
+                <BattleCard
                   isSmall
                   isOpenCard={false}
                   bgImg="QmTDfdUwLNTXJ1PgRqPxyW41jrdxhvh72C4h62dNhNgvtP"
                   pixelImg="QmVALBXYymSKPz5wN1JFVHrZmnNhz7JW8J8QM5zVrHmagk"
-                  numberImg="Qmd9Xyuf3zQiyPfjDisVwL6J4AcTJy4ycFWBXdCQmjupyk"
-                  />
+                  numberImg={numberImgs[battleResult.contractPointer - 1]}
+                />
               </div>
             </div>
 
             {
-              hasBattleResult && battleResult.isWin && 
+              hasBattleResult && battleResult.isWin === 0 &&
               <div className={cx('battle-result-win')}>
                 <div className="start1"></div>
                 <div className="start2"></div>
@@ -256,20 +320,19 @@ export default class extends React.Component {
             }
 
             {
-              hasBattleResult && !battleResult.isWin && 
+              hasBattleResult && battleResult.isWin >= 1 &&
               <div className={cx('battle-result-lose')}>
                 <div className="ghost1"></div>
                 <div className="ghost2"></div>
                 <img className={cx('lost')} src={lostImg} />
               </div>
             }
-
           </div>
         }
 
         { /* 歷史訊息 */}
         {
-          isShowHistory && 
+          isShowHistory &&
           <div>
             <a className="go-back-link-in-arena" onClick={this.handleBackArena}></a>
             <div className={cx('battle-history-container')}>
@@ -289,14 +352,19 @@ export default class extends React.Component {
                 </div>
 
 
-                <div className={cx('content')}>
-                  <span className={cx('player')}>
-                    <img src={userImages[Math.floor(Math.random()*userImages.length)]} style={{ display: 'inline-block', width: 'auto', height: 'auto'}} />
-                  </span>
-                  <span className={cx('player-bet')}>bbb</span>
-                  <span className={cx('result')}>ccc</span>
-                </div>
-                
+                {
+                  historyGames.map(game => {
+                    return (
+                      <div className={cx('content')}>
+                        <span className={cx('player')}>
+                          <img src={userImages[Math.floor(Math.random() * userImages.length)]} style={{ display: 'inline-block', width: 'auto', height: 'auto' }} />
+                        </span>
+                        <span className={cx('player-bet')}>{game.userBet}</span>
+                        <span className={cx('result')}>{game.isWin === 0 ? 'WIN' : game.isWin === 1 ? 'LOSE' : 'DRAW'}</span>
+                      </div>
+                    )
+                  })
+                }
               </div>
             </div>
 

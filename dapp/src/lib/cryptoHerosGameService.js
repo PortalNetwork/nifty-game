@@ -18,10 +18,10 @@ export const doCreateSingleGame = (networkId, tokenId) => {
     return cryptoHerosGame.createSingleGame(tokenId);
 }
 
-export const doGetUserSingleGames = (networkId, address) => {
+export const doGetUserSingleGames = (networkId, addres) => {
   try {
     setWeb3Provider(networkId);
-    const result = cryptoHerosGame.getUserSingleGames(address);
+    const result = cryptoHerosGame.getUserSingleGames(addres);
     return result;
   } catch (err) {
     console.log('doGetUserSingleGames: ', err);
@@ -29,10 +29,10 @@ export const doGetUserSingleGames = (networkId, address) => {
   }
 }
 
-export const getSingleGame = (gameId, address) => {
+export const getSingleGame = (networkId, gameId, address) => {
   try {
     setWeb3Provider(networkId);
-    const result = cryptoHerosGame.singleGame(gameId);
+    const result = cryptoHerosGame.singleGames(gameId);
     return result;
   } catch (err) {
     console.log('getSingleGame: ', err);
