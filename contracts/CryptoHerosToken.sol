@@ -12,6 +12,11 @@ contract CryptoHerosToken is ERC721Token, Ownable {
   mapping (uint256 => address) internal tokenOwner;
   uint constant minPrice = 0.01 ether;
 
+  string[] public images;
+  string[] public backgrounds;
+  string[] public descriptions;
+  uint[] public numbers;
+
   struct Hero {
     uint number;
     string image;
@@ -24,26 +29,43 @@ contract CryptoHerosToken is ERC721Token, Ownable {
   
   mapping(uint256 => Hero) public tokenProperty;
   
-
   constructor(string name, string symbol) public
     ERC721Token(name, symbol)
   { }
 
-  function initHeros(uint number, string image, string background, string desc) public onlyOwner {
-    heros.push(Hero(number, image, background, desc));
+  function initImage(string _image) public onlyOwner {
+    images.push(_image);
   }
+
+  function initBackground(string _background) public onlyOwner {
+    backgrounds.push(_background);
+  }
+
+  function initNumberAndDescription(uint _number, string _description) public onlyOwner {
+    numbers.push(_number);
+    descriptions.push(_description);
+  }
+
   /**
    * Only owner can mint
    */
   function mint() public payable {
-    require(heros.length > 0);
+    require(numbers.length > 0);
+    require(images.length > 0);
+    require(backgrounds.length > 0);
+    require(descriptions.length > 0);
     require(msg.value >= minPrice);
     require(owner.send(msg.value));
     uint256 _tokenId = totalSupply();
     tokenOwner[_tokenId] = msg.sender;
+    uint num = rand(0, numbers.length);
+    uint _number = numbers[num];
+    string _image = images[rand(0, images.length)];
+    string _background = backgrounds[rand(0, backgrounds.length)];
+    string _description = descriptions[num];
+    heros.push(Hero({number: _number, image: _image, background: _background, description: _description}));
+    tokenProperty[_tokenId] = Hero({number: _number, image: _image, background: _background, description: _description});
     super._mint(msg.sender, _tokenId);
-    //super._setTokenURI(_tokenId, heros[rand(0, heros.length)]);
-    tokenProperty[_tokenId] = heros[rand(0, heros.length)];
   }
 
   function burn(uint256 _tokenId) public onlyOwner {

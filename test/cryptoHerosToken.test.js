@@ -44,11 +44,11 @@ contract("CryptoHeros token", accounts => {
 
   it("Should init hero", async () => {
     let cryptoHerosToken = await CryptoHerosToken.deployed();
-    let result = await cryptoHerosToken.initHeros(0, 'image0', 'background0', 'dec0');
+    let result = await cryptoHerosToken.initImage('image0');
     assert.equal(result.receipt.status, '0x1');
-    let result2 = await cryptoHerosToken.initHeros(1, 'image1', 'background1', 'dec1');
+    let result2 = await cryptoHerosToken.initBackground('background0');
     assert.equal(result2.receipt.status, '0x1');
-    let result3 = await cryptoHerosToken.initHeros(2, 'image2', 'background2', 'dec2');
+    let result3 = await cryptoHerosToken.initNumberAndDescription(1, 'description0');
     assert.equal(result3.receipt.status, '0x1');
     //assert.equal(owner, accounts[0]);
   });
