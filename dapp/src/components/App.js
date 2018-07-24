@@ -146,8 +146,6 @@ class App extends Component {
           brandItem={brandItem}
         />
 
-        <Demo/>
-
 
         <Arena isShowArena={isShowArena} handleBack={this.handleBackFromArena} />
         <Arena 

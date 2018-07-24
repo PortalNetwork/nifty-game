@@ -4,64 +4,63 @@
     height: 100%;
     background-color: #000;
 
-
     display: flex;
     justify-content: center;
     align-items: center;
-    .gameCard{
-        position: relative;
-        width: 288px;
-        height: 407px;
-
-        transform-style: preserve-3d;   
-        backface-visibility: hidden; 
-        transition: all 0.5s linear; 
-        perspective: 500px;
-        
-        &:hover{
-            transform: rotateY(180deg);
-        }
-        .seeCard{
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            backface-visibility:hidden;
-            >div{
+    .cardbox{
+        perspective: 800px;
+        .gameCard{
+            position: relative;
+            width: 288px;
+            height: 407px;
+            transition: all 0.5s linear; 
+            transform-style: preserve-3d;   
+            &.OpenCard{
+                transform: rotateY(180deg);
+            }
+            .seeCard{
                 position: absolute;
-                top: 0;
-                left: 0;
                 width: 100%;
                 height: 100%;
-                background-size: 100% 100%;
-                &.c_bg{
-                    z-index: 1;
-                    background-image: url("../../images/demo/bg15.png");
-                }
-                &.c_user{
-                    z-index: 2;   
-                    background-image: url("../../images/demo/Pixel15.png");
-                }
-                &.c_number{
-                    z-index: 3;
-                    background-image: url("../../images/demo/15.png");
+                top: 0;
+                left: 0;
+                >div{
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-size: 100% 100%;
+                    backface-visibility: hidden;
+                    transform: rotateY(180deg);
+                    &.c_bg{
+                        z-index: 1;
+                        background-image: url("../../images/demo/bg15.png");
+                    }
+                    &.c_user{
+                        z-index: 2;   
+                        background-image: url("../../images/demo/Pixel15.png");
+                    }
+                    &.c_number{
+                        z-index: 3;
+                        background-image: url("../../images/demo/15.png");
+                    }
                 }
             }
-        }
-        .BackCard{
-            backface-visibility:hidden;
-            transform: rotateY(180deg);
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            background-image: url("../../images/back.png");
-            background-size: 100% 100%;
-        }
-    }
+            .BackCard{
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                background-image: url("../../images/back.png");
+                background-size: 100% 100%;
 
+                backface-visibility: hidden;
+            }
+        }
+
+    }
 
 
 
