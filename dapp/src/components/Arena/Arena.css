@@ -17,3 +17,19 @@
   transition: left .3s; }
   .arena.open {
     left: 0; }
+  .arena .card-title {
+    display: block;
+    width: 481px;
+    height: auto;
+    margin: 90px auto 0 auto; }
+    .arena .card-title > img {
+      width: 100%;
+      height: auto;
+      margin-bottom: 50px; }
+    .arena .card-title a.go-back {
+      display: block;
+      width: 151px;
+      height: 25px;
+      margin: 0 auto;
+      background-image: url("../../images/goBack.png");
+      animation: btnSetAmin 2s infinite linear; }
