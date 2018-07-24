@@ -17,7 +17,7 @@ contract CryptoHerosGame is Ownable {
 
   struct SingleGame {
     address player;
-    uint256 playerTokenId;
+    uint256 userResult;
     uint256 contractResult;
     uint256 playerBet;
     uint8 game; // 0: smaller. 1: greater
@@ -26,12 +26,19 @@ contract CryptoHerosGame is Ownable {
 
   SingleGame[] public singleGames;
 
+  mapping(address => uint256[]) public usersSingleGames;
+
   constructor(CryptoHerosToken _cryptoHerosToken) public { 
     cryptoHerosToken = _cryptoHerosToken;
   }
 
+  function () payable {
+
+  }
+
   function createSingleGame(uint _tokenId) payable public returns (uint256) {
     require(msg.value >= minPrice);
+    require(this.balance >= minHerosToken);
     require(cryptoHerosToken.ownerOf(_tokenId) == msg.sender);
 
     uint userTokenNumber;
@@ -49,19 +56,31 @@ contract CryptoHerosGame is Ownable {
 
     SingleGame memory _singleGame;
     if (result == 0) {
-      _singleGame = SingleGame({player: msg.sender, playerTokenId: userTokenNumber, contractResult: contractTokenNumber, playerBet: msg.value, game: game, result: 2});
+      _singleGame = SingleGame({player: msg.sender, userResult: userTokenNumber, contractResult: contractTokenNumber, playerBet: msg.value, game: game, result: 2});
       require(msg.sender.send(msg.value * 1 - gameFee));
 
     } else if (result > 0) {
-      _singleGame = SingleGame({player: msg.sender, playerTokenId: userTokenNumber, contractResult: contractTokenNumber, playerBet: msg.value, game: game, result: 0});
+      _singleGame = SingleGame({player: msg.sender, userResult: userTokenNumber, contractResult: contractTokenNumber, playerBet: msg.value, game: game, result: 0});
       require(msg.sender.send(msg.value * 150 / 100));
 
     } else {
-      _singleGame = SingleGame({player: msg.sender, playerTokenId: userTokenNumber, contractResult: contractTokenNumber, playerBet: msg.value, game: game, result: 1});
+      _singleGame = SingleGame({player: msg.sender, userResult: userTokenNumber, contractResult: contractTokenNumber, playerBet: msg.value, game: game, result: 1});
     }
 
     maxSingleGameId = singleGames.push(_singleGame) - 1;
+
+    uint256[] userSingleGames = usersSingleGames[msg.sender];
+    userSingleGames.push(maxSingleGameId);
+
     return maxSingleGameId;
+  }
+
+  // function readUserGamesCount(address _address, uint _idx) public returns (uint){
+  //   return usersSingleGames[_address][_idx].length;
+  // }
+
+  function getUserSingleGames() external view returns (uint256[]) {
+    return usersSingleGames[msg.sender];
   }
 
   function rand(uint min, uint max) private returns (uint){
