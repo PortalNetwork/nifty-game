@@ -37,7 +37,7 @@ ERC-721 non-fungible token：
 - Truffle
 
 ### Test environment/Private chain
-- ganeche
+- ganache
 
 ## How To Install Dependencies
 
