@@ -77,6 +77,12 @@
       height: 25px;
       background-image: url("../../images/Elf3.png");
       animation: ElfMove 2s infinite linear; }
+    .arena .ui.bg_footer {
+      bottom: 0;
+      width: 100%;
+      height: 159px;
+      background-position: -35px 0%;
+      background-image: url("../../images/bgfooter.png"); }
   .arena .card-title {
     display: block;
     width: 481px;
@@ -93,3 +99,94 @@
       margin: 0 auto;
       background-image: url("../../images/goBack.png");
       animation: btnSetAmin 2s infinite linear; }
+
+.battle-field {
+  display: flex;
+  margin-left: 10%;
+  margin-right: 10%;
+  padding-top: 20px;
+  height: 500px; }
+  .battle-field .left {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 0 100px;
+    flex: 1 1; }
+    .battle-field .left .left-item {
+      display: inline-flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%; }
+  .battle-field .center {
+    display: inline-flex;
+    justify-content: center;
+    flex: 1 1; }
+  .battle-field .right {
+    display: inline-flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 0 100px;
+    flex: 1 1; }
+    .battle-field .right .right-item {
+      display: inline-flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%; }
+
+.select_card_field {
+  position: relative;
+  width: 240px;
+  height: 45px;
+  background-size: 240px;
+  background-repeat: no-repeat;
+  background-image: url("../../images/select.png"); }
+  .select_card_field select {
+    position: absolute;
+    top: 8px;
+    left: 20px;
+    width: 200px;
+    height: 30px;
+    border: 0;
+    background-color: rgba(39, 36, 36, 0);
+    outline: none;
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    text-align-last: center;
+    -webkit-appearance: none;
+    -moz-appearance: none; }
+
+.bet_eth_field {
+  position: relative;
+  width: 240px;
+  height: 45px;
+  background-size: 240px;
+  background-repeat: no-repeat;
+  background-image: url("../../images/inputETH.png"); }
+  .bet_eth_field input {
+    position: absolute;
+    top: 8px;
+    left: 20px;
+    width: 150px;
+    height: 30px;
+    border: 0;
+    background-color: #272424;
+    outline: none;
+    font-size: 16px;
+    color: white;
+    text-align: center; }
+
+.place_bet_button {
+  display: inline-block;
+  margin-top: 10px;
+  width: 150px; }
+
+.history-button {
+  display: inline-block;
+  margin-top: 10px;
+  width: 150px;
+  cursor: pointer; }
