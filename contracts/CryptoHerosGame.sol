@@ -32,13 +32,13 @@ contract CryptoHerosGame is Ownable {
     cryptoHerosToken = _cryptoHerosToken;
   }
 
-  function () payable {
+  function () payable public {
 
   }
 
   function createSingleGame(uint _tokenId) payable public returns (uint256) {
     require(msg.value >= minPrice);
-    require(this.balance >= minHerosToken);
+    require(address(this).balance >= minHerosToken);
     require(cryptoHerosToken.ownerOf(_tokenId) == msg.sender);
 
     uint userTokenNumber;
@@ -89,7 +89,7 @@ contract CryptoHerosGame is Ownable {
   }
 
   function withdraw(uint amount) public payable onlyOwner returns(bool) {
-    require(amount <= this.balance);
+    require(amount <= address(this).balance);
     owner.transfer(amount);
     return true;
   }
