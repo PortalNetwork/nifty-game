@@ -97,12 +97,20 @@ contract("CryptoHeros token", accounts => {
     });
 
 
-    it.skip("Should transfer ownership", async () => {
+    it("Start a game", async () => {
       let cryptoHerosToken = await CryptoHerosToken.deployed();
       const res = await cryptoHerosToken.getOwnedTokens(accounts[1]);
-      console.log('cryptoHerosToken: ', cryptoHerosToken.address);
-      //const res2 = await cryptoHerosGame.createSingleGame(res[5]);
       console.log('res: ', res);
+      //console.log('cryptoHerosToken: ', cryptoHerosToken.address);
+
+      let cryptoHerosGame = await CryptoHerosGame.new(cryptoHerosToken.address);
+      for (let i=0;i<res.length;i++) {
+        const res2 = await cryptoHerosGame.createSingleGame(res[i], {from: accounts[1], value: web3.toWei(0.02, "ether")});
+        assert.equal(res2.receipt.status, '0x1');
+        let singleGames = await cryptoHerosGame.singleGames(i);
+        console.log('game result: ', singleGames[5].toString() + ' | ' + singleGames[4].toString() + ' | ' + singleGames[1].toString() + ' | ' + singleGames[2].toString());
+      }
+      
       
     });
   });

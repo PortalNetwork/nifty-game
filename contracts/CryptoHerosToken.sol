@@ -87,4 +87,9 @@ contract CryptoHerosToken is ERC721Token, Ownable {
     nonce++;
     return uint(sha3(nonce))%(min+max)-min;
   }
+
+  function getHerosLength() public returns (uint) {
+    return heros.length;
+  }
+  
 }

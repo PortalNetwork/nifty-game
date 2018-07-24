@@ -31,7 +31,8 @@ contract CryptoHerosGame is Ownable {
     uint256 playerTokenId;
     uint256 contractResult;
     uint256 playerBet;
-    uint8 winner; // 0 user, 1 contract, 2 draw
+    uint8 game; // 0: smaller. 1: greater
+    uint8 result; // 0 user win, 1 contract win, 2 draw
   }
 
   Game[] public games;
@@ -48,10 +49,11 @@ contract CryptoHerosGame is Ownable {
 
     // 取得 number 進行比大小
     uint userTokenNumber = cryptoHerosToken.getTokenProverty(_tokenId);
-    uint contractNumber = rand(0, 10);
+    uint contractNumber = cryptoHerosToken.getTokenProverty(rand(0, cryptoHerosToken.getHerosLength()));
 
     int result;
-    if (rand(0, 1) > 0) {
+    uint8 game = uint8(rand(0, 2));
+    if (game > 0) {
       result = int(userTokenNumber - contractNumber);
     } else {
       result = int(contractNumber - userTokenNumber);
@@ -59,14 +61,15 @@ contract CryptoHerosGame is Ownable {
 
     SingleGame memory _singleGame;
     if (result == 0) {
-      _singleGame = SingleGame({player: msg.sender, playerTokenId: _tokenId, contractResult: contractNumber, playerBet: msg.value, winner: 2});
+      _singleGame = SingleGame({player: msg.sender, playerTokenId: userTokenNumber, contractResult: contractNumber, playerBet: msg.value, game: game, result: 2});
       msg.sender.send(msg.value * 1 - gameFee);
+
     } else if (result > 0) {
-      _singleGame = SingleGame({player: msg.sender, playerTokenId: _tokenId, contractResult: contractNumber, playerBet: msg.value, winner: 0});
-      //var Ether = msg.value;
+      _singleGame = SingleGame({player: msg.sender, playerTokenId: userTokenNumber, contractResult: contractNumber, playerBet: msg.value, game: game, result: 0});
       msg.sender.send(msg.value * 150 / 100);
+
     } else {
-      _singleGame = SingleGame({player: msg.sender, playerTokenId: _tokenId, contractResult: contractNumber, playerBet: msg.value, winner: 1});
+      _singleGame = SingleGame({player: msg.sender, playerTokenId: userTokenNumber, contractResult: contractNumber, playerBet: msg.value, game: game, result: 1});
     }
 
     maxSingleGameId = singleGames.push(_singleGame) - 1;
