@@ -1,0 +1,19 @@
+@keyframes btnSetAmin {
+  to {
+    transform: scale(1); }
+  50% {
+    transform: scale(1.4); }
+  form {
+    transform: scale(1); } }
+
+.arena {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: #272424;
+  transition: left .3s; }
+  .arena.open {
+    left: 0; }
