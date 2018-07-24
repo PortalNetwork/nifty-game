@@ -63,6 +63,7 @@ contract CryptoHerosToken is ERC721Token, Ownable {
     string _image = images[rand(0, images.length)];
     string _background = backgrounds[rand(0, backgrounds.length)];
     string _description = descriptions[num];
+    heros.push(Hero({number: _number, image: _image, background: _background, description: _description}));
     tokenProperty[_tokenId] = Hero({number: _number, image: _image, background: _background, description: _description});
     super._mint(msg.sender, _tokenId);
   }
