@@ -45,7 +45,7 @@ You can find contract detail under `contracts/` directory:
 - Truffle
 
 ### Test environment/Private chain
-- ganeche
+- ganache
 
 ## How To Install Dependencies
 
