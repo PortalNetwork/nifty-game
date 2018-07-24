@@ -8,10 +8,12 @@ function CryptoHerosGame(web3, address) {
   this.cryptoHerosGamePromise = Promise.resolve(Promise.promisifyAll(cryptoHerosGameContract.at(address)));
 }
 
-CryptoHerosGame.prototype.name = function (callback) {
-  return this.cryptoHerosGamePromise.then(function (cryptoHerosGame) {
-    return cryptoHerosGame.nameAsync();
-  });
+CryptoHerosGame.prototype.createSingleGame = function (tokenId, callback) {
+  let byteData = "0x" + 		
+      abi.methodID("createSingleGame", [ "uint" ]).toString("hex") + 		
+      abi.rawEncode([ "uint" ], 
+        [ tokenId ]).toString("hex");
+  return byteData;
 }
 
 module.exports = CryptoHerosGame;
