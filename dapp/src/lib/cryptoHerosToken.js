@@ -1,4 +1,5 @@
 var Promise = require('bluebird');
+const abi = require('ethereumjs-abi');
 
 const cryptoHerosTokenInterface = [
 	{
