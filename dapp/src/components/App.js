@@ -12,6 +12,9 @@ import { MetaMask } from './MetaMask/MetaMask';
 import { TweenMax } from "gsap/TweenMax";
 import { Warning } from './Warning/Warning';
 import { getTokenURI } from '../lib/cryptoHerosTokenService';
+
+
+import Demo from "./Demo";
 class App extends Component {
   state={
     web3: null,
@@ -127,6 +130,8 @@ class App extends Component {
           isGetCardPage={isGetCardPage}
           brandItem={brandItem}
         />
+
+        <Demo/>
 
 
         <Arena isShowArena={isShowArena} handleBack={this.handleBackFromArena} />
