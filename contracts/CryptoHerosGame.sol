@@ -49,7 +49,7 @@ contract CryptoHerosGame is Ownable {
 
     // 取得 number 進行比大小
     uint userTokenNumber = cryptoHerosToken.getTokenProverty(_tokenId);
-    uint contractNumber = rand(0, cryptoHerosToken.getLength());
+    uint contractNumber = cryptoHerosToken.getTokenProverty(rand(0, cryptoHerosToken.getHerosLength()));
 
     int result;
     uint8 game = uint8(rand(0, 2));
