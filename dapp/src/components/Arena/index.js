@@ -89,43 +89,49 @@ export default class extends React.Component {
       value: this.props.web3.toWei(betEth, 'ether'),
       data: byteData
     };
-
+    
     web3.eth.sendTransaction(tx, (err, response) => {
       let t = setInterval(async () => {
         const result = await axios.get(`https://api-ropsten.etherscan.io/api?module=transaction&action=gettxreceiptstatus&txhash=${response}&apikey=RAADZVN65BQA7G839DFN3VHWCZBQMRBR11`)
         if (result.data.status === "1") {
-          const games = await doGetUserSingleGames(network, account);
-          const gamePromises = games.map(cur => getSingleGame(network, cur.c[0], account));
-          const gameDetails = await Promise.all(gamePromises);
-          const thisGame = gameDetails[gameDetails.length - 1];
-          const userPointer = thisGame[1].c[0];
-          const contractPointer = thisGame[2].c[0];
-          const userBet = thisGame[3].c[0];
-          const gameType = thisGame[4].c[0]; // 0 = compare less 1 = compare big
-          const isWin = thisGame[5].c[0];    // 0 win, 1 lost, 2 平手
-          const isUserSmall = userPointer < contractPointer;
+          
+          window.setTimeout(async () => {
+            const games = await doGetUserSingleGames(network, account);
+            const gamePromises = games.map(cur => getSingleGame(network, cur.c[0], account));
+            const gameDetails = await Promise.all(gamePromises);
+            const thisGame = gameDetails[gameDetails.length - 1];
+            const userPointer = thisGame[1].c[0];
+            const contractPointer = thisGame[2].c[0];
+            const userBet = thisGame[3].c[0];
+            const gameType = thisGame[4].c[0]; // 0 = compare less 1 = compare big
+            const isWin = thisGame[5].c[0];    // 0 win, 1 lost, 2 平手
+            const isUserSmall = userPointer < contractPointer;
 
-          const battleResult = {
-            userPointer,
-            contractPointer,
-            userBet,
-            isUserSmall,
-            gameType,
-            isWin,
-          };
+            const battleResult = {
+              userPointer,
+              contractPointer,
+              userBet,
+              isUserSmall,
+              gameType,
+              isWin,
+            };
 
-          window.setTimeout(() => {
-            this.setState({
-              isLoading: false,
-              isShowResult: true,
-              isShowHistory: false,
-              hasBattleResult: true,
-              battleResult,
-            });
-          }, 0);
+            window.setTimeout(() => {
+              this.setState({
+                isLoading: false,
+                isShowResult: true,
+                isShowHistory: false,
+                hasBattleResult: true,
+                battleResult,
+              });
+            }, 0);
+          });
 
           window.clearInterval(t);
         }
+
+
+
       }, 3000);
 
 
@@ -149,7 +155,7 @@ export default class extends React.Component {
 
     const historyGames = gameDetails.map(game => {
       return ({
-        userBet: 1 / game[3].c[0],
+        userBet: game[3].c[0] / 10000,
         isWin: game[5].c[0],
       });
     });
