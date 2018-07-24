@@ -55,18 +55,33 @@ class App extends Component {
   //進入卡牌畫面
   gotoAndPlayGame = async () =>{
     let brandObj = [];
+    const { brand, } = this.state;
     const { network } = this.props.metaMask;
-    this.state.brand.forEach(async (item, idx) => {
-      const contents = await getTokenURI(network, item);
-      brandObj.push(JSON.parse(contents));
-      if(this.state.brand.length - 1 === idx){
-        setTimeout(() => {
-          this.setState({brandItem: brandObj, isGetCardPage: true}, ()=>{
-            TweenMax.staggerFrom(".cardBox", 0.5, {transform: "translateY(-30px)", opacity:0}, 0.2);
-          });
-        }, 500);
-      }
-    })
+
+    const promises = brand.map(cur => getTokenURI(network, cur));
+    const result = await Promise.all(promises);
+    this.setState({
+      brandItem: result.map(cur => JSON.parse(cur)),
+      isGetCardPage: true,
+    });
+    setTimeout(() => {
+      TweenMax.staggerFrom(".cardBox", 0.5, {
+        transform: "translateY(-30px)", 
+        opacity:0}, 0.2
+      );
+    }, 0);
+
+    // this.state.brand.forEach(async (item, idx) => {
+    //   const contents = await getTokenURI(network, item);
+    //   brandObj.push(JSON.parse(contents));
+    //   if(this.state.brand.length - 1 === idx){
+    //     setTimeout(() => {
+    //       this.setState({brandItem: brandObj, isGetCardPage: true}, ()=>{
+    //         TweenMax.staggerFrom(".cardBox", 0.5, {transform: "translateY(-30px)", opacity:0}, 0.2);
+    //       });
+    //     }, 500);
+    //   }
+    // });
   }
 
   componentDidMount(){
@@ -97,8 +112,9 @@ class App extends Component {
           <div className="titlebox">
             <img className="title" src={title}/>
             <img className="title2" src={title2}/>
-            { isLoading?  <Loading/> : <a className="gameplay"></a> }
-            { isLoading?  '': <a className="getCard" onClick={this.gotoAndPlayGame}></a>}
+            { isLoading && <Loading/> }
+            { !isLoading && <a className="gameplay"></a>}
+            { !isLoading && <a className="getCard" onClick={this.gotoAndPlayGame}></a>}
           </div>
           <IndexUi/>
           <MetaMask {...this.props} {...this.state} setWeb3={this.setWeb3}/>
