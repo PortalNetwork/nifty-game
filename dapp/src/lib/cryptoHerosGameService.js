@@ -28,3 +28,14 @@ export const doGetUserSingleGames = (networkId, address) => {
     return 'getUserSingleGames not found';
   }
 }
+
+export const getSingleGame = (gameId, address) => {
+  try {
+    setWeb3Provider(networkId);
+    const result = cryptoHerosGame.singleGame(gameId);
+    return result;
+  } catch (err) {
+    console.log('getSingleGame: ', err);
+    return 'singleGame not found';
+  }
+}
