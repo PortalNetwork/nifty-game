@@ -65,7 +65,7 @@ contract("CryptoHeros token", accounts => {
       let cryptoHerosToken = await CryptoHerosToken.deployed();
       const res = await cryptoHerosToken.getOwnedTokens(accounts[1]);
       for(let i = 0; i < res.length; i++) {
-        const property = await cryptoHerosToken.getTokenProverty(res[i]);
+        const property = await cryptoHerosToken.getTokenProperty(res[i]);
         console.log(property);
         //assert.equal(property.toNumber() >= 0, true);
       }
