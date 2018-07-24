@@ -17,6 +17,66 @@
   transition: left .3s; }
   .arena.open {
     left: 0; }
+  .arena .cloud_card1 {
+    position: absolute;
+    width: 68px;
+    height: 27px;
+    background-image: url("../../images/cloud.png");
+    top: 12%;
+    left: 16%;
+    animation: cloudMove1 18s infinite linear; }
+  .arena .cloud_card2 {
+    position: absolute;
+    width: 68px;
+    height: 27px;
+    background-image: url("../../images/cloud.png");
+    top: 19%;
+    right: 12%;
+    animation: cloudMove2 18s infinite linear; }
+  .arena .ui {
+    position: absolute; }
+    .arena .ui.start1 {
+      width: 13px;
+      height: 20px;
+      background-image: url("../../images/star1.png");
+      top: 30%;
+      left: 10%;
+      animation: starMove1 3s infinite linear; }
+    .arena .ui.start2 {
+      width: 13px;
+      height: 21px;
+      background-image: url("../../images/star2.png");
+      top: 37%;
+      right: 5%;
+      animation: starMove2 2s infinite linear; }
+    .arena .ui.start3 {
+      width: 13px;
+      height: 20px;
+      background-image: url("../../images/star1.png");
+      top: 75%;
+      left: 5%;
+      animation: starMove3 4s infinite linear; }
+    .arena .ui.Elf1 {
+      bottom: 10%;
+      left: 120px;
+      width: 26px;
+      height: 25px;
+      background-image: url("../../images/Elf1.png");
+      animation: ElfMove 2s infinite linear; }
+    .arena .ui.Elf2 {
+      top: 15%;
+      left: 25%;
+      width: 26px;
+      height: 25px;
+      background-image: url("../../images/Elf2.png");
+      animation: ElfMove 2s infinite linear; }
+    .arena .ui.Elf3 {
+      bottom: 15%;
+      right: 8%;
+      width: 26px;
+      height: 25px;
+      background-image: url("../../images/Elf3.png");
+      animation: ElfMove 2s infinite linear; }
   .arena .card-title {
     display: block;
     width: 481px;
