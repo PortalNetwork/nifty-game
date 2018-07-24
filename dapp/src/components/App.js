@@ -12,14 +12,10 @@ import { MetaMask } from './MetaMask/MetaMask';
 import { TweenMax } from "gsap/TweenMax";
 import { Warning } from './Warning/Warning';
 import { getTokenURI } from '../lib/cryptoHerosTokenService';
-<<<<<<< HEAD
-
 
 import Demo from "./Demo";
-=======
 import LoadingCoin from './LoadingCoin';
 
->>>>>>> b924309a5feeca0706008e342f42fcdcc223c6bd
 class App extends Component {
   state={
     web3: null,
@@ -150,12 +146,10 @@ class App extends Component {
           brandItem={brandItem}
         />
 
-<<<<<<< HEAD
         <Demo/>
 
 
         <Arena isShowArena={isShowArena} handleBack={this.handleBackFromArena} />
-=======
         <Arena 
           isShowArena={isShowArena} 
           handleBack={this.handleBackFromArena} 
@@ -163,7 +157,6 @@ class App extends Component {
           handleCloseLoadingCoin={this.handleCloseLoadingCoin}
         />
         { isLoadingCoinLoading && <LoadingCoin />}
->>>>>>> b924309a5feeca0706008e342f42fcdcc223c6bd
       </div>
     );
   }

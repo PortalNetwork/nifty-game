@@ -9,7 +9,7 @@ export default class extends React.Component {
       <div className="demo">
 
         <div className="gameCard">
-            <div className="gameCard">
+            <div className="seeCard">
                 <div className="c_bg"></div>
                 <div className="c_user"></div>
                 <div className="c_number"></div>
