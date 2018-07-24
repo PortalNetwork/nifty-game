@@ -93,7 +93,6 @@ class App extends Component {
   handleGoArena = e => {
     this.setState({
       isShowArena: true,
-      isLoadingCoinLoading: true,
     });
   }
 
