@@ -378,3 +378,64 @@
     height: 73px;
   }
 }
+
+.battle-history-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.battle-history-field {
+  background-color: rgba(140, 140, 140, .5);
+  display: inline-block;
+  margin: 0 auto;
+  width: 80%;
+  height: 480px;
+  border-radius: 20px;
+  padding: 20px 50px;
+  overflow-y: scroll;
+
+  & .header {
+    display: flex;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #7bc3b7;
+
+    & span {
+      flex: 1 1;
+    }
+  }
+
+  & .content {
+    display: flex;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    & span {
+      flex: 1 1;
+      font-size: 30px;
+      color: #7bc3b7;
+    }
+  }
+
+  & .player {
+    & img {
+      width: 126px;
+      height: 22px;
+    }
+  }
+
+  & .player-bet {
+    & img {
+      width: 199px;
+      height: 22px;
+    }
+  }
+
+  & .result {
+    & img {
+      width: 127px;
+      height: 23px;
+    }
+  }
+}

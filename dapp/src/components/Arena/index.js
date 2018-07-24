@@ -10,6 +10,23 @@ import historyImg from '../../images/history.png';
 import bigImg from '../../images/big.png';
 import winImg from '../../images/winlogo.png';
 import lostImg from '../../images/youlost.png';
+import playerImg from '../../images/paayer.png';
+import playerbetImg from '../../images/playerbet.png';
+import resultImg from '../../images/result.png';
+import user1 from '../../images/user/user1.png';
+import user2 from '../../images/user/user2.png';
+import user3 from '../../images/user/user3.png';
+import user4 from '../../images/user/user4.png';
+import user5 from '../../images/user/user5.png';
+import user6 from '../../images/user/user6.png';
+import user7 from '../../images/user/user7.png';
+import user8 from '../../images/user/user8.png';
+import user9 from '../../images/user/user9.png';
+import user10 from '../../images/user/user10.png';
+import user11 from '../../images/user/user11.png';
+import user12 from '../../images/user/user12.png';
+import user13 from '../../images/user/user13.png';
+import user14 from '../../images/user/user14.png';
 
 const cx = classnames.bind(style);
 
@@ -87,7 +104,7 @@ export default class extends React.Component {
         isShowResult: false,
         isShowHistory: true,
       });
-    }, 3000);
+    }, 0);
   }
 
   // 回到鬥技場
@@ -104,6 +121,7 @@ export default class extends React.Component {
   render() {
     const { cards, selectedCard, betEth, isShowResult, isShowHistory, isLoading, hasBattleResult, battleResult, } = this.state;
     const { isShowArena, handleBack, } = this.props;
+    const userImages = [user1, user2, user3, user4, user5, user6, user7, user8, user9, user10, user11, user12, user13, user14];
     
     return (
       <div className={cx('arena', { open: isShowArena })}>
@@ -231,10 +249,36 @@ export default class extends React.Component {
         { /* 歷史訊息 */}
         {
           isShowHistory && 
-          <div className={cx('battle-history')}>
+          <div>
             <a className="go-back-link-in-arena" onClick={this.handleBackArena}></a>
+            <div className={cx('battle-history-container')}>
+              <div className={cx('battle-history-field')}>
+                <div className={cx('header')}>
+                  <span className={cx('player')}>
+                    <img src={playerImg} />
+                  </span>
 
-            history
+                  <span className={cx('player-bet')}>
+                    <img src={playerbetImg} />
+                  </span>
+
+                  <span className={cx('result')}>
+                    <img src={resultImg} />
+                  </span>
+                </div>
+
+
+                <div className={cx('content')}>
+                  <span className={cx('player')}>
+                    <img src={userImages[Math.floor(Math.random()*userImages.length)]} style={{ display: 'inline-block', width: 'auto', height: 'auto'}} />
+                  </span>
+                  <span className={cx('player-bet')}>bbb</span>
+                  <span className={cx('result')}>ccc</span>
+                </div>
+                
+              </div>
+            </div>
+
           </div>
         }
       </div>
