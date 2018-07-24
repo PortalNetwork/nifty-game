@@ -1,7 +1,7 @@
 # Nifty Game 
 [![Build Status](https://travis-ci.com/billPortalNetwork/nifty-game.svg?branch=master)](https://travis-ci.com/billPortalNetwork/nifty-game)
-![react](https://img.shields.io/badge/react-%5E16.1.1-brightgreen.svg)
-![node](https://img.shields.io/badge/node-%3E%3D%206.0.0-brightgreen.svg)
+[![react](https://img.shields.io/badge/react-%5E16.1.1-brightgreen.svg)](https://img.shields.io/badge/react-%5E16.1.1-brightgreen.svg)
+[![node](https://img.shields.io/badge/node-%3E%3D%206.0.0-brightgreen.svg)](https://img.shields.io/badge/node-%3E%3D%206.0.0-brightgreen.svg)
 
 This project is a crypto card game that uses [OpenZepplin](https://github.com/OpenZeppelin/openzeppelin-solidity).
 

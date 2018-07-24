@@ -1,7 +1,7 @@
 # Nifty Game 
 [![Build Status](https://travis-ci.com/billPortalNetwork/nifty-game.svg?branch=master)](https://travis-ci.com/billPortalNetwork/nifty-game)
-![react](https://img.shields.io/badge/react-%5E16.1.1-brightgreen.svg)
-![node](https://img.shields.io/badge/node-%3E%3D%206.0.0-brightgreen.svg)
+[![react](https://img.shields.io/badge/react-%5E16.1.1-brightgreen.svg)](https://img.shields.io/badge/react-%5E16.1.1-brightgreen.svg)
+[![node](https://img.shields.io/badge/node-%3E%3D%206.0.0-brightgreen.svg)](https://img.shields.io/badge/node-%3E%3D%206.0.0-brightgreen.svg)
 
 這是一款加密卡牌遊戲，使用[OpenZepplin](https://github.com/OpenZeppelin/openzeppelin-solidity)。
 在ERC-721 non-fungible token 標準下建置合約，透過truffle框架編寫及部署合約，合約部署之後，使用者可以透過前端來跟dApp互動，再由dApp呼叫部署在以太坊上的合約來進行遊戲。
