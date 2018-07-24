@@ -27,18 +27,15 @@ import user11 from '../../images/user/user11.png';
 import user12 from '../../images/user/user12.png';
 import user13 from '../../images/user/user13.png';
 import user14 from '../../images/user/user14.png';
+import { getCryptoHerosGameAddress } from '../../lib/web3Service';
+import { doCreateSingleGame, doGetUserSingleGames, } from '../../lib/cryptoHerosGameService';
+
 
 const cx = classnames.bind(style);
 
 export default class extends React.Component {
   state = {
-    cards: [
-      '1213321',
-      '1213322',
-      '1213323',
-      '1213324',
-    ],
-    selectedCard: '1213322',
+    selectedCardIdx: 0,
     betEth: 0.01,
     isLoading: false,
     isShowResult: false,
@@ -61,35 +58,54 @@ export default class extends React.Component {
   }
 
   // 卡片選擇
-  handleSelectChange = e => {
+  handleSelectChange = idx => e => {
     this.setState({
-      selectedCard: e.target.value,
+      selectedCardIdx: idx,
     });
   }
 
   // 開始賭
-  handlePlaceBet = e => {
-    const { betEth, selectedCard, } = this.state;
+  handlePlaceBet = async e => {
+    const { web3, metaMask, } = this.props;
+    const { betEth, selectedCardIdx, } = this.state;
+    const {account, network} = metaMask;
+    
+
     if(betEth > 1 || betEth < 0.01) {
       alert('bet eth should not be bigger than 1 and less than 0.01');
       return;
     }
+    const selectedCard = this.props.cards[selectedCardIdx];
 
     this.setState({
       isLoading: true,
     });
+ 
+    const byteData = doCreateSingleGame(network, selectedCard.tokenId);
+    const tx = {
+      from: account,
+      to: getCryptoHerosGameAddress(network),
+      value: this.props.web3.toWei(betEth, 'ether'),
+      data: byteData 
+    };
+    console.log('tx', tx);
+    web3.eth.sendTransaction(tx, (err, response) => {
+      console.log('response', response)
+    });
+    
 
-    window.setTimeout(() => {
-      this.setState({
-        isLoading: false,
-        isShowResult: true,
-        isShowHistory: false,
-        hasBattleResult: true,
-        battleResult: {
-          isWin: true,
-        },
-      });
-    }, 0);
+
+    // window.setTimeout(() => {
+    //   this.setState({
+    //     isLoading: false,
+    //     isShowResult: true,
+    //     isShowHistory: false,
+    //     hasBattleResult: true,
+    //     battleResult: {
+    //       isWin: true,
+    //     },
+    //   });
+    // }, 0);
   }
 
   // 看歷史戰鬥
@@ -119,10 +135,15 @@ export default class extends React.Component {
   }
 
   render() {
-    const { cards, selectedCard, betEth, isShowResult, isShowHistory, isLoading, hasBattleResult, battleResult, } = this.state;
-    const { isShowArena, handleBack, } = this.props;
+    const { selectedCardIdx, betEth, isShowResult, isShowHistory, isLoading, hasBattleResult, battleResult, } = this.state;
+    const { cards, isShowArena, handleBack, } = this.props;
     const userImages = [user1, user2, user3, user4, user5, user6, user7, user8, user9, user10, user11, user12, user13, user14];
-    
+    const selectedCard = cards[selectedCardIdx];
+
+    if(!selectedCard) {
+      return null;
+    }
+
     return (
       <div className={cx('arena', { open: isShowArena })}>
         <div className="cloud_card1"></div>
@@ -149,9 +170,9 @@ export default class extends React.Component {
               <div className={cx('left')}>
                 <div className={cx('left-item')}>
                   <label className={cx('select_card_field')} for="select-card">
-                    <select id="select-card" value={selectedCard} onChange={this.handleSelectChange}>
+                    <select id="select-card" value={selectedCardIdx} onChange={this.handleSelectChange}>
                     {
-                      cards.map(card => (<option value={card}>{card}</option>))
+                      cards.map((card, idx) => (<option key={idx} value={idx}>{card.tokenId}</option>))
                     }
                     </select>
                   </label>
@@ -172,9 +193,9 @@ export default class extends React.Component {
                 <BattleCard 
                   isLock
                   isOpenCard={true}
-                  bgImg="QmTDfdUwLNTXJ1PgRqPxyW41jrdxhvh72C4h62dNhNgvtP"
-                  pixelImg="QmVALBXYymSKPz5wN1JFVHrZmnNhz7JW8J8QM5zVrHmagk"
-                  numberImg="Qmd9Xyuf3zQiyPfjDisVwL6J4AcTJy4ycFWBXdCQmjupyk"
+                  bgImg={selectedCard.bgImg || "QmTDfdUwLNTXJ1PgRqPxyW41jrdxhvh72C4h62dNhNgvtP"}
+                  pixelImg={selectedCard.roleImg || "QmVALBXYymSKPz5wN1JFVHrZmnNhz7JW8J8QM5zVrHmagk"}
+                  numberImg={selectedCard.numberImg || "Qmd9Xyuf3zQiyPfjDisVwL6J4AcTJy4ycFWBXdCQmjupyk"}
                 />
               </div>
 

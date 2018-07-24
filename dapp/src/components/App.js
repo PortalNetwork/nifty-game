@@ -9,7 +9,7 @@ import './App.css';
 import { MetaMask } from './MetaMask/MetaMask';
 import { TweenMax } from "gsap/TweenMax";
 import { Warning } from './Warning/Warning';
-import { doGetTokenProperty, doMint } from '../lib/cryptoHerosTokenService';
+import { doGetTokenProperty, doGetOwnedTokens, doMint } from '../lib/cryptoHerosTokenService';
 
 import LoadingCoin from './LoadingCoin';
 
@@ -22,6 +22,7 @@ class App extends Component {
     isGetCardPage: false,
     isShowArena: false,
     isLoadingCoinLoading: false,
+    userOwnCards: [],
   }
 
   constructor(props) {
@@ -76,10 +77,48 @@ class App extends Component {
     }, 0);
   }
 
+  fetchCards = async () => {
+    const { network, account, } = this.props.metaMask;
+    console.log('network', network)
+    console.log('account', account)
+    
+    const result = await doGetOwnedTokens(network, account);
+    const cardsPromises = result.map(cur => doGetTokenProperty(network, cur.c));
+    const detailResult = await Promise.all(cardsPromises);
+    const cards = detailResult.map((cur, idx) => {
+      return ({
+        tokenId: result[idx].c[0],
+        roleImg: cur['1'],
+        numberImg: cur['3'],
+        bgImg: cur['2'],
+      });
+    });
+
+    
+    console.log('cards', cards)
+  }
+
   // 開局, 前往鬥技場
-  handleGoArena = e => {
+  handleGoArena = async e => {
+    const { network, account, } = this.props.metaMask;
+    console.log('network', network)
+    console.log('account', account)
+    
+    const result = await doGetOwnedTokens(network, account);
+    const cardsPromises = result.map(cur => doGetTokenProperty(network, cur.c));
+    const detailResult = await Promise.all(cardsPromises);
+    const userOwnCards = detailResult.map((cur, idx) => {
+      return ({
+        tokenId: result[idx].c[0],
+        roleImg: cur['1'],
+        numberImg: cur['3'],
+        bgImg: cur['2'],
+      });
+    });
+
     this.setState({
       isShowArena: true,
+      userOwnCards,
     });
   }
 
@@ -115,7 +154,7 @@ class App extends Component {
   }
   
   render() {
-    const { isLoading, brandItem, isGetCardPage, isShowArena, isLoadingCoinLoading, } = this.state;
+    const { userOwnCards, isLoading, brandItem, isGetCardPage, isShowArena, isLoadingCoinLoading, } = this.state;
     return (
       <div className="App">
         <div className="index">
@@ -142,9 +181,10 @@ class App extends Component {
           gotoAndPlayGame={this.gotoAndPlayGame}
         />
 
-
-        <Arena isShowArena={isShowArena} handleBack={this.handleBackFromArena} />
         <Arena 
+          {...this.state} 
+          {...this.props}
+          cards={userOwnCards}
           isShowArena={isShowArena} 
           handleBack={this.handleBackFromArena} 
           handleOpenLoadingCoin={this.handleOpenLoadingCoin}
