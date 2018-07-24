@@ -34,7 +34,11 @@
     form { transform: scale(1); }
 }
 
-
+@keyframes loading_coin_breath{
+  form { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  to { transform: scale(1); }
+}
 
 
 @mixin GameBtn($url, $bottom){

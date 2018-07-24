@@ -12,6 +12,8 @@ import { MetaMask } from './MetaMask/MetaMask';
 import { TweenMax } from "gsap/TweenMax";
 import { Warning } from './Warning/Warning';
 import { getTokenURI } from '../lib/cryptoHerosTokenService';
+import LoadingCoin from './LoadingCoin';
+
 class App extends Component {
   state={
     web3: null,
@@ -20,6 +22,7 @@ class App extends Component {
     isLoading: true,
     isGetCardPage: false,
     isShowArena: false,
+    isLoadingCoinLoading: false,
   }
 
   constructor(props) {
@@ -88,6 +91,7 @@ class App extends Component {
   handleGoArena = e => {
     this.setState({
       isShowArena: true,
+      isLoadingCoinLoading: true,
     });
   }
 
@@ -98,8 +102,20 @@ class App extends Component {
     });
   }
 
+  handleOpenLoadingCoin = e => {
+    this.setState({
+      isLoadingCoinLoading: true,
+    });
+  }
+
+  handleCloseLoadingCoin = e => {
+    this.setState({
+      isLoadingCoinLoading: false,
+    });
+  }
+
   render() {
-    const { isLoading, brandItem, isGetCardPage, isShowArena, } = this.state;
+    const { isLoading, brandItem, isGetCardPage, isShowArena, isLoadingCoinLoading, } = this.state;
     return (
       <div className="App">
         {/*
@@ -128,8 +144,13 @@ class App extends Component {
           brandItem={brandItem}
         />
 
-
-        <Arena isShowArena={isShowArena} handleBack={this.handleBackFromArena} />
+        <Arena 
+          isShowArena={isShowArena} 
+          handleBack={this.handleBackFromArena} 
+          handleOpenLoadingCoin={this.handleOpenLoadingCoin}
+          handleCloseLoadingCoin={this.handleCloseLoadingCoin}
+        />
+        { isLoadingCoinLoading && <LoadingCoin />}
       </div>
     );
   }

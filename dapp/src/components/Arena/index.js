@@ -24,7 +24,6 @@ export default class extends React.Component {
           <img src={ cardTitleImg } />
           <a className="go-back" onClick={handleBack}></a>
         </div>
-
       </div>
     )
 
