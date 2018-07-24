@@ -190,3 +190,10 @@
   margin-top: 10px;
   width: 150px;
   cursor: pointer; }
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 300px; }

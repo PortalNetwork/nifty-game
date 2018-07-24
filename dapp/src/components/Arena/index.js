@@ -3,6 +3,7 @@ import classnames from 'classnames/bind';
 import style from './Arena.css';
 import { TweenMax, } from "gsap/TweenMax";
 import BattleCard from '../BattleCard';
+import Loading from '../Loading';
 import gameplaytitleImg from '../../images/gameplaytitle.png';
 import playgameImg from '../../images/playgame.png';
 import historyImg from '../../images/history.png';
@@ -19,6 +20,7 @@ export default class extends React.Component {
     ],
     selectedCard: '1213322',
     betEth: 0.01,
+    isLoading: false,
     isShowResult: false,
     isShowHistory: false,
   }
@@ -52,7 +54,7 @@ export default class extends React.Component {
   }
 
   render() {
-    const { cards, selectedCard, betEth, isShowResult, isShowHistory, } = this.state;
+    const { cards, selectedCard, betEth, isShowResult, isShowHistory, isLoading, } = this.state;
     const { isShowArena, handleBack, } = this.props;
     
     return (
@@ -66,48 +68,58 @@ export default class extends React.Component {
           <a className="go-back" onClick={handleBack}></a>
         </div>
 
+        {
+          isLoading &&
+          <div className={cx('loading-spinner')}>
+            <div style={{display: 'inline-block', width: '100px'}}><Loading /></div>
+          </div>
+        }
+
         { /* 開局 */}
-        <div className={cx('battle-field')}>
-          <div className={cx('left')}>
-            <div className={cx('left-item')}>
-              <label className={cx('select_card_field')} for="select-card">
-                <select id="select-card" value={selectedCard} onChange={this.handleSelectChange}>
-                {
-                  cards.map(card => (<option value={card}>{card}</option>))
-                }
-                </select>
-              </label>
+        {
+          !isLoading &&
+          <div className={cx('battle-field')}>
+            <div className={cx('left')}>
+              <div className={cx('left-item')}>
+                <label className={cx('select_card_field')} for="select-card">
+                  <select id="select-card" value={selectedCard} onChange={this.handleSelectChange}>
+                  {
+                    cards.map(card => (<option value={card}>{card}</option>))
+                  }
+                  </select>
+                </label>
+              </div>
+
+              <div className={cx('left-item')}>
+                <span className={cx('bet_eth_field')}>
+                  <input type="number" name="betEth" value={betEth} onChange={this.handleBetETHChange} />
+                </span>
+                <a onClick={this.handlePlaceBet}>
+                  <img className={cx('place_bet_button')} src={playgameImg} />
+                </a>
+              </div>
+            
             </div>
 
-            <div className={cx('left-item')}>
-              <span className={cx('bet_eth_field')}>
-                <input type="number" name="betEth" value={betEth} onChange={this.handleBetETHChange} />
-              </span>
-              <a onClick={this.handlePlaceBet}>
-                <img className={cx('place_bet_button')} src={playgameImg} />
-              </a>
+            <div className={cx('center')}>
+              <BattleCard 
+                isLock
+                isOpenCard={true}
+                bgImg="QmTDfdUwLNTXJ1PgRqPxyW41jrdxhvh72C4h62dNhNgvtP"
+                pixelImg="QmVALBXYymSKPz5wN1JFVHrZmnNhz7JW8J8QM5zVrHmagk"
+                numberImg="Qmd9Xyuf3zQiyPfjDisVwL6J4AcTJy4ycFWBXdCQmjupyk"
+              />
             </div>
-          
-          </div>
 
-          <div className={cx('center')}>
-            <BattleCard 
-              isLock
-              isOpenCard={true}
-              bgImg="QmTDfdUwLNTXJ1PgRqPxyW41jrdxhvh72C4h62dNhNgvtP"
-              pixelImg="QmVALBXYymSKPz5wN1JFVHrZmnNhz7JW8J8QM5zVrHmagk"
-              numberImg="Qmd9Xyuf3zQiyPfjDisVwL6J4AcTJy4ycFWBXdCQmjupyk"
-            />
-          </div>
-
-          <div className={cx('right')}>
-            <div className={cx('right-item')}>
-              <a onClick={()=>{alert('history')}}>
-                <img className={cx('history-button')} src={historyImg} />
-              </a>
+            <div className={cx('right')}>
+              <div className={cx('right-item')}>
+                <a onClick={()=>{alert('history')}}>
+                  <img className={cx('history-button')} src={historyImg} />
+                </a>
+              </div>
             </div>
           </div>
-        </div>
+        }
 
         { /* 戰鬥結果 */ }
         {
