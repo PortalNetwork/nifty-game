@@ -4,7 +4,7 @@ import SendTransactoin from './SendTransaction';
 import Card from './Card';
 import IndexUi from './IndexUi';
 import Loading from './Loading';
-import title from "../images/title.png";
+import title from "../images/titlelogo.png";
 import title2 from "../images/title2.png";
 import './App.css';
 import { MetaMask } from './MetaMask/MetaMask';
