@@ -91,12 +91,16 @@ truffle test
 
 ## Playground
 
-我們已經將合約部署至 [Ropsten](https://ropsten.etherscan.io/) 測試鍊上。 你可以直接對合約進行操作。
+我們已經將合約部署至 [Ropsten](https://ropsten.etherscan.io/) 測試鏈上。 你可以直接對合約進行操作。
 
 | Contract         | Token address | Transaction hash
 |------------------|---------------|---------------------
 | CryptoHerosGame  | [0x7e6A075669bf4D0B91750B6656A26cCB3a08adbd](https://ropsten.etherscan.io/address/0x7e6A075669bf4D0B91750B6656A26cCB3a08adbd) | [0xd09a7c09e70a8d9d9933138ca5b54757b64fe3f076defc0a8cb1bf3e9eb75889](https://ropsten.etherscan.io/tx/0xd09a7c09e70a8d9d9933138ca5b54757b64fe3f076defc0a8cb1bf3e9eb75889)
 | CryptoHerosToken | [0xf70F7d4e063E50B68a08db043f6345ea68A446bE](https://ropsten.etherscan.io/address/0xf70f7d4e063e50b68a08db043f6345ea68a446be) | [0xd6f3989edb1df46325ab4df12fbc6efbde10088ca18e1e2cee866ce03d66751d](https://ropsten.etherscan.io/tx/0xd6f3989edb1df46325ab4df12fbc6efbde10088ca18e1e2cee866ce03d66751d)
+
+## Card List
+
+查看我們的卡牌列表 [CARD.md](./dapp/CARD.md).
 
 ## Contributing
 
