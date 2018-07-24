@@ -5,7 +5,7 @@ const Web3 = require('web3');
 
 let web3 = new Web3();
 let cryptoHerosGameAddress = '0x0';
-let cryptoHerosGame = nbull;
+let cryptoHerosGame = null;
 
 const setWeb3Provider = (networkId) => {
   web3.setProvider(new web3.providers.HttpProvider(getProvider(networkId)));
@@ -13,15 +13,15 @@ const setWeb3Provider = (networkId) => {
   cryptoHerosGame = new CryptoHerosGame(web3, cryptoHerosGameAddress);
 }
 
-//玩遊戲
-export const createSingleGame = (tokenId) => {
-  return cryptoHerosGame.createSingleGame(tokenId);
+export const doCreateSingleGame = (networkId, tokenId) => {
+    setWeb3Provider(networkId);
+    return cryptoHerosGame.createSingleGame(tokenId);
 }
 
-export const doGetUserSingleGames = (networkId, address) => {
+export const doGetUserSingleGames = (networkId, addres) => {
   try {
     setWeb3Provider(networkId);
-    const result = cryptoHerosGame.getUserSingleGames(address);
+    const result = cryptoHerosGame.getUserSingleGames(addres);
     return result;
   } catch (err) {
     console.log('doGetUserSingleGames: ', err);
@@ -29,10 +29,10 @@ export const doGetUserSingleGames = (networkId, address) => {
   }
 }
 
-export const getSingleGame = (gameId, address) => {
+export const getSingleGame = (networkId, gameId, address) => {
   try {
     setWeb3Provider(networkId);
-    const result = cryptoHerosGame.singleGame(gameId);
+    const result = cryptoHerosGame.singleGames(gameId);
     return result;
   } catch (err) {
     console.log('getSingleGame: ', err);

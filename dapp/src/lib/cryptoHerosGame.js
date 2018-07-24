@@ -239,7 +239,7 @@ CryptoHerosGame.prototype.getUserSingleGames = function (address, callback) {
   });
 }
 
-CryptoHerosGame.prototype.singleGames = function (gamdId, callback) {
+CryptoHerosGame.prototype.singleGames = function (gameId, callback) {
   return this.cryptoHerosGamePromise.then(function (cryptoHerosGame) {
     return cryptoHerosGame.singleGamesAsync(gameId);
   })
