@@ -33,7 +33,7 @@ export const getCryptoHerosTokenAddress = (networkId) => {
     case '1':
       return '0x0';
     case '3':
-      return '0x5dff6cabf3bfcf331617f110d377b332134e1782';
+      return '0x3425035d631fc5b00f63d17dd0f64931f1ae2939';
     case '4':
       return '0x0';
     case '42':
