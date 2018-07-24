@@ -236,6 +236,37 @@ const cryptoHerosTokenInterface = [
 		"type": "function"
 	},
 	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "getTokenProperty",
+		"outputs": [
+			{
+				"name": "_number",
+				"type": "uint256"
+			},
+			{
+				"name": "_image",
+				"type": "string"
+			},
+			{
+				"name": "_background",
+				"type": "string"
+			},
+			{
+				"name": "_description",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"constant": false,
 		"inputs": [
 			{
@@ -341,37 +372,6 @@ const cryptoHerosTokenInterface = [
 			{
 				"name": "",
 				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "_tokenId",
-				"type": "uint256"
-			}
-		],
-		"name": "getTokenProverty",
-		"outputs": [
-			{
-				"name": "_number",
-				"type": "uint256"
-			},
-			{
-				"name": "_image",
-				"type": "string"
-			},
-			{
-				"name": "_background",
-				"type": "string"
-			},
-			{
-				"name": "_description",
-				"type": "string"
 			}
 		],
 		"payable": false,
