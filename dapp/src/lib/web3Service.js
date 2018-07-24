@@ -48,7 +48,7 @@ export const getCryptoHerosGameAddress = (networkId) => {
     case '1':
       return '0x0';
     case '3':
-      return '0x7e6A075669bf4D0B91750B6656A26cCB3a08adbd';
+      return '0x0B6211662d7fcAa5B0DF771dBE49996c4b08d3C9';
     case '4':
       return '0x0';
     case '42':

@@ -117,7 +117,7 @@ contract("CryptoHeros token", accounts => {
         // console.log('game result: ', singleGames[5].toString() + ' | ' + singleGames[4].toString() + ' | ' + singleGames[1].toString() + ' | ' + singleGames[2].toString());
       }
 
-      const res3 = await cryptoHerosGame.getUserSingleGames({from: accounts[1]});
+      const res3 = await cryptoHerosGame.getUserSingleGames(accounts[1]);
       for (let i=0;i<res3.length;i++) {
         console.log(res3[i].toString());
         let singleGames = await cryptoHerosGame.singleGames(res3[i].toString());

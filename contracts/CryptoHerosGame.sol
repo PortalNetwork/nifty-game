@@ -79,8 +79,8 @@ contract CryptoHerosGame is Ownable {
   //   return usersSingleGames[_address][_idx].length;
   // }
 
-  function getUserSingleGames() external view returns (uint256[]) {
-    return usersSingleGames[msg.sender];
+  function getUserSingleGames(address _address) external view returns (uint256[]) {
+    return usersSingleGames[_address];
   }
 
   function rand(uint min, uint max) private returns (uint){
