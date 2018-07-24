@@ -11,10 +11,11 @@ import './App.css';
 import { MetaMask } from './MetaMask/MetaMask';
 import { TweenMax } from "gsap/TweenMax";
 import { Warning } from './Warning/Warning';
-import { getTokenURI } from '../lib/cryptoHerosTokenService';
+import { doGetTokenProperty, doMint } from '../lib/cryptoHerosTokenService';
 
 import Demo from "./Demo";
 import LoadingCoin from './LoadingCoin';
+import animateScrollTo from 'animated-scroll-to';
 
 class App extends Component {
   state={
@@ -32,17 +33,6 @@ class App extends Component {
     this.setWeb3 = this.setWeb3.bind(this);
   }
 
-  componentDidMount(){
-    window.addEventListener("mousemove", this.Elffn);
-    let t = setInterval(()=>{
-      const {network, account} = this.props.metaMask;
-      if(network!==null && account!==null){
-        window.clearInterval(t);
-        //抓卡牌編號
-        this.props.handleCryptoHerosTokenGetOwnedTokens(network, account, this.TimeOutGoTokens);
-      }
-    },300)
-  }
 
   setWeb3(web3) {
     this.setState({web3});
@@ -67,20 +57,27 @@ class App extends Component {
 
   //撈回所有的卡片
   TimeOutGoTokens = res =>{
-    this.setState({brand: res.split(","), isLoading: false})
+    console.log('撈回所有的卡片');
+    this.setState({brand: res.split(","), isLoading: false},()=>{
+      console.log("Card idx:",res.split(","));
+    })
   }
 
   //進入卡牌畫面
   gotoAndPlayGame = async () =>{
+    console.log('進入卡牌畫面');
     const { brand, } = this.state;
     const { network } = this.props.metaMask;
-
-    const promises = brand.map(cur => getTokenURI(network, cur));
+    
+    const promises = brand.map(cur => doGetTokenProperty(network, cur));
     const result = await Promise.all(promises);
+
+    console.log('進入卡牌畫面 result:',result);
     this.setState({
-      brandItem: result.map(cur => JSON.parse(cur)),
+      brandItem: result.map(cur => cur),
       isGetCardPage: true,
     });
+
     setTimeout(() => {
       TweenMax.staggerFrom(".cardBox", 0.5, {
         transform: "translateY(-30px)", 
@@ -116,6 +113,18 @@ class App extends Component {
     });
   }
 
+  componentDidMount(){
+    window.addEventListener("mousemove", this.Elffn);
+    let t = setInterval(()=>{
+      const {network, account} = this.props.metaMask;
+      if(network!==null && account!==null){
+        window.clearInterval(t);
+        //抓卡牌編號
+        this.props.handleCryptoHerosTokenGetOwnedTokens(network, account, this.TimeOutGoTokens);
+      }
+    },300)
+  }
+  
   render() {
     const { isLoading, brandItem, isGetCardPage, isShowArena, isLoadingCoinLoading, } = this.state;
     return (
@@ -140,10 +149,15 @@ class App extends Component {
           <Warning {...this.props}/>
         </div>
 
-        <Card 
+        <Card
+          {...this.state} 
+          {...this.props}
+          doMint={doMint}
+          TimeOutGoTokens={this.TimeOutGoTokens}
           closeMyCard={this.closeMyCard}
           isGetCardPage={isGetCardPage}
           brandItem={brandItem}
+          gotoAndPlayGame={this.gotoAndPlayGame}
         />
 
 

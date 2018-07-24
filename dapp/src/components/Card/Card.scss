@@ -73,14 +73,25 @@
             height: auto;
             margin-bottom: 50px;
         }
-        a.goback{
-            display: block;
-            width: 151px;
-            height: 25px;
-            margin: 0 auto;
-            background-image: url("../../images/goBack.png");
-
-            animation: btnSetAmin 2s infinite linear;
+        .btn_box{
+            width: 481px;
+            >a{
+                display: block;
+                width: 50%;
+                height: 25px;
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+            a.goback{
+                background-image: url("../../images/goBack.png");
+                background-size: 151px 25px;
+                float: left;
+            }
+            a.getHero{
+                background-image: url("../../images/getherobtn.png");
+                background-size: 165px 25px;
+                float: right;
+            }
         }
     }
     &.open{
@@ -122,23 +133,16 @@
                 height: 282px;
                 margin: 0 auto;
                 background-size: 100% 100%;
-                >p{
+                >div{
                     position: absolute;
-                    color: #272424;
-                    font-size: 12px;
-                    left: 25px;
-                    &.name{
-                        bottom: 58px;
-                    }
-                    &.hp{
-                        bottom: 47px;
-                    }
-                    &.atk{
-                        bottom: 36px;
-                    }
-                    &.edf{
-                        bottom: 25px;
-                    }
+                    width: 100%;
+                    height: 100%;
+                    background-size: 100% 100%;
+                    top: 0;
+                    left: 0;
+                    &.s_bgcard{z-index: 1;}
+                    &.s_user{z-index: 2;}
+                    &.s_number{z-index: 3;}
                 }
             }
         }

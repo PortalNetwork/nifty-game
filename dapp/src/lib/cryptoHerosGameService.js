@@ -13,6 +13,7 @@ const setWeb3Provider = (networkId) => {
   cryptoHerosGame = new CryptoHerosGame(web3, cryptoHerosGameAddress);
 }
 
+//玩遊戲
 export const createSingleGame = (tokenId) => {
   return cryptoHerosGame.createSingleGame(tokenId);
 }

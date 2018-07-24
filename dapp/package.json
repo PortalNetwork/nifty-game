@@ -75,6 +75,8 @@
     "test": "node scripts/test.js --env=jsdom"
   },
   "devDependencies": {
+    "animated-scroll-to": "^1.2.2",
+    "axios": "^0.18.0",
     "classnames": "^2.2.6",
     "node-sass-chokidar": "^0.0.3",
     "npm-run-all": "^4.1.2"

@@ -4,29 +4,70 @@ import testCard1 from '../../images/testCard1.png';
 import cardtitle from '../../images/cardtitle.png';
 import style from './Card.css';
 import {TweenMax} from "gsap/TweenMax";
-const cx = classnames.bind(style);
-// let cardData = {
-//   name: 'Chicken Piemon', 
-//   image: testCard1,
-//   HP: "0.9 ETH",
-//   ATK: "9",
-//   DEF: "5"
-// };
-// const arr = [0,1,2,3,4,5,6,7,8,9,10,11,12,13];
+import { getCryptoHerosTokenAddress } from '../../lib/web3Service';
+import axios from 'axios';
 
+import LoadingCoin from '../LoadingCoin';
+const cx = classnames.bind(style);
 function ipfsUrl(hash) {
-  // return 'https://ipfs.infura.io/ipfs/' + hash;
-  return "https://ipfs.infura.io/ipfs/QmeVXWcHeV5dFmeUWezMUah5p6JGKMH4qRLXNCoV4Tgfnj";
+  // console.log('https://ipfs.infura.io/ipfs/' + hash);
+  return 'https://ipfs.infura.io/ipfs/' + hash;
+  // return "https://ipfs.infura.io/ipfs/QmeVXWcHeV5dFmeUWezMUah5p6JGKMH4qRLXNCoV4Tgfnj";
 }
 
 class Card extends Component {
-  
+
+  state = {
+    doMintTx: '',
+    isLoading: false,
+  }
+
+  CreateHero = async() =>{
+    const{doMint} = this.props;
+    const result = await doMint();
+    this.setState({'doMintTx': result, isLoading: true},()=>{
+      this.handleSubmitMetaMask(this.state.doMintTx);
+    })
+  }
+
+  handleSubmitMetaMask =(doMintTx)=>{
+    const {account, network} = this.props.metaMask;
+    const {web3} = this.props;
+    web3.eth.sendTransaction({
+      from: account,
+      to: getCryptoHerosTokenAddress(network),
+      value: this.props.web3.toWei(0.01, 'ether'),
+      data: doMintTx 
+    }, this.handleMetaMaskCallBack);
+  }
+
+  handleMetaMaskCallBack = (err, result)=>{
+    if (err) return console.error('MetaMask Error:', err.message);
+    const tx = result;
+    let t = setInterval(async ()=>{
+      const result = await axios.get(`https://api-ropsten.etherscan.io/api?module=transaction&action=gettxreceiptstatus&txhash=${tx}&apikey=RAADZVN65BQA7G839DFN3VHWCZBQMRBR11`)
+      console.log('status:', result.data.result.status);
+      if(result.data.result.status === "1") {
+        this.ReloadDataFn();
+        console.log('===END===');
+        this.setState({isLoading: false},()=> this.props.gotoAndPlayGame());
+        window.clearInterval(t);
+        console.log('===clearInterval===');
+      }
+    },3000);
+  }
+
+  ReloadDataFn =()=>{
+    const {network, account} = this.props.metaMask;
+    //抓卡牌編號
+    this.props.handleCryptoHerosTokenGetOwnedTokens(network, account, this.props.TimeOutGoTokens);
+  }
+
   render() {
-    const {brandItem, isGetCardPage, closeMyCard} = this.props;
-    console.log("brandItem:",brandItem);
+    const {brandItem, isGetCardPage, closeMyCard, doMint} = this.props;
     return (
       <div className={cx('Card', {open: isGetCardPage})}>
-
+        
         <div className="cloud_card1"></div>
         <div className="cloud_card2"></div>
 
@@ -39,7 +80,10 @@ class Card extends Component {
 
         <div className="cardtitle">
           <img src={cardtitle} />
-          <a className="goback" onClick={closeMyCard}></a>
+          <div className="btn_box">
+            <a className="goback" onClick={closeMyCard}></a>
+            <a className="getHero" onClick={this.CreateHero}></a>
+          </div>
         </div>
 
         <div className="c_mid">
@@ -47,17 +91,19 @@ class Card extends Component {
             brandItem.map((obj, idx)=>{
               return (
                 <div className="cardBox" key={idx}>
-                  <div className="cardbg" style={ { backgroundImage: `url(${ipfsUrl(obj.image)})` } }>
-                    <p className="name">Name: {`${obj.name} - ${idx}`}</p>
-                    <p className="hp">HP: {obj.HP}</p>
-                    <p className="atk">ATK: {obj.ATK}</p>
-                    <p className="edf">DEF: {obj.DEF}</p>
+                  <div className="cardbg">
+                    <div className="s_bgcard" style={{backgroundImage: `url("${ipfsUrl(obj[2])}")` }}></div>
+                    <div className="s_user" style={{backgroundImage: `url("${ipfsUrl(obj[1])}")` } }></div>
+                    <div className="s_number" style={{backgroundImage: `url("${ipfsUrl(obj[3])}")` }}></div>
                   </div>
                 </div>
               )
             })
           }
-        </div>
+        </div>  
+        {
+          this.state.isLoading && <LoadingCoin/>
+        }
       </div>
     );
   }

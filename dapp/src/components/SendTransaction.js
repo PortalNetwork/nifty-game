@@ -13,13 +13,14 @@ class SendTransaction extends Component {
       from: this.props.metaMask.account, 
       to: this.props.metaMask.account,
       value: this.props.web3.toWei(1, 'ether'),
-      data: 'dead' }, function(err, result) {
+      data: 'dead' 
+    }, function(err, result) {
         if (err) {
           self.props.handleWarningOpen(err.message);
         } else {
           self.props.handleWarningOpen(result);
         }
-      });
+    });
   }
 
   render() {

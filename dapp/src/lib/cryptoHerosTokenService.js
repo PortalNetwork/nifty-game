@@ -46,10 +46,11 @@ export const getOwnerOf = (networkId, tokenId) => {
   }
 }
 
-export const doGetTokenProperty = (networkId, tokenId) => {
+//卡片細節
+export const doGetTokenProperty = async (networkId, tokenId) => {
   try {
     setWeb3Provider(networkId);
-    const result = cryptoHerosToken.getTokenProperty(tokenId);
+    const result = await cryptoHerosToken.getTokenProperty(tokenId);
     return result;
   } catch (err) {
     console.log('doGetTokenProperty: ', err);
@@ -68,6 +69,7 @@ export const doTransferOwnership = (networkId, address) => {
   }
 }
 
+//我有多少卡片編號
 export const doGetOwnedTokens = (networkId, address) => {
   try {
     setWeb3Provider(networkId);
@@ -90,6 +92,7 @@ export const doGetHerosLength = (networkId) => {
   }
 }
 
+//創造卡片
 export const doMint = () => {
   return cryptoHerosToken.mint();
 }
