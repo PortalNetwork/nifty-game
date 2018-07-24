@@ -213,6 +213,25 @@ const cryptoHerosTokenInterface = [
 		"type": "function"
 	},
 	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "withdraw",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
 		"constant": true,
 		"inputs": [
 			{
@@ -802,6 +821,17 @@ CryptoHerosToken.prototype.getOwnedTokens = function (address, callback) {
   return this.cryptoHerosTokenPromise.then(function (cryptoHerosToken) {
     return cryptoHerosToken.getOwnedTokensAsync(address);
   });
+}
+
+CryptoHerosToken.prototype.getHerosLength = function (callback) {
+  return this.cryptoHerosTokenPromise.then(function (cryptoHerosToken) {
+    return cryptoHerosToken.getHerosLengthAsync();
+  });
+}
+
+CryptoHerosToken.prototype.mint = function () {
+  let byteData = "0x" + abi.methodID("mint", []).toString("hex");
+  return byteData;
 }
 
 module.exports = CryptoHerosToken;
