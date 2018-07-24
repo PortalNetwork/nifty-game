@@ -9,7 +9,7 @@
 ## ERC-721 Token
 
 ERC-721 non-fungible token：
-    符合這合約的每個token都是不一樣的，擁有獨一無二的token ID，與ERC-20相比，ERC-20的token可以彼此互換的，使用者A的5ㄢ個token與使用者B的50個token是沒有差別的，但如果是ERC-721的話因為每個token ID都不一樣，所以不可以互換，視為獨立的資產。
+    符合這合約的每個token都是不一樣的，擁有獨一無二的token ID，與ERC-20相比，ERC-20的token可以彼此互換的，使用者A的50個token與使用者B的50個token是沒有差別的，但如果是ERC-721的話因為每個token ID都不一樣，所以不可以互換，視為獨立的資產。
 
 ## Contracts
 合約內容存放在`contracts/`底下：
