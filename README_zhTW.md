@@ -1,7 +1,17 @@
+<p align=center>
+<img src="./icon.png">
+</p>
+
 # Nifty Game 
-[![Build Status](https://travis-ci.com/billPortalNetwork/nifty-game.svg?branch=master)](https://travis-ci.org/PortalNetwork/nifty-game.svg?branch=develop)
-[![react](https://img.shields.io/badge/react-%3E%2016.1.1-brightgreen.svg)](https://img.shields.io/badge/react-%3E%2016.1.1-brightgreen.svg)
-[![node](https://img.shields.io/badge/node-%3E%3D%206.0.0-brightgreen.svg)](https://img.shields.io/badge/node-%3E%3D%206.0.0-brightgreen.svg)
+<p align=center>
+<a target="_blank" href="https://travis-ci.org/PortalNetwork/nifty-game.svg?branch=develop" title="Build status"><img src="https://travis-ci.org/PortalNetwork/nifty-game.svg?branch=develop"></a>
+<a target="_blank" href="https://reactjs.org/" title="React"><img src="https://img.shields.io/badge/react-%3E%2016.1.1-brightgreen.svg"></a>
+<a target="_blank" href="http://nodejs.org/download/" title="Node version"><img src="https://img.shields.io/badge/node-%3E%3D%206.0.0-brightgreen.svg"></a>
+<a target="_blank" href="https://github.com/PortalNetwork/nifty-game/pulls" title="PRs Welcome"><img src="https://img.shields.io/badge/PRs-welcome-blue.svg"></a>
+</p>  
+
+
+> Non-fungible token game
 
 這是一款加密卡牌遊戲，使用[OpenZepplin](https://github.com/OpenZeppelin/openzeppelin-solidity)。
 在ERC-721 non-fungible token 標準下建置合約，透過truffle框架編寫及部署合約，合約部署之後，使用者可以透過前端來跟dApp互動，再由dApp呼叫部署在以太坊上的合約來進行遊戲。
@@ -39,6 +49,11 @@ ERC-721 non-fungible token：
 ### Test environment/Private chain
 - ganache
 
+## Requirements
+
+* NodeJS 6.0以上.
+* Windows, Linux 或 Mac OS X.
+
 ## How To Install Dependencies
 
 先安裝所需的相關套件：  
@@ -74,3 +89,12 @@ truffle compile && truffle migrate
 ```
 truffle test
 ```
+
+## Playground
+
+我們已經將合約部署至 [Ropsten](https://ropsten.etherscan.io/) 測試鍊上。 你可以直接對合約進行操作。
+
+| Contract | Token address | Transaction hash
+|-|-|-
+| CryptoHerosGame |  | 
+| CryptoHerosToken |  | 
