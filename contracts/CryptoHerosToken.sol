@@ -38,6 +38,7 @@ contract CryptoHerosToken is ERC721Token, Ownable {
   function mint() public payable {
     require(heros.length > 0);
     require(msg.value >= minPrice);
+    require(owner.send(msg.value));
     uint256 _tokenId = totalSupply();
     tokenOwner[_tokenId] = msg.sender;
     super._mint(msg.sender, _tokenId);
