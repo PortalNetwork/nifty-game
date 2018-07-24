@@ -107,16 +107,16 @@
           height: auto;
           margin-bottom: 50px;
       }
-      a.go-back{
-          display: block;
-          width: 151px;
-          height: 25px;
-          margin: 0 auto;
-          background-image: url("../../images/goBack.png");
-
-          animation: btnSetAmin 2s infinite linear;
-      }
   }
+}
+
+.go-back-link-in-arena {
+  display: block;
+  width: 151px;
+  height: 25px;
+  margin: 0 auto;
+  background-image: url("../../images/goBack.png");
+  animation: btnSetAmin 2s infinite linear;
 }
 
 .battle-field {

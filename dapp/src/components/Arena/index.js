@@ -25,6 +25,7 @@ export default class extends React.Component {
     isShowHistory: false,
   }
 
+  // 賭金輸入
   handleBetETHChange = e => {
     let betEth = e.target.value;
     if(betEth > 1) {
@@ -37,20 +38,56 @@ export default class extends React.Component {
     });
   }
 
+  // 卡片選擇
   handleSelectChange = e => {
     this.setState({
       selectedCard: e.target.value,
     });
   }
 
+  // 開始賭
   handlePlaceBet = e => {
     const { betEth, selectedCard, } = this.state;
     if(betEth > 1 || betEth < 0.01) {
       alert('bet eth should not be bigger than 1 and less than 0.01');
       return;
     }
-    alert('pass');
 
+    this.setState({
+      isLoading: true,
+    });
+
+    window.setTimeout(() => {
+      this.setState({
+        isLoading: false,
+        isShowResult: true,
+        isShowHistory: false,
+      });
+    }, 3000);
+  }
+
+  // 看歷史戰鬥
+  handleShowHistory = e => {
+    this.setState({
+      isLoading: true,
+    });
+
+    window.setTimeout(() => {
+      this.setState({
+        isLoading: false,
+        isShowResult: false,
+        isShowHistory: true,
+      });
+    }, 3000);
+  }
+
+  // 回到鬥技場
+  handleBackArena = e => {
+    this.setState({
+      isLoading: false,
+      isShowHistory: false,
+      isShowResult: false,
+    });
   }
 
   render() {
@@ -65,7 +102,6 @@ export default class extends React.Component {
 
         <div className="card-title">
           <img src={ gameplaytitleImg } />
-          <a className="go-back" onClick={handleBack}></a>
         </div>
 
         {
@@ -77,45 +113,48 @@ export default class extends React.Component {
 
         { /* 開局 */}
         {
-          !isLoading &&
-          <div className={cx('battle-field')}>
-            <div className={cx('left')}>
-              <div className={cx('left-item')}>
-                <label className={cx('select_card_field')} for="select-card">
-                  <select id="select-card" value={selectedCard} onChange={this.handleSelectChange}>
-                  {
-                    cards.map(card => (<option value={card}>{card}</option>))
-                  }
-                  </select>
-                </label>
+          !isLoading && !isShowHistory && !isShowResult &&
+          <div >
+            <a className="go-back-link-in-arena" onClick={handleBack}></a>
+            <div className={cx('battle-field')}>
+              <div className={cx('left')}>
+                <div className={cx('left-item')}>
+                  <label className={cx('select_card_field')} for="select-card">
+                    <select id="select-card" value={selectedCard} onChange={this.handleSelectChange}>
+                    {
+                      cards.map(card => (<option value={card}>{card}</option>))
+                    }
+                    </select>
+                  </label>
+                </div>
+
+                <div className={cx('left-item')}>
+                  <span className={cx('bet_eth_field')}>
+                    <input type="number" name="betEth" value={betEth} onChange={this.handleBetETHChange} />
+                  </span>
+                  <a onClick={this.handlePlaceBet}>
+                    <img className={cx('place_bet_button')} src={playgameImg} />
+                  </a>
+                </div>
+              
               </div>
 
-              <div className={cx('left-item')}>
-                <span className={cx('bet_eth_field')}>
-                  <input type="number" name="betEth" value={betEth} onChange={this.handleBetETHChange} />
-                </span>
-                <a onClick={this.handlePlaceBet}>
-                  <img className={cx('place_bet_button')} src={playgameImg} />
-                </a>
+              <div className={cx('center')}>
+                <BattleCard 
+                  isLock
+                  isOpenCard={true}
+                  bgImg="QmTDfdUwLNTXJ1PgRqPxyW41jrdxhvh72C4h62dNhNgvtP"
+                  pixelImg="QmVALBXYymSKPz5wN1JFVHrZmnNhz7JW8J8QM5zVrHmagk"
+                  numberImg="Qmd9Xyuf3zQiyPfjDisVwL6J4AcTJy4ycFWBXdCQmjupyk"
+                />
               </div>
-            
-            </div>
 
-            <div className={cx('center')}>
-              <BattleCard 
-                isLock
-                isOpenCard={true}
-                bgImg="QmTDfdUwLNTXJ1PgRqPxyW41jrdxhvh72C4h62dNhNgvtP"
-                pixelImg="QmVALBXYymSKPz5wN1JFVHrZmnNhz7JW8J8QM5zVrHmagk"
-                numberImg="Qmd9Xyuf3zQiyPfjDisVwL6J4AcTJy4ycFWBXdCQmjupyk"
-              />
-            </div>
-
-            <div className={cx('right')}>
-              <div className={cx('right-item')}>
-                <a onClick={()=>{alert('history')}}>
-                  <img className={cx('history-button')} src={historyImg} />
-                </a>
+              <div className={cx('right')}>
+                <div className={cx('right-item')}>
+                  <a onClick={this.handleShowHistory}>
+                    <img className={cx('history-button')} src={historyImg} />
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -125,7 +164,8 @@ export default class extends React.Component {
         {
           isShowResult && 
           <div className={cx('battle-result')}>
-
+            <a className="go-back-link-in-arena" onClick={this.handleBackArena}></a>
+            result
           </div>
         }
 
@@ -133,7 +173,9 @@ export default class extends React.Component {
         {
           isShowHistory && 
           <div className={cx('battle-history')}>
+            <a className="go-back-link-in-arena" onClick={this.handleBackArena}></a>
 
+            history
           </div>
         }
       </div>
