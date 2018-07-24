@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
 import classnames from 'classnames/bind';
-import testCard1 from '../../images/testCard1.png';
 import cardtitle from '../../images/cardtitle.png';
 import style from './Card.css';
-import {TweenMax} from "gsap/TweenMax";
 import { getCryptoHerosTokenAddress } from '../../lib/web3Service';
 import axios from 'axios';
-
 import LoadingCoin from '../LoadingCoin';
 const cx = classnames.bind(style);
 function ipfsUrl(hash) {
-  // console.log('https://ipfs.infura.io/ipfs/' + hash);
   return 'https://ipfs.infura.io/ipfs/' + hash;
-  // return "https://ipfs.infura.io/ipfs/QmeVXWcHeV5dFmeUWezMUah5p6JGKMH4qRLXNCoV4Tgfnj";
 }
 
 class Card extends Component {
@@ -49,10 +44,7 @@ class Card extends Component {
       console.log('status:', result.data.result.status);
       if(result.data.result.status === "1") {
         this.ReloadDataFn();
-        console.log('===END===');
-        this.setState({isLoading: false},()=> this.props.gotoAndPlayGame());
         window.clearInterval(t);
-        console.log('===clearInterval===');
       }
     },3000);
   }
@@ -61,6 +53,9 @@ class Card extends Component {
     const {network, account} = this.props.metaMask;
     //抓卡牌編號
     this.props.handleCryptoHerosTokenGetOwnedTokens(network, account, this.props.TimeOutGoTokens);
+    setTimeout(() => {
+      this.setState({isLoading: false},()=> this.props.gotoAndPlayGame());
+    }, 6000);
   }
 
   render() {

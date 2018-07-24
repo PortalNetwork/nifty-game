@@ -137,13 +137,6 @@ img {
         .App .index .titlebox a.getCard:after {
           content: "";
           right: -20px; }
-    .App .index img.logo {
-      position: absolute;
-      width: 90px;
-      height: 47px;
-      bottom: 13%;
-      left: 50%;
-      margin-left: -45px; }
     .App .index .ladder {
       position: absolute;
       width: 133px;

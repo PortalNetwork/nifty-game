@@ -10,6 +10,7 @@ import { MetaMask } from './MetaMask/MetaMask';
 import { TweenMax } from "gsap/TweenMax";
 import { Warning } from './Warning/Warning';
 import { doGetTokenProperty, doMint } from '../lib/cryptoHerosTokenService';
+
 import LoadingCoin from './LoadingCoin';
 
 class App extends Component {
@@ -52,22 +53,16 @@ class App extends Component {
 
   //撈回所有的卡片
   TimeOutGoTokens = res =>{
-    console.log('撈回所有的卡片');
-    this.setState({brand: res.split(","), isLoading: false},()=>{
-      console.log("Card idx:",res.split(","));
-    })
+    this.setState({brand: res.split(","), isLoading: false});
   }
 
   //進入卡牌畫面
   gotoAndPlayGame = async () =>{
-    console.log('進入卡牌畫面');
     const { brand, } = this.state;
     const { network } = this.props.metaMask;
     
     const promises = brand.map(cur => doGetTokenProperty(network, cur));
     const result = await Promise.all(promises);
-
-    console.log('進入卡牌畫面 result:',result);
     this.setState({
       brandItem: result.map(cur => cur),
       isGetCardPage: true,
@@ -123,13 +118,6 @@ class App extends Component {
     const { isLoading, brandItem, isGetCardPage, isShowArena, isLoadingCoinLoading, } = this.state;
     return (
       <div className="App">
-        {/*
-          <Top/>
-          <Health {...this.props} />
-          <SendTransactoin {...this.props} {...this.state}/>
-          <Card {...this.props}/>
-          <Contract {...this.props} {...this.state} />
-        */}
         <div className="index">
           <div className="titlebox">
             <img className="title" src={title}/>
