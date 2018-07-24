@@ -1,6 +1,10 @@
 .cardbox{
   display: inline-block;
   perspective: 800px;
+
+  &.small {
+    transform: scale(.8);
+  }
         
   .gameCard {
     position: relative;
