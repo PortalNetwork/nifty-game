@@ -11,6 +11,8 @@
 
 > Non-fungible token game
 
+<img src="https://i.imgur.com/77nixUU.png" height="30"/>
+
 This project is a crypto card game that uses [OpenZepplin](https://github.com/OpenZeppelin/openzeppelin-solidity).
 
 The contract is compiled and deployed under the ERC-721 non-fungible token standard with truffle framework. After deploying onto the Ethereum blockchain, users will be able to play the game by interacting with the smart contract through DAPP’s front-end interface.
