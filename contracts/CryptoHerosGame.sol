@@ -36,8 +36,8 @@ contract CryptoHerosGame is Ownable {
 
     uint userTokenNumber;
     uint contractTokenNumber;
-    (userTokenNumber, , ,) = cryptoHerosToken.getTokenProverty(_tokenId);
-    (contractTokenNumber, , ,) = cryptoHerosToken.getTokenProverty(rand(0, cryptoHerosToken.getHerosLength()));
+    (userTokenNumber, , ,) = cryptoHerosToken.getTokenProperty(_tokenId);
+    (contractTokenNumber, , ,) = cryptoHerosToken.getTokenProperty(rand(0, cryptoHerosToken.getHerosLength()));
 
     int result;
     uint8 game = uint8(rand(0, 2));
