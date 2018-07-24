@@ -1,7 +1,15 @@
-# Nifty Game 
-[![Build Status](https://travis-ci.com/billPortalNetwork/nifty-game.svg?branch=master)](https://travis-ci.com/billPortalNetwork/nifty-game)
-[![react](https://img.shields.io/badge/react-%3E%2016.1.1-brightgreen.svg)](https://img.shields.io/badge/react-%3E%2016.1.1-brightgreen.svg)
-[![node](https://img.shields.io/badge/node-%3E%3D%206.0.0-brightgreen.svg)](https://img.shields.io/badge/node-%3E%3D%206.0.0-brightgreen.svg)
+<p align=center>
+<img src="./icon.png">
+</p>
+
+<p align=center>
+<a target="_blank" href="https://travis-ci.org/PortalNetwork/nifty-game.svg?branch=develop" title="Build status"><img src="https://travis-ci.org/PortalNetwork/nifty-game.svg?branch=develop"></a>
+<a target="_blank" href="https://reactjs.org/" title="React"><img src="https://img.shields.io/badge/react-%3E%2016.1.1-brightgreen.svg"></a>
+<a target="_blank" href="http://nodejs.org/download/" title="Node version"><img src="https://img.shields.io/badge/node-%3E%3D%206.0.0-brightgreen.svg"></a>
+<a target="_blank" href="https://github.com/PortalNetwork/nifty-game/pulls" title="PRs Welcome"><img src="https://img.shields.io/badge/PRs-welcome-blue.svg"></a>
+</p>  
+
+> Non-fungible token game
 
 This project is a crypto card game that uses [OpenZepplin](https://github.com/OpenZeppelin/openzeppelin-solidity).
 
@@ -47,6 +55,11 @@ You can find contract detail under `contracts/` directory:
 ### Test environment/Private chain
 - ganache
 
+## Requirements
+
+* NodeJS 6.0+ recommended.
+* Windows, Linux or Mac OS X.
+
 ## How To Install Dependencies
 
 First install required dependencies:
@@ -82,3 +95,12 @@ Run contract tests:
 ```
 truffle test
 ```
+
+## Playground
+
+We already deployed contracts to Ropsten network. You can play with them RIGHT NOW.
+
+| Contract | Token address | Transaction hash
+|-|-|-
+| CryptoHerosGame |  | 
+| CryptoHerosToken |  | 
