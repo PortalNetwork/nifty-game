@@ -81,4 +81,10 @@ contract CryptoHerosGame is Ownable {
     return uint(sha3(nonce))%(min+max)-min;
   }
 
+  function withdraw(uint amount) public payable onlyOwner returns(bool) {
+    require(amount <= this.balance);
+    owner.transfer(amount);
+    return true;
+  }
+
 }
