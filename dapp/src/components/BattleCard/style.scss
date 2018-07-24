@@ -1,0 +1,61 @@
+.cardbox{
+  display: inline-block;
+  perspective: 800px;
+
+  &.small {
+    transform: scale(.8);
+  }
+        
+  .gameCard {
+    position: relative;
+    width: 288px;
+    height: 407px;
+    transition: all 0.5s linear; 
+    transform-style: preserve-3d; 
+
+    &.OpenCard {
+      transform: rotateY(180deg);
+    }
+
+    & .seeCard {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+
+        > div{
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-size: 100% 100%;
+          backface-visibility: hidden;
+          transform: rotateY(180deg);
+          &.c_bg{
+              z-index: 1;
+          }
+          &.c_user{
+              z-index: 2;   
+          }
+          &.c_number{
+              z-index: 3;
+          }
+        }
+    }
+
+    & .BackCard{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-image: url("../../images/back.png");
+        background-size: 100% 100%;
+        backface-visibility: hidden;
+    }
+  }
+}
+
+    

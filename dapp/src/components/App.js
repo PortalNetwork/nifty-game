@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import Contract from './Contract';
-import SendTransactoin from './SendTransaction';
 import Card from './Card';
 import Arena from './Arena';
 import IndexUi from './IndexUi';
@@ -82,7 +80,6 @@ class App extends Component {
   handleGoArena = e => {
     this.setState({
       isShowArena: true,
-      isLoadingCoinLoading: true,
     });
   }
 
