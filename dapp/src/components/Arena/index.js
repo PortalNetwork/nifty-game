@@ -48,7 +48,6 @@ export default class extends React.Component {
 
   // 賭金輸入
   handleBetETHChange = e => {
-    console.log('eee', e)
     let betEth = e.target.value;
     if (betEth > 1) {
       alert('bet eth should not bigger than 1');
@@ -73,7 +72,6 @@ export default class extends React.Component {
     const { betEth, selectedCardIdx, } = this.state;
     const { account, network } = metaMask;
 
-
     if (betEth > 1 || betEth < 0.01) {
       alert('bet eth should not be bigger than 1 and less than 0.01');
       return;
@@ -93,6 +91,14 @@ export default class extends React.Component {
     };
     
     web3.eth.sendTransaction(tx, (err, response) => {
+      if(err) {
+        alert('Sorry, transaction failed');
+        this.setState({
+          isLoading: false,
+        });
+        return;
+      }
+
       let t = setInterval(async () => {
         const result = await axios.get(`https://api-ropsten.etherscan.io/api?module=transaction&action=gettxreceiptstatus&txhash=${response}&apikey=RAADZVN65BQA7G839DFN3VHWCZBQMRBR11`)
         if (result.data.status === "1") {
@@ -371,7 +377,7 @@ export default class extends React.Component {
 
           </div>
         }
-        
+
         {
           isLoading && <LoadingCoin />
         }
