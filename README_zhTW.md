@@ -27,7 +27,7 @@
 
 #### 卡牌對戰
 擁有卡牌之後可以開始對戰，對戰開始之前玩家必須先選擇自己要出的卡牌，之後系統會隨機決定此回合是比大或是比小，並且隨機產生點數，玩家獲勝之後可獲得獎勵。
-
+  
 <iframe src="https://giphy.com/embed/1ylv7JGUUWMV1XxK6g" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/portalnetwork-nifty-game-1ylv7JGUUWMV1XxK6g">via GIPHY</a></p>
 
 ## ERC-721 Token 
