@@ -210,7 +210,16 @@
     justify-content: center;
     flex: 1 1; }
   .battle-result .center {
+    flex-direction: column;
     align-items: center; }
+    .battle-result .center span {
+      margin-top: 10px;
+      font-size: 32px;
+      font-weight: 600; }
+      .battle-result .center span.big {
+        color: #FFF100; }
+      .battle-result .center span.small {
+        color: #FFF100; }
 
 .result-center-container {
   display: inline-flex;

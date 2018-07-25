@@ -129,8 +129,7 @@ export default class extends React.Component {
   handleBetETHChange = e => {
     let betEth = e.target.value;
     if (betEth > 1) {
-      this.handleAlertOpen("bet eth should not bigger than 1");
-      // alert('bet eth should not bigger than 1');
+      this.handleAlertOpen('Your bet should be between 0.01 and 1 eth.');
       betEth = 0.01;
     }
 
@@ -153,8 +152,7 @@ export default class extends React.Component {
     const { account, network } = metaMask;
 
     if (betEth > 1 || betEth < 0.01) {
-      
-      this.handleAlertOpen("bet eth should not be bigger than 1 and less than 0.01");
+      this.handleAlertOpen('Your bet should be between 0.01 and 1 eth.');
       return;
     }
     const selectedCard = this.props.cards[selectedCardIdx];
@@ -194,14 +192,13 @@ export default class extends React.Component {
               return;
             }
             window.clearInterval(gameChecker);
-            console.log('clean gameChecker');
             const gamePromises = games.map(cur => getSingleGame(network, cur.c[0], account));
             const gameDetails = await Promise.all(gamePromises);
             const thisGame = gameDetails[gameDetails.length - 1];
             const userPointer = thisGame[1].c[0];
             const contractPointer = thisGame[2].c[0];
             const userBet = thisGame[3].c[0];
-            const gameType = thisGame[4].c[0]; // 0 = compare less 1 = compare big
+            const gameType = thisGame[4].c[0]; // 0 = small win 1 = big win
             const isWin = thisGame[5].c[0];    // 0 win, 1 lost, 2 平手
             const isUserSmall = userPointer < contractPointer;
 
@@ -227,9 +224,6 @@ export default class extends React.Component {
           window.clearInterval(t);
         }
       }, 3000);
-
-
-
     });
   }
 
@@ -252,7 +246,6 @@ export default class extends React.Component {
         isWin: game[5].c[0],
       });
     });
-    console.log('historyGames', historyGames)
 
     window.setTimeout(() => {
       this.setState({
@@ -365,7 +358,12 @@ export default class extends React.Component {
                 <div className={cx('result-center-container', { isSmall: battleResult.isUserSmall })}>
                   { hasBattleResult && battleResult.isWin <= 1 && <img src={bigImg} /> }
                   { hasBattleResult && battleResult.isWin === 2 && <img src={drawImg} /> }
-                </div>                
+                </div>          
+                <span className={cx({ big: battleResult.gameType === 1, small: battleResult.gameType === 0})}>
+                  {
+                    battleResult.gameType === 0 ? 'SMALL WIN' : 'BIG WIN'
+                  }
+                </span>
               </div>
               <div className={cx('right')}>
                 <BattleCard
