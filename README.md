@@ -24,6 +24,8 @@ Users can acquire game cards using ETH. Every game card will have a game point o
 
 ## Roles
 
+[![Join the chat at https://gitter.im/PortalNetwork/nifty-game](https://badges.gitter.im/PortalNetwork/nifty-game.svg)](https://gitter.im/PortalNetwork/nifty-game?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 #### Card collection
 Players can aquire card using ether. Each card will have a random points on it, which will be used to deternmine the winner in the card game.
 
