@@ -10,6 +10,7 @@ import { MetaMask } from './MetaMask/MetaMask';
 import { TweenMax } from "gsap/TweenMax";
 import { Warning } from './Warning/Warning';
 import { doGetTokenProperty, doGetOwnedTokens, doMint } from '../lib/cryptoHerosTokenService';
+import { doGetUserSingleGames, getSingleGame, } from '../lib/cryptoHerosGameService';
 
 import LoadingCoin from './LoadingCoin';
 
@@ -23,6 +24,7 @@ class App extends Component {
     isShowArena: false,
     isLoadingCoinLoading: false,
     userOwnCards: [],
+    historyGamesCount: 0,
   }
 
   constructor(props) {
@@ -128,9 +130,20 @@ class App extends Component {
       });
     });
 
+    const games = await doGetUserSingleGames(network, account);
+    const gamePromises = games.map(cur => getSingleGame(network, cur.c[0], account));
+    const gameDetails = await Promise.all(gamePromises);
+    const historyGames = gameDetails.map(game => {
+      return ({
+        userBet: game[3].c[0] / 10000,
+        isWin: game[5].c[0],
+      });
+    });
+
     this.setState({
       isLoadingCoinLoading: false,
       isShowArena: true,
+      historyGamesCount: historyGames.length,
       userOwnCards,
     });
   }
@@ -155,7 +168,7 @@ class App extends Component {
   }
   
   render() {
-    const { userOwnCards, isLoading, brandItem, isGetCardPage, isShowArena, isLoadingCoinLoading, } = this.state;
+    const { userOwnCards, isLoading, brandItem, isGetCardPage, isShowArena, isLoadingCoinLoading, historyGamesCount, } = this.state;
     return (
       <div className="App">
         <div className="index">
@@ -187,6 +200,7 @@ class App extends Component {
           {...this.props}
           cards={userOwnCards}
           isShowArena={isShowArena} 
+          historyGamesCount={historyGamesCount}
           handleBack={this.handleBackFromArena} 
           handleOpenLoadingCoin={this.handleOpenLoadingCoin}
           handleCloseLoadingCoin={this.handleCloseLoadingCoin}
