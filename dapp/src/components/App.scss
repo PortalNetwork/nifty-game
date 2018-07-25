@@ -32,14 +32,19 @@ img{
       img.title2{
         width: 239px;
         height: auto;
-        margin-bottom: 120px;
+        margin-bottom: 185px;
       }
       a.gameplay{
-        @include GameBtn("../images/gameplaybtn.png", 0);
+        @include GameBtn("../images/gameplaybtn.png", 20%);
         background-size: 152px 23px;
       }
       a.getCard{
-        @include GameBtn("../images/getcard.png", -20%);
+        @include GameBtn("../images/getcard.png", 0%);
+        background-size: 132px 19px;
+      }
+
+      a.showTutorial{
+        @include GameBtn("../images/Tutorial.png", -20%);
         background-size: 132px 19px;
       }
     }

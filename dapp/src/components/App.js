@@ -3,6 +3,7 @@ import Card from './Card';
 import Arena from './Arena';
 import IndexUi from './IndexUi';
 import Loading from './Loading';
+import Tutorial from './Tutorial';
 import title from "../images/titlelogo.png";
 import title2 from "../images/title2.png";
 import './App.css';
@@ -27,6 +28,7 @@ class App extends Component {
     userOwnCards: [],
     historyGamesCount: 0,
     isErrorOpen: false,
+    isShowTutorial: false,
     errorMessage: ''
   }
 
@@ -179,9 +181,28 @@ class App extends Component {
       isLoadingCoinLoading: false,
     });
   }
+
+  // 開啟教戰手冊
+  handleOpenTutorial = e => {
+    this.setState({
+      isShowTutorial: true,
+    });
+  }
+
+  // 關閉教戰手冊
+  handleCloseTutorial = e => {
+    this.setState({
+      isShowTutorial: false,
+    });
+  }
   
   render() {
-    const { userOwnCards, isLoading, brandItem, isGetCardPage, isShowArena, isLoadingCoinLoading, historyGamesCount, } = this.state;
+    const { 
+      userOwnCards, isLoading, brandItem, isGetCardPage, 
+      isShowArena, isLoadingCoinLoading, historyGamesCount, 
+      isShowTutorial, 
+    } = this.state;
+
     return (
       <div className="App">
         <div className="index">
@@ -191,6 +212,7 @@ class App extends Component {
             { isLoading && <Loading/> }
             { !isLoading && <a className="gameplay" onClick={this.handleGoArena}></a>}
             { !isLoading && <a className="getCard" onClick={this.gotoAndPlayGame}></a>}
+            <a className="showTutorial" onClick={this.handleOpenTutorial}></a>
           </div>
           <IndexUi/>
           <MetaMask {...this.props} {...this.state} setWeb3={this.setWeb3}/>
@@ -225,6 +247,8 @@ class App extends Component {
           handleOpenLoadingCoin={this.handleOpenLoadingCoin}
           handleCloseLoadingCoin={this.handleCloseLoadingCoin}
         />
+
+        { isShowTutorial && <Tutorial onClose={this.handleCloseTutorial}  /> }
         { isLoadingCoinLoading && <LoadingCoin />}
       </div>
     );
