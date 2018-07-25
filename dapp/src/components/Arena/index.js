@@ -4,6 +4,7 @@ import style from './Arena.css';
 import { TweenMax, } from "gsap/TweenMax";
 import BattleCard from '../BattleCard';
 import Loading from '../Loading';
+import LoadingCoin from '../LoadingCoin';
 import gameplaytitleImg from '../../images/gameplaytitle.png';
 import playgameImg from '../../images/playgame.png';
 import historyImg from '../../images/history.png';
@@ -71,7 +72,6 @@ export default class extends React.Component {
     const { betEth, selectedCardIdx, } = this.state;
     const { account, network } = metaMask;
 
-
     if (betEth > 1 || betEth < 0.01) {
       alert('bet eth should not be bigger than 1 and less than 0.01');
       return;
@@ -91,6 +91,14 @@ export default class extends React.Component {
     };
     
     web3.eth.sendTransaction(tx, (err, response) => {
+      if(err) {
+        alert('Sorry, transaction failed');
+        this.setState({
+          isLoading: false,
+        });
+        return;
+      }
+
       let t = setInterval(async () => {
         const result = await axios.get(`https://api-ropsten.etherscan.io/api?module=transaction&action=gettxreceiptstatus&txhash=${response}&apikey=RAADZVN65BQA7G839DFN3VHWCZBQMRBR11`)
         if (result.data.status === "1") {
@@ -209,7 +217,7 @@ export default class extends React.Component {
       'QmWzdBNu1ikXvcXo7C1WyUk3FxWRnDo5gt2WKm14Rcs1Pc',
       'Qmf8MPrUF41e5N5rtXVEGZg5AC7m8NLsjqf9ad9fvwVSrw',
     ]
-    console.log('battleResult', battleResult)
+
     if (!selectedCard) {
       return null;
     }
@@ -223,13 +231,6 @@ export default class extends React.Component {
         <div className="card-title">
           <img src={gameplaytitleImg} />
         </div>
-
-        {
-          isLoading &&
-          <div className={cx('loading-spinner')}>
-            <div style={{ display: 'inline-block', width: '100px' }}><Loading /></div>
-          </div>
-        }
 
         { /* 開局 */}
         {
@@ -250,7 +251,7 @@ export default class extends React.Component {
 
                 <div className={cx('left-item')}>
                   <span className={cx('bet_eth_field')}>
-                    <input type="number" name="betEth" value={betEth} onChange={this.handleBetETHChange} />
+                    <input type="number" name="betEth" value={betEth} max="1" step="0.01" min="0.01" onChange={this.handleBetETHChange} />
                   </span>
                   <a onClick={this.handlePlaceBet}>
                     <img className={cx('place_bet_button')} src={playgameImg} />
@@ -375,6 +376,10 @@ export default class extends React.Component {
             </div>
 
           </div>
+        }
+
+        {
+          isLoading && <LoadingCoin />
         }
       </div>
     )
