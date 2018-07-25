@@ -30,6 +30,23 @@ class App extends Component {
     this.setWeb3 = this.setWeb3.bind(this);
   }
 
+  componentDidMount(){
+    window.addEventListener("mousemove", this.Elffn);
+    let t = setInterval(()=>{
+      const {network, account} = this.props.metaMask;
+      if(network!==null && account!==null){
+        window.clearInterval(t);
+        //抓卡牌編號
+        this.props.handleCryptoHerosTokenGetOwnedTokens(network, account, this.TimeOutGoTokens);
+      }
+    },300)
+  }
+
+  componentDidUpdate(prevProps) {
+    if(this.props.metaMask.account && prevProps.metaMask.account && this.props.metaMask.account !== prevProps.metaMask.account) {
+      window.location.reload();
+    }
+  }
 
   setWeb3(web3) {
     this.setState({web3});
@@ -151,18 +168,6 @@ class App extends Component {
     this.setState({
       isLoadingCoinLoading: false,
     });
-  }
-
-  componentDidMount(){
-    window.addEventListener("mousemove", this.Elffn);
-    let t = setInterval(()=>{
-      const {network, account} = this.props.metaMask;
-      if(network!==null && account!==null){
-        window.clearInterval(t);
-        //抓卡牌編號
-        this.props.handleCryptoHerosTokenGetOwnedTokens(network, account, this.TimeOutGoTokens);
-      }
-    },300)
   }
   
   render() {
