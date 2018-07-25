@@ -106,6 +106,16 @@ class App extends Component {
 
     const { network, account, } = this.props.metaMask;
     const result = await doGetOwnedTokens(network, account);
+
+    if(result.length === 0) {
+      alert('You have no cards, please get card');
+      this.setState({
+        isLoadingCoinLoading: false,
+      });
+      this.gotoAndPlayGame();
+      return;
+    }
+
     const cardsPromises = result.map(cur => doGetTokenProperty(network, cur.c));
     const detailResult = await Promise.all(cardsPromises);
     const userOwnCards = detailResult.map((cur, idx) => {
