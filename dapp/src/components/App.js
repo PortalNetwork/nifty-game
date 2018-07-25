@@ -76,14 +76,19 @@ class App extends Component {
 
   //進入卡牌畫面
   gotoAndPlayGame = async () =>{
-    const { brand, } = this.state;
-    const { network } = this.props.metaMask;
-    
-    const promises = brand.map(cur => doGetTokenProperty(network, cur));
-    const result = await Promise.all(promises);
     this.setState({
-      brandItem: result.map(cur => cur),
+      isLoadingCoinLoading: true,
+    });
+
+    const { network, account, } = this.props.metaMask;
+    const result = await doGetOwnedTokens(network, account);
+    const cardsPromises = result.map(cur => doGetTokenProperty(network, cur.c));
+    const brandItem = await Promise.all(cardsPromises);
+
+    this.setState({
+      brandItem,
       isGetCardPage: true,
+      isLoadingCoinLoading: false,
     });
 
     setTimeout(() => {
@@ -92,27 +97,6 @@ class App extends Component {
         opacity:0}, 0.2
       );
     }, 0);
-  }
-
-  fetchCards = async () => {
-    const { network, account, } = this.props.metaMask;
-    console.log('network', network)
-    console.log('account', account)
-    
-    const result = await doGetOwnedTokens(network, account);
-    const cardsPromises = result.map(cur => doGetTokenProperty(network, cur.c));
-    const detailResult = await Promise.all(cardsPromises);
-    const cards = detailResult.map((cur, idx) => {
-      return ({
-        tokenId: result[idx].c[0],
-        roleImg: cur['1'],
-        numberImg: cur['3'],
-        bgImg: cur['2'],
-      });
-    });
-
-    
-    console.log('cards', cards)
   }
 
   // 開局, 前往鬥技場
