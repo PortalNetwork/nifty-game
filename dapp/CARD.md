@@ -2,7 +2,7 @@
 
 > Card List
 
-## Image Card List
+## Number Card List
 Name                      | IPFS Hash                                       
 --------------------------|:------------------------------------------------
 1.png                     | QmNbPeXSeUEg6oEhRVFa5uSwVdi8GbXewttkVKf3zX2oyX  
@@ -26,7 +26,7 @@ Name                      | IPFS Hash
 19.png                    | QmWzdBNu1ikXvcXo7C1WyUk3FxWRnDo5gt2WKm14Rcs1Pc
 20.png                    | Qmf8MPrUF41e5N5rtXVEGZg5AC7m8NLsjqf9ad9fvwVSrw
 
-## Background Card List
+## Image Card List
 Name                      | IPFS Hash                                       
 --------------------------|:------------------------------------------------
 Pixel1.png                | QmeARz345pVTS1CgT8YWrTiMnj8wk56nKBcbxEgSvVjpXE
@@ -50,7 +50,7 @@ Pixel18.png               | QmXhPFrZHQRXmicJtNigkV3oCB23KTK8rwHJDKQrkGk39k
 Pixel19.png               | QmVWd4RQqg1k6PqggZUY8tRafyZhwMZAZc1Qavpfdb3QZs
 Pixel20.png               | QmfZ9111VoCssYnCRFjyKRRTaqE638Dys5duDLNqDUr7ZV
 
-## Number Card List
+## Background Card List
 Name                      | IPFS Hash                                       
 --------------------------|:------------------------------------------------
 bg1.png                   | Qmb9jK8bPGaWAVm46kxDMr2Hf1YWcNGiGRhxoRiTRvfNeW
