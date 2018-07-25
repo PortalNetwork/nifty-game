@@ -47,6 +47,7 @@ export default class extends React.Component {
 
   // 賭金輸入
   handleBetETHChange = e => {
+    console.log('eee', e)
     let betEth = e.target.value;
     if (betEth > 1) {
       alert('bet eth should not bigger than 1');
@@ -209,7 +210,7 @@ export default class extends React.Component {
       'QmWzdBNu1ikXvcXo7C1WyUk3FxWRnDo5gt2WKm14Rcs1Pc',
       'Qmf8MPrUF41e5N5rtXVEGZg5AC7m8NLsjqf9ad9fvwVSrw',
     ]
-    console.log('battleResult', battleResult)
+
     if (!selectedCard) {
       return null;
     }
@@ -250,7 +251,7 @@ export default class extends React.Component {
 
                 <div className={cx('left-item')}>
                   <span className={cx('bet_eth_field')}>
-                    <input type="number" name="betEth" value={betEth} onChange={this.handleBetETHChange} />
+                    <input type="number" name="betEth" value={betEth} max="1" step="0.01" min="0.01" onChange={this.handleBetETHChange} />
                   </span>
                   <a onClick={this.handlePlaceBet}>
                     <img className={cx('place_bet_button')} src={playgameImg} />
