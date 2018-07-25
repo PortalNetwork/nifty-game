@@ -25,7 +25,7 @@
 #### 卡牌收集
 玩家先使用ether來兌換卡牌，每張卡牌上面有不一樣的點數。
 
-![Card Collection](cardcollection.gif)
+![Card Collection](herocollection.gif)
 
 #### 卡牌對戰
 擁有卡牌之後可以開始對戰，對戰開始之前玩家必須先選擇自己要出的卡牌，之後系統會隨機決定此回合是比大或是比小，並且隨機產生點數，玩家獲勝之後可獲得獎勵。
