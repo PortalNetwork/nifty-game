@@ -100,10 +100,11 @@ class App extends Component {
 
   // 開局, 前往鬥技場
   handleGoArena = async e => {
+    this.setState({
+      isLoadingCoinLoading: true,
+    });
+
     const { network, account, } = this.props.metaMask;
-    console.log('network', network)
-    console.log('account', account)
-    
     const result = await doGetOwnedTokens(network, account);
     const cardsPromises = result.map(cur => doGetTokenProperty(network, cur.c));
     const detailResult = await Promise.all(cardsPromises);
@@ -117,6 +118,7 @@ class App extends Component {
     });
 
     this.setState({
+      isLoadingCoinLoading: false,
       isShowArena: true,
       userOwnCards,
     });

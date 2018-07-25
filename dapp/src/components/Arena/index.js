@@ -4,6 +4,7 @@ import style from './Arena.css';
 import { TweenMax, } from "gsap/TweenMax";
 import BattleCard from '../BattleCard';
 import Loading from '../Loading';
+import LoadingCoin from '../LoadingCoin';
 import gameplaytitleImg from '../../images/gameplaytitle.png';
 import playgameImg from '../../images/playgame.png';
 import historyImg from '../../images/history.png';
@@ -225,13 +226,6 @@ export default class extends React.Component {
           <img src={gameplaytitleImg} />
         </div>
 
-        {
-          isLoading &&
-          <div className={cx('loading-spinner')}>
-            <div style={{ display: 'inline-block', width: '100px' }}><Loading /></div>
-          </div>
-        }
-
         { /* 開局 */}
         {
           !isLoading && !isShowHistory && !isShowResult &&
@@ -376,6 +370,10 @@ export default class extends React.Component {
             </div>
 
           </div>
+        }
+        
+        {
+          isLoading && <LoadingCoin />
         }
       </div>
     )
