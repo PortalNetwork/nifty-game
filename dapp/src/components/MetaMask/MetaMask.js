@@ -15,7 +15,7 @@ const messages = {
   'METAMASK_ACCOUNT': 'You have choosen the MetamMask Wallet: ',
   'NETWORK_ERROR': 'Network error, please check it.',
   'METAMASK_NOT_INSTALL': 'You must install MetaMask before start.',
-  'METAMASK_TEST_NET': 'Please switch your MetaMask to Ropsten Test Network to play the game'
+  'METAMASK_TEST_NET': 'Our game is available on Ropsten Test Network only. Please switch via MetaMask!'
 };
 
 const MetaMaskInstallDialog = (props) => (
