@@ -68,9 +68,8 @@
   position: absolute;
   width: 200px;
   height: auto;
-  bottom: 100px;
-  left: 50%;
-  margin-left: -100px;
+  top: 20px;
+  right: 10px;
   display: flex;
   justify-content: space-around;
   align-items: center; }
