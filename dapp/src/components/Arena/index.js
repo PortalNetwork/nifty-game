@@ -310,7 +310,7 @@ export default class extends React.Component {
                   <span className={cx('bet_eth_field')}>
                     <input type="number" name="betEth" value={betEth} max="1" step="0.01" min="0.01" onChange={this.handleBetETHChange} />
                   </span>
-                  <a onClick={this.handlePlaceBet}>
+                  <a onClick={this.handlePlaceBet} style={{position: 'relative'}}>
                     <img className={cx('place_bet_button')} src={playgameImg} />
                   </a>
                 </div>
@@ -329,7 +329,7 @@ export default class extends React.Component {
 
               <div className={cx('right')}>
                 <div className={cx('right-item')}>
-                  <a onClick={this.handleShowHistory}>
+                  <a onClick={this.handleShowHistory} style={{position: 'relative'}}>
                     <img className={cx('history-button')} src={historyImg} />
                   </a>
                 </div>
