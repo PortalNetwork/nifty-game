@@ -13,6 +13,7 @@ import { doGetTokenProperty, doGetOwnedTokens, doMint } from '../lib/cryptoHeros
 import { doGetUserSingleGames, getSingleGame, } from '../lib/cryptoHerosGameService';
 
 import LoadingCoin from './LoadingCoin';
+import NiftyAlert from "./NiftyAlert";
 
 class App extends Component {
   state={
@@ -25,11 +26,21 @@ class App extends Component {
     isLoadingCoinLoading: false,
     userOwnCards: [],
     historyGamesCount: 0,
+    isErrorOpen: false,
+    errorMessage: ''
   }
 
   constructor(props) {
     super(props);
     this.setWeb3 = this.setWeb3.bind(this);
+  }
+
+  handleAlertOpen=(errmag)=>{
+    this.setState({isErrorOpen: true, errorMessage: errmag})
+  }
+
+  handleAlertClose=()=>{
+    this.setState({isErrorOpen: false})
   }
 
   componentDidMount(){
@@ -41,7 +52,8 @@ class App extends Component {
         //抓卡牌編號
         this.props.handleCryptoHerosTokenGetOwnedTokens(network, account, this.TimeOutGoTokens);
       }
-    },300)
+    },300);
+
   }
 
   componentDidUpdate(prevProps) {
@@ -111,7 +123,8 @@ class App extends Component {
     const result = await doGetOwnedTokens(network, account);
 
     if(result.length === 0) {
-      alert('You have no cards, please get card');
+      this.handleAlertOpen('You have no cards, please get card');
+      // alert('You have no cards, please get card');
       this.setState({
         isLoadingCoinLoading: false,
       });
@@ -182,6 +195,13 @@ class App extends Component {
           <IndexUi/>
           <MetaMask {...this.props} {...this.state} setWeb3={this.setWeb3}/>
           <Warning {...this.props}/>
+          {this.state.isErrorOpen && 
+            <NiftyAlert 
+              isOpenAlert={this.state.isErrorOpen}
+              errorMessage={this.state.errorMessage}
+              handleAlertClose={this.handleAlertClose}
+            />
+          }
         </div>
 
         <Card
