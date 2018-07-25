@@ -25,10 +25,13 @@
 #### 卡牌收集
 玩家先使用ether來兌換卡牌，每張卡牌上面有不一樣的點數。
 
+![Card Collection](cardcollection.gif)
+
 #### 卡牌對戰
 擁有卡牌之後可以開始對戰，對戰開始之前玩家必須先選擇自己要出的卡牌，之後系統會隨機決定此回合是比大或是比小，並且隨機產生點數，玩家獲勝之後可獲得獎勵。
-  
-<iframe src="https://giphy.com/embed/1ylv7JGUUWMV1XxK6g" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/portalnetwork-nifty-game-1ylv7JGUUWMV1XxK6g">via GIPHY</a></p>
+
+#### 對戰紀錄
+對戰之後可以透過對戰紀錄看到所有過去的遊戲紀錄，包含遊戲的勝負以及下注的金額。
 
 ## ERC-721 Token 
 
