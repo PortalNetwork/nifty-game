@@ -83,6 +83,7 @@
     color: #fff; }
 
 .ui_item .ui {
+  display: block;
   position: absolute; }
   .ui_item .ui.footer {
     width: 100%;
