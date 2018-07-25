@@ -5,29 +5,30 @@
       position: absolute;
       width: 90px;
       height: 47px;
-      bottom: 13%;
-      left: 50%;
-      margin-left: -(90px / 2);
+      top: 2%;
+      left: 2%;
       >img{
         width: 100%;
       }
     }
-
-    a.linkIcon{
-      display: block;
+    
+    .linkBOx{
       position: absolute;
-      width: 50px;
-      height: 50px;
-      background-size: 100% 100%;
-      animation: loading_coin_breath 1s infinite linear;
-      color: #fff;
-      &.github{
-        top: 20px;
-        right: 3px;
-      }
-      &.telegram{
-        top: 20px;
-        right: 50px;
+      width: 200px;
+      height: auto;
+      bottom: 150px;
+      left: 50%;
+      margin-left: -(200px / 2);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      a.linkIcon{
+        display: block;
+        width: 50px;
+        height: 50px;
+        background-size: 100% 100%;
+        animation: loading_coin_breath 1s infinite linear;
+        color: #fff;
       }
     }
 
