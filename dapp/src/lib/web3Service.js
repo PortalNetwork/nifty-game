@@ -9,7 +9,7 @@ export const getProvider = (networkId) => {
     case '42':
       return 'https://kovan.infura.io/';
     default:
-      return 'http://localhost:3000/';
+      return 'http://localhost:8545/';
   }
 }
 
