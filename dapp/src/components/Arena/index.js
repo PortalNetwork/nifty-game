@@ -68,8 +68,8 @@ export default class extends React.Component {
 
   // 開始賭
   handlePlaceBet = async e => {
-    const { web3, metaMask, } = this.props;
-    const { betEth, selectedCardIdx, } = this.state;
+    const { web3, metaMask, historyGamesCount, } = this.props;
+    const { betEth, selectedCardIdx, historyGames, } = this.state;
     const { account, network } = metaMask;
 
     if (betEth > 1 || betEth < 0.01) {
@@ -81,7 +81,7 @@ export default class extends React.Component {
     this.setState({
       isLoading: true,
     });
-    console.log('selectedCard', selectedCard)
+    
     const byteData = doCreateSingleGame(network, selectedCard.tokenId);
     const tx = {
       from: account,
@@ -103,8 +103,17 @@ export default class extends React.Component {
         const result = await axios.get(`https://api-ropsten.etherscan.io/api?module=transaction&action=gettxreceiptstatus&txhash=${response}&apikey=RAADZVN65BQA7G839DFN3VHWCZBQMRBR11`)
         if (result.data.status === "1") {
           
-          window.setTimeout(async () => {
+          const gameChecker = window.setInterval(async () => {
             const games = await doGetUserSingleGames(network, account);
+
+            //FIXME: 透過 user 戰鬥場數來判斷此役戰鬥在合約中是否已確實完成
+            //       但礙於組建設計不良, 生命週期混亂, 只能透過在 App.js 取得的 historyGamesCount
+            //       以及本地取得的 historyGames 做雙重判斷, 之後需要更改
+            if(games.length <= historyGames.length || games.length <= historyGamesCount) {
+              return;
+            }
+            window.clearInterval(gameChecker);
+            console.log('clean gameChecker');
             const gamePromises = games.map(cur => getSingleGame(network, cur.c[0], account));
             const gameDetails = await Promise.all(gamePromises);
             const thisGame = gameDetails[gameDetails.length - 1];
@@ -133,13 +142,9 @@ export default class extends React.Component {
                 battleResult,
               });
             }, 0);
-          });
-
+          }, 1234);
           window.clearInterval(t);
         }
-
-
-
       }, 3000);
 
 
@@ -155,7 +160,6 @@ export default class extends React.Component {
     this.setState({
       isLoading: true,
     });
-
 
     const games = await doGetUserSingleGames(network, account);
     const gamePromises = games.map(cur => getSingleGame(network, cur.c[0], account));

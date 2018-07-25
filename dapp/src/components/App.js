@@ -10,6 +10,7 @@ import { MetaMask } from './MetaMask/MetaMask';
 import { TweenMax } from "gsap/TweenMax";
 import { Warning } from './Warning/Warning';
 import { doGetTokenProperty, doGetOwnedTokens, doMint } from '../lib/cryptoHerosTokenService';
+import { doGetUserSingleGames, getSingleGame, } from '../lib/cryptoHerosGameService';
 
 import LoadingCoin from './LoadingCoin';
 
@@ -23,6 +24,7 @@ class App extends Component {
     isShowArena: false,
     isLoadingCoinLoading: false,
     userOwnCards: [],
+    historyGamesCount: 0,
   }
 
   constructor(props) {
@@ -76,14 +78,19 @@ class App extends Component {
 
   //進入卡牌畫面
   gotoAndPlayGame = async () =>{
-    const { brand, } = this.state;
-    const { network } = this.props.metaMask;
-    
-    const promises = brand.map(cur => doGetTokenProperty(network, cur));
-    const result = await Promise.all(promises);
     this.setState({
-      brandItem: result.map(cur => cur),
+      isLoadingCoinLoading: true,
+    });
+
+    const { network, account, } = this.props.metaMask;
+    const result = await doGetOwnedTokens(network, account);
+    const cardsPromises = result.map(cur => doGetTokenProperty(network, cur.c));
+    const brandItem = await Promise.all(cardsPromises);
+
+    this.setState({
+      brandItem,
       isGetCardPage: true,
+      isLoadingCoinLoading: false,
     });
 
     setTimeout(() => {
@@ -92,27 +99,6 @@ class App extends Component {
         opacity:0}, 0.2
       );
     }, 0);
-  }
-
-  fetchCards = async () => {
-    const { network, account, } = this.props.metaMask;
-    console.log('network', network)
-    console.log('account', account)
-    
-    const result = await doGetOwnedTokens(network, account);
-    const cardsPromises = result.map(cur => doGetTokenProperty(network, cur.c));
-    const detailResult = await Promise.all(cardsPromises);
-    const cards = detailResult.map((cur, idx) => {
-      return ({
-        tokenId: result[idx].c[0],
-        roleImg: cur['1'],
-        numberImg: cur['3'],
-        bgImg: cur['2'],
-      });
-    });
-
-    
-    console.log('cards', cards)
   }
 
   // 開局, 前往鬥技場
@@ -144,9 +130,20 @@ class App extends Component {
       });
     });
 
+    const games = await doGetUserSingleGames(network, account);
+    const gamePromises = games.map(cur => getSingleGame(network, cur.c[0], account));
+    const gameDetails = await Promise.all(gamePromises);
+    const historyGames = gameDetails.map(game => {
+      return ({
+        userBet: game[3].c[0] / 10000,
+        isWin: game[5].c[0],
+      });
+    });
+
     this.setState({
       isLoadingCoinLoading: false,
       isShowArena: true,
+      historyGamesCount: historyGames.length,
       userOwnCards,
     });
   }
@@ -171,7 +168,7 @@ class App extends Component {
   }
   
   render() {
-    const { userOwnCards, isLoading, brandItem, isGetCardPage, isShowArena, isLoadingCoinLoading, } = this.state;
+    const { userOwnCards, isLoading, brandItem, isGetCardPage, isShowArena, isLoadingCoinLoading, historyGamesCount, } = this.state;
     return (
       <div className="App">
         <div className="index">
@@ -203,6 +200,7 @@ class App extends Component {
           {...this.props}
           cards={userOwnCards}
           isShowArena={isShowArena} 
+          historyGamesCount={historyGamesCount}
           handleBack={this.handleBackFromArena} 
           handleOpenLoadingCoin={this.handleOpenLoadingCoin}
           handleCloseLoadingCoin={this.handleCloseLoadingCoin}
