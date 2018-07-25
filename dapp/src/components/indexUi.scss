@@ -13,17 +13,21 @@
       }
     }
 
-    a.github{
+    a.linkIcon{
       display: block;
       position: absolute;
       width: 50px;
       height: 50px;
-      bottom: 10%;
-      left: 8%;
       background-size: 100% 100%;
       animation: loading_coin_breath 1s infinite linear;
-      >img{
-        width: 100%;
+      color: #fff;
+      &.github{
+        top: 20px;
+        right: 3px;
+      }
+      &.telegram{
+        top: 20px;
+        right: 50px;
       }
     }
 

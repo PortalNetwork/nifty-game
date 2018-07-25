@@ -5,16 +5,56 @@ import style from './Card.css';
 import { getCryptoHerosTokenAddress } from '../../lib/web3Service';
 import axios from 'axios';
 import LoadingCoin from '../LoadingCoin';
+import Button from 'material-ui/Button';
+
+import Dialog, {
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+} from 'material-ui/Dialog';
+
 const cx = classnames.bind(style);
+
+
 function ipfsUrl(hash) {
   return 'https://ipfs.infura.io/ipfs/' + hash;
 }
+
+const ErrorAlertDialog = (props) => (
+  <Dialog
+    open={props.isOpenAlert}
+    onClose={props.handleAlertClose}
+    aria-labelledby="alert-dialog-title"
+    aria-describedby="alert-dialog-description"
+  >
+    <DialogContent>
+      <DialogContentText id="alert-dialog-description">
+        {props.errmsg}
+      </DialogContentText>
+    </DialogContent>
+    <DialogActions>
+      <Button onClick={props.handleAlertClose} color="primary" autoFocus>
+        Close
+      </Button>
+    </DialogActions>
+  </Dialog>
+);
 
 class Card extends Component {
 
   state = {
     doMintTx: '',
     isLoading: false,
+    isOpenAlert: false,
+    errmsg: '',
+  }
+
+  handleClickAlertOpen = () => {
+    this.setState({ isOpenAlert: true });
+  }
+
+  handleAlertClose = () => {
+    this.setState({ isOpenAlert: false });
   }
 
   CreateHero = async() =>{
@@ -28,24 +68,36 @@ class Card extends Component {
   handleSubmitMetaMask =(doMintTx)=>{
     const {account, network} = this.props.metaMask;
     const {web3} = this.props;
-    web3.eth.sendTransaction({
+    
+    const msk = {
       from: account,
       to: getCryptoHerosTokenAddress(network),
       value: this.props.web3.toWei(0.01, 'ether'),
-      data: doMintTx 
-    }, this.handleMetaMaskCallBack);
+      data: doMintTx
+    }
+
+    web3.eth.sendTransaction(msk, this.handleMetaMaskCallBack);
+    
   }
 
   handleMetaMaskCallBack = (err, result)=>{
-    if (err) return console.error('MetaMask Error:', err.message);
+
+    if(err) {
+      this.setState({errmsg: 'Sorry, transaction failed'}, ()=> this.setState({isOpenAlert: true}));
+      console.error('MetaMask Error:', err.message);
+      this.setState({isLoading: false});
+      return;
+    }
+
     const tx = result;
     let t = setInterval(async ()=>{
-      const result = await axios.get(`https://api-ropsten.etherscan.io/api?module=transaction&action=gettxreceiptstatus&txhash=${tx}&apikey=RAADZVN65BQA7G839DFN3VHWCZBQMRBR11`)
-      console.log('status:', result.data.result.status);
+      const result = await axios.get(`https://api-ropsten.etherscan.io/api?module=transaction&action=gettxreceiptstatus&txhash=${tx}&apikey=RAADZVN65BQA7G839DFN3VHWCZBQMRBR11`);
+
       if(result.data.result.status === "1") {
         this.ReloadDataFn();
         window.clearInterval(t);
       }
+
     },3000);
   }
 
@@ -59,7 +111,14 @@ class Card extends Component {
   }
 
   render() {
-    const {brandItem, isGetCardPage, closeMyCard, doMint} = this.props;
+    const {brandItem, isGetCardPage, closeMyCard} = this.props;
+
+    const alertMsg = this.state.isOpenAlert && 
+      <ErrorAlertDialog 
+        {...this.state} 
+        handleAlertClose={this.handleAlertClose}
+    />;
+
     return (
       <div className={cx('Card', {open: isGetCardPage})}>
         
@@ -99,6 +158,7 @@ class Card extends Component {
         {
           this.state.isLoading && <LoadingCoin/>
         }
+        { alertMsg }
       </div>
     );
   }
