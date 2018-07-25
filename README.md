@@ -33,8 +33,12 @@ Players can aquire card using ether. Each card will have a random points on it, 
 #### Card Battle
 Once entered the game, players will need to choose a card to play for the round. Each round, the smart contract will randomly decide either card with larger or smaller point wins the round. At the same time, the smart contract will also randomly generate a number in order to compete with the player. Winner of the game will receive the price.
 
+![Card Battle](cardbattle.gif)
+
 #### Dashboard
 You can view the card battle history about all the games you played.
+
+![Game History](gamehistory.gif)
 
 ## ERC-721 Token
 
