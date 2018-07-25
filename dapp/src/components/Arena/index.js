@@ -11,6 +11,8 @@ import historyImg from '../../images/history.png';
 import bigImg from '../../images/big.png';
 import winImg from '../../images/winlogo.png';
 import lostImg from '../../images/youlost.png';
+import drawMsgImg from '../../images/draw_message.png';
+import drawImg from '../../images/draw.png';
 import playerImg from '../../images/paayer.png';
 import playerbetImg from '../../images/playerbet.png';
 import resultImg from '../../images/result.png';
@@ -303,8 +305,9 @@ export default class extends React.Component {
               </div>
               <div className={cx('center')}>
                 <div className={cx('result-center-container', { isSmall: battleResult.isUserSmall })}>
-                  <img src={bigImg} />
-                </div>
+                  { hasBattleResult && battleResult.isWin <= 1 && <img src={bigImg} /> }
+                  { hasBattleResult && battleResult.isWin === 2 && <img src={drawImg} /> }
+                </div>                
               </div>
               <div className={cx('right')}>
                 <BattleCard
@@ -318,7 +321,7 @@ export default class extends React.Component {
             </div>
 
             {
-              hasBattleResult && battleResult.isWin === 0 &&
+              hasBattleResult && battleResult.isWin === 0 && 
               <div className={cx('battle-result-win')}>
                 <div className="start1"></div>
                 <div className="start2"></div>
@@ -331,13 +334,21 @@ export default class extends React.Component {
             }
 
             {
-              hasBattleResult && battleResult.isWin >= 1 &&
+              hasBattleResult && battleResult.isWin === 1 &&
               <div className={cx('battle-result-lose')}>
                 <div className="ghost1"></div>
                 <div className="ghost2"></div>
                 <img className={cx('lost')} src={lostImg} />
               </div>
             }
+
+            {
+              hasBattleResult && battleResult.isWin === 2 &&
+              <div className={cx('battle-result-win')}>
+                <img className={cx('win')} src={drawMsgImg} />
+              </div>
+            }
+
           </div>
         }
 
