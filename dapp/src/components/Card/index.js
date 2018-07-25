@@ -154,6 +154,9 @@ class Card extends Component {
               )
             })
           }
+          <div className='addCardBtn'>
+            <a onClick={this.CreateHero}></a>
+          </div>
         </div>  
         {
           this.state.isLoading && <LoadingCoin/>

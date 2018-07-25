@@ -107,6 +107,26 @@
     height: auto;
     margin: 0 auto;
     padding-top: 80px; }
+    .Card .c_mid .addCardBtn {
+      width: 25%;
+      height: 282px;
+      overflow: hidden;
+      display: inline-block;
+      margin-bottom: 40px; }
+      .Card .c_mid .addCardBtn > a {
+        display: block;
+        cursor: pointer;
+        position: relative;
+        width: 200px;
+        height: 282px;
+        margin: 0 auto;
+        background-size: 100% 100%;
+        background-image: url("../../images/addcard.png");
+        background-size: 100% 100%;
+        opacity: 0.4;
+        transition: opacity .2s; }
+        .Card .c_mid .addCardBtn > a:hover {
+          opacity: 0.6; }
     .Card .c_mid .cardBox {
       width: 25%;
       height: auto;

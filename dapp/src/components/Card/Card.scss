@@ -120,6 +120,29 @@
         height: auto;
         margin: 0 auto;
         padding-top: 80px;
+        .addCardBtn{
+            width: 25%;
+            height: 282px;
+            overflow: hidden;
+            display: inline-block;
+            margin-bottom: 40px;
+            >a{
+                display: block;
+                cursor: pointer;
+                position: relative;
+                width: 200px;
+                height: 282px;
+                margin: 0 auto;
+                background-size: 100% 100%;
+                background-image: url("../../images/addcard.png");
+                background-size: 100% 100%;
+                opacity: 0.4;
+                transition: opacity .2s;
+                &:hover{
+                    opacity: 0.6;
+                }
+            }
+        }
         .cardBox{
             width: 25%;
             height: auto;
