@@ -18,10 +18,10 @@ export default class className extends Component{
                 <div className="ui start2"></div>
                 <div className="ui start3"></div>
                 <a className="linkIcon github" href="https://github.com/PortalNetwork/nifty-game" target="_blank">
-                    <i class="fab fa-github fa-2x"></i>
+                    <i className="fab fa-github fa-2x"></i>
                 </a>
                 <a className="linkIcon telegram" href="https://t.me/portalnetworkofficial" target="_blank">
-                    <i class="fab fa-telegram fa-2x"></i>
+                    <i className="fab fa-telegram fa-2x"></i>
                 </a>
                 <div className="ui Elf0"></div>
                 <div className="ui Elf1"></div>
