@@ -87,6 +87,15 @@
       background-image: url("../../images/Elf3.png");
       animation: ElfMove 2s infinite linear;
     }
+
+    &.bg_footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      height: 159px;
+      background-position: -35px 0%;
+      background-image: url("../../images/bgfooter.png");
+    }
   }
 
   & .card-title {
@@ -99,14 +108,368 @@
           height: auto;
           margin-bottom: 50px;
       }
-      a.go-back{
-          display: block;
-          width: 151px;
-          height: 25px;
-          margin: 0 auto;
-          background-image: url("../../images/goBack.png");
+  }
+}
 
-          animation: btnSetAmin 2s infinite linear;
+.go-back-link-in-arena {
+  display: block;
+  width: 151px;
+  height: 25px;
+  margin: 0 auto;
+  background-image: url("../../images/goBack.png");
+  animation: btnSetAmin 2s infinite linear;
+}
+
+.battle-field {
+  display: flex;
+  margin-left: 10%;
+  margin-right: 10%;
+  padding-top: 20px;
+  height: 500px;
+
+  & .left {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 0 100px;
+    flex: 1 1;
+
+    & .left-item {
+      display: inline-flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
+  }
+
+  & .center {
+    display: inline-flex;
+    justify-content: center;
+    flex: 1 1;
+
+  }
+
+  & .right {
+    display: inline-flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 0 100px;
+    flex: 1 1;
+
+    & .right-item {
+      display: inline-flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
+    >.texttotu{
+      width: 100%;
+      height: 300px;
+      overflow: auto; 
+      padding: 0 20px;
+      background-color: rgba($color: #fff, $alpha: 0.1);
+      >p, >p >a{
+        color: #fff;
+        font-size: 13px;
+        line-height: 32px;
       }
+      a{
+        text-decoration: underline;
+        &:hover{
+          color: #FFF100;
+        } 
+      }
+    }
+  }
+}
+
+.select_card_field {
+  position: relative;
+  width: 240px;
+  height: 45px;
+  background-size: 240px;
+  background-repeat: no-repeat;
+  background-image: url("../../images/select.png");
+  
+  & select {
+    position: absolute;
+    top: 8px;
+    left: 20px;
+    width: 200px;
+    height: 30px;
+    border: 0;
+    background-color: rgba(39, 36, 36, 0);
+    outline: none;
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    text-align-last:center;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
+}
+
+.bet_eth_field {
+  position: relative;
+  width: 240px;
+  height: 45px;
+  background-size: 240px;
+  background-repeat: no-repeat;
+  background-image: url("../../images/inputETH.png");
+
+  & input {
+    position: absolute;
+    top: 8px;
+    left: 20px;
+    width: 150px;
+    height: 30px;
+    border: 0;
+    background-color: #272424;
+    outline: none;
+    font-size: 16px;
+    color: white;
+    text-align: center;
+  }
+}
+
+.place_bet_button {
+  display: inline-block;
+  margin-top: 10px;
+  width: 150px;
+}
+
+.history-button {
+  display: inline-block;
+  margin-top: 10px;
+  width: 150px;
+  cursor: pointer;
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 300px;
+}
+
+.battle-result {
+  display: flex;
+  margin-left: 20%;
+  margin-right: 20%;
+  padding-top: 10px;
+  height: 400px;
+
+  & .left, & .right, & .center {
+    display: inline-flex;
+    justify-content: center;
+    flex: 1 1;
+  }
+
+  & .center {
+    flex-direction: column;
+    align-items: center;
+
+    & span {
+      margin-top: 10px;
+      font-size: 32px;
+      font-weight: 600;
+
+      &.big {
+        color: #FFF100;
+      }
+
+      &.small {
+        color: #FFF100;
+      }
+    }
+  }
+}
+
+.result-center-container {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100px;
+  border: 5px solid white;
+  border-radius: 10px;
+
+  & img {
+    width: 36px;
+    height: 61px;
+  }
+
+  &.isSmall {
+    & img {
+      transform: scaleX(-1);
+    }
+  }
+}
+
+.battle-result-win {
+  position: relative;
+  margin-top: 20px;
+  text-align: center;
+
+  & .start1, & .start2, & .start3, & .start4, & .start5, & .start6 {
+    position: absolute;
+  }
+
+  & .start1{
+    width: 13px;
+    height: 20px;
+    background-image: url("../../images/star1.png");
+    top: 15%;
+    left: 15%;
+    animation: starMove1 3s infinite linear;
+  }
+
+  & .start2 {
+    width: 13px;
+    height: 21px;
+    background-image: url("../../images/star2.png");
+    top: 37%;
+    left: 26%;
+    animation: starMove2 2s infinite linear;
+  }
+  
+  & .start3{
+    width: 13px;
+    height: 20px;
+    background-image: url("../../images/star1.png");
+    top: 30%;
+    left: 20%;
+    animation: starMove3 4s infinite linear;
+  }
+
+  & .start4{
+    width: 13px;
+    height: 20px;
+    background-image: url("../../images/star1.png");
+    top: 15%;
+    right: 15%;
+    animation: starMove1 3s infinite linear;
+  }
+
+  & .start5 {
+    width: 13px;
+    height: 21px;
+    background-image: url("../../images/star2.png");
+    top: 37%;
+    right: 26%;
+    animation: starMove2 2s infinite linear;
+  }
+  
+  & .start6{
+    width: 13px;
+    height: 20px;
+    background-image: url("../../images/star1.png");
+    top: 30%;
+    right: 20%;
+    animation: starMove3 4s infinite linear;
+  }
+
+  & .win {
+    display: inline-block;
+    width: 486px;
+    height: 73px;
+  }
+}
+
+.battle-result-lose {
+  position: relative;
+  margin-top: 20px;
+  text-align: center;
+
+  & .ghost1 {
+    position: absolute;
+    display: inline-block;
+    width: 64px;
+    height: 63px;
+    background-image: url("../../images/lostelf.png");
+    top: 15%;
+    left: 25%;
+  }
+
+  & .ghost2 {
+    position: absolute;
+    display: inline-block;
+    width: 64px;
+    height: 63px;
+    background-image: url("../../images/lostelf.png");
+    top: 15%;
+    right: 25%;
+  }
+
+  & .lost {
+    display: inline-block;
+    width: 486px;
+    height: 73px;
+  }
+}
+
+.battle-history-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.battle-history-field {
+  background-color: rgba(140, 140, 140, .5);
+  display: inline-block;
+  margin: 0 auto;
+  width: 80%;
+  height: 480px;
+  border-radius: 20px;
+  padding: 20px 50px;
+  overflow-y: scroll;
+
+  & .header {
+    display: flex;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #7bc3b7;
+
+    & span {
+      flex: 1 1;
+    }
+  }
+
+  & .content {
+    display: flex;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    & span {
+      flex: 1 1;
+      font-size: 30px;
+      color: #7bc3b7;
+    }
+  }
+
+  & .player {
+    & img {
+      width: 126px;
+      height: 22px;
+    }
+  }
+
+  & .player-bet {
+    & img {
+      width: 199px;
+      height: 22px;
+    }
+  }
+
+  & .result {
+    & img {
+      width: 127px;
+      height: 23px;
+    }
   }
 }

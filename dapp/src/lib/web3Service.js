@@ -9,7 +9,7 @@ export const getProvider = (networkId) => {
     case '42':
       return 'https://kovan.infura.io/';
     default:
-      return 'http://localhost:3000/';
+      return 'http://localhost:8545/';
   }
 }
 
@@ -33,7 +33,22 @@ export const getCryptoHerosTokenAddress = (networkId) => {
     case '1':
       return '0x0';
     case '3':
-      return '0x5dff6cabf3bfcf331617f110d377b332134e1782';
+      return '0xa82Bc392bF65d03A796E1666d27594fB31De4B93';
+    case '4':
+      return '0x0';
+    case '42':
+      return '0x0';
+    default:
+      return '0x0';
+  }
+}
+
+export const getCryptoHerosGameAddress = (networkId) => {
+  switch (networkId) {
+    case '1':
+      return '0x0';
+    case '3':
+      return '0xb4FF27d8cD1C5b1e3D4BD8A8FFEBdA9BE9517a4b';
     case '4':
       return '0x0';
     case '42':

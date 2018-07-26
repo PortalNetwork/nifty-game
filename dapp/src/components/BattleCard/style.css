@@ -1,0 +1,43 @@
+.cardbox {
+  display: inline-block;
+  perspective: 800px; }
+  .cardbox.small {
+    transform: scale(0.8); }
+  .cardbox .gameCard {
+    position: relative;
+    width: 288px;
+    height: 407px;
+    transition: all 0.5s linear;
+    transform-style: preserve-3d; }
+    .cardbox .gameCard.OpenCard {
+      transform: rotateY(180deg); }
+    .cardbox .gameCard .seeCard {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0; }
+      .cardbox .gameCard .seeCard > div {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-size: 100% 100%;
+        backface-visibility: hidden;
+        transform: rotateY(180deg); }
+        .cardbox .gameCard .seeCard > div.c_bg {
+          z-index: 1; }
+        .cardbox .gameCard .seeCard > div.c_user {
+          z-index: 2; }
+        .cardbox .gameCard .seeCard > div.c_number {
+          z-index: 3; }
+    .cardbox .gameCard .BackCard {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background-image: url("../../images/back.png");
+      background-size: 100% 100%;
+      backface-visibility: hidden; }

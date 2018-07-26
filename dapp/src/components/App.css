@@ -46,6 +46,14 @@
   form {
     transform: scale(1); } }
 
+@keyframes loading_coin_breath {
+  form {
+    transform: scale(1); }
+  50% {
+    transform: scale(1.1); }
+  to {
+    transform: scale(1); } }
+
 img {
   display: block; }
 
@@ -76,10 +84,10 @@ img {
       .App .index .titlebox img.title2 {
         width: 239px;
         height: auto;
-        margin-bottom: 120px; }
+        margin-bottom: 185px; }
       .App .index .titlebox a.gameplay {
         position: absolute;
-        bottom: 0;
+        bottom: 20%;
         display: block;
         width: 250px;
         height: 40px;
@@ -105,7 +113,7 @@ img {
           right: -20px; }
       .App .index .titlebox a.getCard {
         position: absolute;
-        bottom: -20%;
+        bottom: 0%;
         display: block;
         width: 250px;
         height: 40px;
@@ -129,13 +137,32 @@ img {
         .App .index .titlebox a.getCard:after {
           content: "";
           right: -20px; }
-    .App .index img.logo {
-      position: absolute;
-      width: 90px;
-      height: 47px;
-      bottom: 13%;
-      left: 50%;
-      margin-left: -45px; }
+      .App .index .titlebox a.showTutorial {
+        position: absolute;
+        bottom: -20%;
+        display: block;
+        width: 250px;
+        height: 40px;
+        background-image: url("../images/Tutorial.png");
+        background-repeat: no-repeat;
+        background-position: center center;
+        transition: transform .3s;
+        background-size: 132px 19px; }
+        .App .index .titlebox a.showTutorial:hover {
+          transform: scale(1.1); }
+        .App .index .titlebox a.showTutorial:before, .App .index .titlebox a.showTutorial:after {
+          position: absolute;
+          display: block;
+          width: 47px;
+          height: 37px;
+          background-image: url("../images/loveicon.png");
+          top: 3px; }
+        .App .index .titlebox a.showTutorial:before {
+          content: "";
+          left: -20px; }
+        .App .index .titlebox a.showTutorial:after {
+          content: "";
+          right: -20px; }
     .App .index .ladder {
       position: absolute;
       width: 133px;

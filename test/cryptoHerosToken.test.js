@@ -50,6 +50,10 @@ contract("CryptoHeros token", accounts => {
     assert.equal(result2.receipt.status, '0x1');
     let result3 = await cryptoHerosToken.initNumberAndDescription(1, 'description0');
     assert.equal(result3.receipt.status, '0x1');
+    let result4 = await cryptoHerosToken.initNumberAndDescription(2, 'description0');
+    assert.equal(result4.receipt.status, '0x1');
+    let result5 = await cryptoHerosToken.initNumberAndDescription(3, 'description0');
+    assert.equal(result5.receipt.status, '0x1');
     //assert.equal(owner, accounts[0]);
   });
 
@@ -65,8 +69,9 @@ contract("CryptoHeros token", accounts => {
       let cryptoHerosToken = await CryptoHerosToken.deployed();
       const res = await cryptoHerosToken.getOwnedTokens(accounts[1]);
       for(let i = 0; i < res.length; i++) {
-        const property = await cryptoHerosToken.getTokenProverty(res[i]);
-        assert.equal(property.toNumber() >= 0, true);
+        const property = await cryptoHerosToken.getTokenProperty(res[i]);
+        console.log(property);
+        //assert.equal(property.toNumber() >= 0, true);
       }
     });
 
@@ -100,17 +105,24 @@ contract("CryptoHeros token", accounts => {
     it("Start a game", async () => {
       let cryptoHerosToken = await CryptoHerosToken.deployed();
       const res = await cryptoHerosToken.getOwnedTokens(accounts[1]);
-      console.log('res: ', res);
-      //console.log('cryptoHerosToken: ', cryptoHerosToken.address);
+      //console.log('res: ', res);
+      console.log('cryptoHerosGame: ', cryptoHerosGame.address);
+      web3.eth.sendTransaction({from: accounts[0], to: cryptoHerosGame.address, value: web3.toWei(10,"ether"), gas: 2000000});
+      console.log(web3.eth.getBalance(accounts[0]).toNumber());
 
-      let cryptoHerosGame = await CryptoHerosGame.new(cryptoHerosToken.address);
       for (let i=0;i<res.length;i++) {
         const res2 = await cryptoHerosGame.createSingleGame(res[i], {from: accounts[1], value: web3.toWei(0.02, "ether")});
         assert.equal(res2.receipt.status, '0x1');
-        let singleGames = await cryptoHerosGame.singleGames(i);
+        // let singleGames = await cryptoHerosGame.singleGames(i);
+        // console.log('game result: ', singleGames[5].toString() + ' | ' + singleGames[4].toString() + ' | ' + singleGames[1].toString() + ' | ' + singleGames[2].toString());
+      }
+
+      const res3 = await cryptoHerosGame.getUserSingleGames(accounts[1]);
+      for (let i=0;i<res3.length;i++) {
+        console.log(res3[i].toString());
+        let singleGames = await cryptoHerosGame.singleGames(res3[i].toString());
         console.log('game result: ', singleGames[5].toString() + ' | ' + singleGames[4].toString() + ' | ' + singleGames[1].toString() + ' | ' + singleGames[2].toString());
       }
-      
       
     });
   });

@@ -5,16 +5,17 @@ const Web3 = require('web3');
 
 let web3 = new Web3();
 let cryptoHerosTokenAddress = '0x0';
+let cryptoHerosToken = null;
 
 const setWeb3Provider = (networkId) => {
   web3.setProvider(new web3.providers.HttpProvider(getProvider(networkId)));
   cryptoHerosTokenAddress = getCryptoHerosTokenAddress(networkId);
+  cryptoHerosToken = new CryptoHerosToken(web3, cryptoHerosTokenAddress);
 }
 
 export const getName = (networkId) => {
   try {
     setWeb3Provider(networkId);
-    const cryptoHerosToken = new CryptoHerosToken(web3, cryptoHerosTokenAddress);
     const result = cryptoHerosToken.name();
     return result;
   } catch (err) {
@@ -26,7 +27,6 @@ export const getName = (networkId) => {
 export const getSymbol = (networkId) => {
   try {
     setWeb3Provider(networkId);
-    const cryptoHerosToken = new CryptoHerosToken(web3, cryptoHerosTokenAddress);
     const result = cryptoHerosToken.symbol();
     return result;
   } catch (err) {
@@ -38,7 +38,6 @@ export const getSymbol = (networkId) => {
 export const getOwnerOf = (networkId, tokenId) => {
   try {
     setWeb3Provider(networkId);
-    const cryptoHerosToken = new CryptoHerosToken(web3, cryptoHerosTokenAddress);
     const result = cryptoHerosToken.ownerOf(tokenId);
     return result;
   } catch (err) {
@@ -47,22 +46,21 @@ export const getOwnerOf = (networkId, tokenId) => {
   }
 }
 
-export const getTokenURI = (networkId, tokenId) => {
+//卡片細節
+export const doGetTokenProperty = async (networkId, tokenId) => {
   try {
     setWeb3Provider(networkId);
-    const cryptoHerosToken = new CryptoHerosToken(web3, cryptoHerosTokenAddress);
-    const result = cryptoHerosToken.tokenURI(tokenId);
+    const result = await cryptoHerosToken.getTokenProperty(tokenId);
     return result;
   } catch (err) {
-    console.log('getTokenURI: ', err);
-    return 'tokenURI not found';
+    console.log('doGetTokenProperty: ', err);
+    return 'getTokenProperty not found';
   }
 }
 
 export const doTransferOwnership = (networkId, address) => {
   try {
     setWeb3Provider(networkId);
-    const cryptoHerosToken = new CryptoHerosToken(web3, cryptoHerosTokenAddress);
     const result = cryptoHerosToken.transferOwnership(address);
     return result;
   } catch (err) {
@@ -71,14 +69,30 @@ export const doTransferOwnership = (networkId, address) => {
   }
 }
 
+//我有多少卡片編號
 export const doGetOwnedTokens = (networkId, address) => {
   try {
     setWeb3Provider(networkId);
-    const cryptoHerosToken = new CryptoHerosToken(web3, cryptoHerosTokenAddress);
     const result = cryptoHerosToken.getOwnedTokens(address);
     return result;
   } catch (err) {
     console.log('doGetOwnedTokens: ', err);
-    return 'doGetOwnedTokens not found';
+    return 'getOwnedTokens not found';
   }
+}
+
+export const doGetHerosLength = (networkId) => {
+  try {
+    setWeb3Provider(networkId);
+    const result = cryptoHerosToken.getHerosLength();
+    return result;
+  } catch (err) {
+    console.log('doGetHerosLength: ', err);
+    return 'getHerosLength not found';
+  }
+}
+
+//創造卡片
+export const doMint = () => {
+  return cryptoHerosToken.mint();
 }
