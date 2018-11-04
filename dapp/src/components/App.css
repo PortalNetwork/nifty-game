@@ -170,3 +170,20 @@ img {
       background-image: url("../images/ladder.png");
       bottom: 38px;
       left: 75px; }
+
+span.text {
+  position: fixed;
+  display: block;
+  width: 100%;
+  height: 30px;
+  bottom: 60px;
+  left: 0; }
+  span.text .footer {
+    width: 50%;
+    height: 30px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around; }
+    span.text .footer > a {
+      color: #fff;
+      text-decoration: underline; }

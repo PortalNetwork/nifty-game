@@ -23,10 +23,11 @@ const MetaMaskInstallDialog = (props) => (
     className="MetaMaskDialog"
     open={props.metaMaskInstallDialogOpen}
     transition={Slide}>
-    <DialogTitle>{"Oops, you haven't install MetaMask"}</DialogTitle>
+    <DialogTitle>{"Oops, you haven't installed MetaMask"}</DialogTitle>
     <DialogContent>
       <DialogContentText>
-        {"You’ll need a safe place to store all of your adorable THIS PROJECT! The perfect place is in a secure wallet like MetaMask. This will also act as your login to the game (no extra password needed)."}
+        {"What is MetaMask? "}
+        <a href="https://metamask.io/" target="_blank">Link</a>
       </DialogContentText>
     </DialogContent>
     <DialogActions>

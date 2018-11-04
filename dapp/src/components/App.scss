@@ -60,3 +60,23 @@ img{
     }
   }
 }
+
+span.text{
+  position: fixed;
+  display: block;
+  width: 100%;
+  height: 30px;
+  bottom: 60px;
+  left: 0;
+  .footer{
+      width: 50%;
+      height: 30px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-around;
+      >a{
+          color: #fff;
+          text-decoration: underline;
+      }
+  }
+}
