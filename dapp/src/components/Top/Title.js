@@ -1,5 +1,5 @@
 import React from 'react';
-import Typography from 'material-ui/Typography';
+import Typography from '@material-ui/core/Typography';
 
 export const Title = (props) => (
   <Typography type="title" color="inherit" align="left" className="Title">

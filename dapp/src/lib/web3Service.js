@@ -2,6 +2,7 @@ export const getProvider = (networkId) => {
   switch (networkId) {
     case '1':
       return 'https://mainnet.infura.io/';
+    //! This currently need a project Id in order to access, please run locally if you can
     case '3':
       return 'https://ropsten.infura.io/';
     case '4':
@@ -10,21 +11,6 @@ export const getProvider = (networkId) => {
       return 'https://kovan.infura.io/';
     default:
       return 'http://localhost:8545/';
-  }
-}
-
-export const getSimpleTokenAddress = (networkId) => {
-  switch (networkId) {
-    case '1':
-      return '0x0';
-    case '3':
-      return '0x131855dda0aaff096f6854854c55a4debf61077a';
-    case '4':
-      return '0x0';
-    case '42':
-      return '0x0';
-    default:
-      return '0x0';
   }
 }
 
@@ -38,6 +24,9 @@ export const getCryptoHerosTokenAddress = (networkId) => {
       return '0x0';
     case '42':
       return '0x0';
+    case '1337':
+      //* development at local, please update your local contract's address here
+      return '0x5FbDB2315678afecb367f032d93F642f64180aa3';
     default:
       return '0x0';
   }
@@ -53,6 +42,9 @@ export const getCryptoHerosGameAddress = (networkId) => {
       return '0x0';
     case '42':
       return '0x0';
+    case '1337':
+      //* development at local, please update your local contract's address here
+      return '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512';
     default:
       return '0x0';
   }

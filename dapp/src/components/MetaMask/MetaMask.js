@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
 import Web3 from 'web3';
-import Button from 'material-ui/Button';
-import Dialog, {
+import {Button} from '@material-ui/core';
+import {
+  Dialog,
   DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
-} from 'material-ui/Dialog';
-import Slide from 'material-ui/transitions/Slide';
+  Slide,
+} from '@material-ui/core';
 
 const messages = {
   'LOAD_MATAMASK_WALLET_ERROR': 'Load metamask wallet error, maybe try Metamask later, or upload a wallet json file.',
