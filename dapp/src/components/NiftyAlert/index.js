@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import Button from 'material-ui/Button';
+import Button from '@material-ui/core/Button';
 import Dialog, {
   DialogActions,
   DialogContent,
   DialogContentText,
-} from 'material-ui/Dialog';
+} from '@material-ui/core/Dialog';
 
 export default class extends Component{    
 

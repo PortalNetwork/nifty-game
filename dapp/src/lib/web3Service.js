@@ -13,20 +13,8 @@ export const getProvider = (networkId) => {
   }
 }
 
-export const getSimpleTokenAddress = (networkId) => {
-  switch (networkId) {
-    case '1':
-      return '0x0';
-    case '3':
-      return '0x131855dda0aaff096f6854854c55a4debf61077a';
-    case '4':
-      return '0x0';
-    case '42':
-      return '0x0';
-    default:
-      return '0x0';
-  }
-}
+// Heros Token deployed to: 0x5FbDB2315678afecb367f032d93F642f64180aa3
+// Heros Game deployed to: 0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512
 
 export const getCryptoHerosTokenAddress = (networkId) => {
   switch (networkId) {
@@ -38,6 +26,8 @@ export const getCryptoHerosTokenAddress = (networkId) => {
       return '0x0';
     case '42':
       return '0x0';
+    case '1337':
+      return '0x5FbDB2315678afecb367f032d93F642f64180aa3';
     default:
       return '0x0';
   }
@@ -53,6 +43,8 @@ export const getCryptoHerosGameAddress = (networkId) => {
       return '0x0';
     case '42':
       return '0x0';
+    case '1337':
+      return '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512';
     default:
       return '0x0';
   }

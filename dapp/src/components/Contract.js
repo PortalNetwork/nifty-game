@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { LinearProgress } from 'material-ui/Progress';
+import { LinearProgress } from '@material-ui/core/Progress';
 import './Contract.css';
 export default class Contract extends Component {
   // 將 read contract method 透過 redux 儲存與 saga 非同步呼叫，將 web3 當成 API 使用
